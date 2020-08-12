@@ -1,0 +1,1056 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="lecture 2
+
+最优方式：传统数值方法
+
+Analytical Optimisation：解析法（求导）
+Exhaustive Search：穷举法
+Nelder-Mead Downhill Simplex Method：多面体法：R..." />
+    <meta name="keywords" content="semester2" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-16</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 10 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMBIM 生物启发算法</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>最优方式：传统数值方法
+<ol>
+<li>Analytical Optimisation：解析法（求导）</li>
+<li>Exhaustive Search：穷举法</li>
+<li>Nelder-Mead Downhill Simplex Method：多面体法：Reflection ; Expansion; Contraction; Shrinking</li>
+<li>Gradient Descent：梯度下降，x_k+1 = x_k - h_k ▼f (x)</li>
+<li>Line Minimisation：泰勒函数的展开式，结果同梯度下降，找到随机点，求导直到代价函数increase。更像是数学推导</li>
+<li>Random Walk：随机dk，随机hk，随机数与固定门限比较，从而确定x_k+1，通过比较代价函数确定x_best</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Binary Genetic Algorithm：(BGA) 二进制遗传算法
+<ol>
+<li>Encoding：编码</li>
+<li>Natural Selection：自然选择</li>
+<li>Selection：选择父代</li>
+<li>Crossover：交配成子代</li>
+<li>Multation：子代突变</li>
+<li>其他概念：
+<ol>
+<li>chromosome：染色体</li>
+<li>generation：迭代次数</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Natural Selection：自然选择：删掉需要死亡的人，X_rate，thresholding</li>
+<li>selection：选择两个人进行交配
+<ol>
+<li>Pairing from top to bottom：自上而下</li>
+<li>Random pairing：随机选择</li>
+<li>Weighted random pairing
+<ol>
+<li>Rank weighting：自上而下被选择的概率依次降低</li>
+<li>Cost weighting：依照权重差值，差值越大概率越高</li>
+</ol>
+</li>
+<li>Tournament selection：随机选择多个爹，选择这里面权重最好的当爹。重新随机选择多个妈，然后取权重最好的当妈。允许自交，视problem而定。</li>
+</ol>
+</li>
+<li>Crossover：交配过程
+<ol>
+<li>Single-point crossover：单侧交配</li>
+<li>Double-point crossover：双侧交配</li>
+<li>Uniform crossover：对于每个bit，根据随机决定是否交配</li>
+</ol>
+</li>
+<li>Mutations：突变
+<ol>
+<li>设置突变率</li>
+<li>设置是否精英模式，精英chromosome不突变</li>
+</ol>
+</li>
+<li>Convergence：停止算法的方式：千奇百怪</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Continuous Genetic Algorithm：连续遗传算法：没有编码过程，直接使用连续的数值
+<ol>
+<li>Crossover: Blending, Extrapolation：交配使用公式，与随机数相加减</li>
+<li>Mutations：p'n = pn +σNn(0;1)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Multiple-Objective Optimisation：多目标优化：要求多个目标的总输出最小
+<ol>
+<li>Weighted Sum Approach：使用权重，f = Σw`f</li>
+<li>Gray Codes：格雷码，Hamming distance：汉明距离
+<ol>
+<li>使十进制与二进制码长相相似，3--011，4--100这个就长得不一样</li>
+<li>XOR方式</li>
+<li>减小大的跳变，适用于local search</li>
+</ol>
+</li>
+<li>Permutation Problem：排列问题：属于crossover。适用于每个变量选不同的数：比如可以是1 2 3，2 1 3，3 1 2，不能是1 1 1，1 1 2 ...
+<ol>
+<li>Partially matched crossover (PMX)：正常先换俩，然后再换俩</li>
+<li>Ordered crossover (OX)：先换俩，剩下的问号根据parent剩下的数按序补足</li>
+<li>Cycle crossover (CX)：从左开始交配，遇到相同数字，对该位置进行交配，直到没有相同数字</li>
+<li>Coding with reference list：按照索引对parent进行编码</li>
+</ol>
+</li>
+<li>Mutation 突变方式：
+<ol>
+<li>Inversion：对一串位置进行翻转</li>
+<li>Insertion and Displacement：一串位置前移几位</li>
+<li>Reciprocal exchange：交换位置</li>
+</ol>
+</li>
+<li>Penalty Function：本质上也是cost function，将cost func与所有相加的约束，求其最小</li>
+<li>example：travelling salesman problem (TSP)销售路径问题</li>
+<li>genetic programming (GP)：遗传编程/基因编程：树形结构
+<ol>
+<li>Function set ：and/or/exp/+/-/...</li>
+<li>Terminal set：x1, x2</li>
+</ol>
+</li>
+<li>Schema Theorem：图解理论证明GA算法：
+<ol>
+<li>通过计算图形S在多次迭代后，长得是S的染色体是多了还是少了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Evolution Strategy(ES)：进化策略：随机选父母，生成指定个数的子代（可能每次就一个子代），多次循环直到生成确定数目的子代。初始化，交配，突变，评估，选择。</li>
+<li>(1+1)-ES：一个父母x，一个孩子σ，单亲，没有交配环节
+<ol>
+<li>子代突变方式：
+<ol>
+<li>静态constant</li>
+<li>考虑1/5次进化，如果变好，子代参数增加，否则减少</li>
+<li>运行10次根据成功次数来变化子代参数</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>(μ+1)-ES：将μ&gt;1的父母随机分两类，然后每个子代，根据随机数来确认选择哪个类的作为子代</li>
+<li>(μ+λ)-ES (plus strategy)：(一般μ&gt;λ) 把μ父母生成的子代λ放到poplution（μ个）中，从(μ+λ)中选出最好的μ个作为下次循环的父母</li>
+<li>(μ, λ)-ES (comma strategy)：μ≤λ 从λ子代中选出优秀的μ个作为父母</li>
+<li>crossover
+<ol>
+<li>Local crossover: (p = 2)，两个父母（这俩父母都是矩阵，有nx个 基因？？）</li>
+<li>Global crossover: (2 &lt; p ≤ μ) ：多个父母</li>
+<li>Discrete recombination: 通过随机数随意选一个类中的父母作为子代</li>
+<li>Intermediate recombination: 随机权重将两个类中的父母求和作为子代，多个类父母的话就取平均了</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Ant Colony Optimisation algorithms：蚁群最优算法</li>
+<li>Binary Bridge Experiments：二进制桥实验</li>
+<li>Simple Ant Colony Optimisation (SACO)：
+<ol>
+<li>tij(t): Pheromone concentration：信息素浓度</li>
+<li>pk ij(t)：Transition probability：根据信息素浓度计算每条路径的概率</li>
+<li>Evaporation of Pheromone Intensity (negative feedback)：t的负反馈调节</li>
+<li>Update of Pheromone Intensity (positive feedback)：t的正反馈调节</li>
+<li>随机确定t，计算p，让每个蚂蚁都从起点走到了终点（遇到内部循环则删除循环节），然后对t进行负正反馈</li>
+</ol>
+</li>
+<li>Ant System (AS)：蚂蚁系统：基于SACO发展的系统，增加更多边界信息和约束条件
+<ol>
+<li>n ij(t)：t的权重priori effectiveness</li>
+<li>正反馈计算Δt有三种模式：Ant-cycle AS（Q/f）（考虑全局问题，f=Σd），Ant-density AS（Q），Ant-quantity AS（Q/d）（考虑本地问题）</li>
+<li>Elitist Strategy：精英策略：正反馈调节中仅对最优解增加权重（ 精英蚁群数x Δt）</li>
+</ol>
+</li>
+<li>example：travelling salesman problem (TSP)：行商问题</li>
+<li>Ant Colony System (ACS)：蚁群系统
+<ol>
+<li>p的计算方式更改：首先增加强随机数门限user-specified parameter，如果在此门限内，概率选取所有路径t x n中的最大值</li>
+<li>负反馈更改：
+<ol>
+<li>Local update rule：仅对于普通边缘的修改：增加pt0，t0为小常量</li>
+<li>Global update rule：仅对于最佳solution的边缘的修改：增加pΔt，Δt=1/f+，f+是best solusion</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>PARTICLE SWARM OPTIMISATION (PSO)：粒子群算法</li>
+<li>Global best PSO (gbest PSO): 星型拓扑结构（每个粒子跟所有粒子建立联系），速度快但更容易找到local minima</li>
+<li>Local best PSO (lbest PSO)：环形拓扑结构（每个粒子跟相邻粒子建立关系），速度慢但更容易找到global minima</li>
+<li>Global Best PSO：
+<ol>
+<li>x：数据（每个燕子）xi(t=1)=[1,0,0,1]，y：每个x在其运行的t时间后，每次获得的最优解 yi(t=1)=[1,0,0,1], yi(t=2)=[1,1,0,1]，y^ ：将所有的yi比较后的一个最优解 y^ =[[1,1,0,1],...]。v：每次x将要运行的方向，x(t+1)=x(t)+v(t+1)。xij：i是population size，就是实例；j是attribute</li>
+</ol>
+</li>
+<li>Local Best PSO：
+<ol>
+<li>仅有一处改动，将y^ 变为y^ i，i是instance，每个y^ i都有一组（neighbor）比如(y1, y2, y3)，判断这里面的y哪个更小，则y^ i = y2</li>
+<li>每个粒子可以是多个邻域的成员</li>
+</ol>
+</li>
+<li>Velocity Components： 三部分：初始速度，自己之前走过的最优方向，社会最优方向</li>
+<li>Particle clustering algorithm：粒子聚类算法：目的是停止迭代。不断移动中心点，确认绝大部分的粒子都在这些中心点的范围内。不单一使用一个中心点所在范围</li>
+<li>Velocity Clamping：
+<ol>
+<li>速度夹紧：速度过大容易仅在边界附近搜索。解决：增加Vmax参数限制速度</li>
+<li>Dynamic Velocity Approaches：动态速度：如果前5次都没有发现最优解，则速度改为γVmax，γ是个梯度方程</li>
+</ol>
+</li>
+<li>Inertia Weight：惯性权重：在初始速度上乘以一定权重，也可以是个方程</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>DIFFERENTIAL EVOLUTION（DE）：差分进化</li>
+<li>population, mutation, crossover, selection：先突变后杂交。通过突变获得子代ui，子代一般不是亲生的xi，然后父子杂交获得二胎x'i。父代和二胎进行比较，谁好谁作为下一代。</li>
+<li>mutation：ui=xi1+β(xi2-xi3)，ui是子代，等于三个干爹的向量和
+<ol>
+<li>xi1：target vector：目标向量，可以随机挑干爹，也可挑最佳干爹</li>
+<li>xi2，xi3：difference vector差分向量，(xi2-xi3)这算一组差分向量，不算俩</li>
+</ol>
+</li>
+<li>crossover：选择ux(attribute个数)中有多少用于杂交的J
+<ol>
+<li>Binomial crossover：先随机选一个放到J里面，然后nx里面逐次判断，随机数大于阈值的就放进J里面</li>
+<li>Exponential crossover：随机选择nx里的一个位置放入J中并逐次向后判断，随机数大于阈值或J满了就跳出</li>
+</ol>
+</li>
+<li>DE/x/y/z：DE/target vector/difference vector/crossover method
+<ol>
+<li>z: bin/exp</li>
+<li>DE/rand/1/z: ui = xi1 + β(xi2-xi3)</li>
+<li>DE/best/1/z: ui = x^ + β(xi2-xi3)</li>
+<li>DE/x/nv/z: ui = xi1 + βΣ(xi2-xi3)</li>
+<li>DE/rand-to-best/nv/z: ui = γx^ +(1-γ)xi1 + βΣ(xi2-xi3)</li>
+<li>DE/current-to-best/1+nv/z: ui = xi + β(x^ + xi) + βΣ(xi2-xi3)</li>
+</ol>
+</li>
+<li>Switching DE strategies：每次迭代时，通过随机数确定两种方法用哪种。数次迭代后重新计算选取这两种方法的概率。这两种方法一般为exploration探索和exploitation开采</li>
+<li>Hybrid DE strategies：混合DE
+<ol>
+<li>Gradient-based hybrid DE：DE与梯度下降结合
+<ol>
+<li>Acceleration operator：将x^ t+1与x^ t比较，如果x^ t+1更好则不变（使用DE），否则使用梯度下降，x^ t-η▽f强制将其变小（使用梯度下降）</li>
+<li>migration operator：如果population中某一属性间隔过小，需要将该属性的距离拉开。</li>
+</ol>
+</li>
+<li>Evolutionary algorithm-based hybrid DE：用等级方法修正crossover和mutation，也就是按顺序选干爹</li>
+<li>Particle Swarm Optimization Hybrids：switch选用PSO还是DE</li>
+</ol>
+</li>
+<li>Self-adaptive DE strategies：pr（probability of crossover）和β随时间变化。β越大探索能力越强，β越小开采能力越强</li>
+</ol>
+<p>.</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/6cc3ome-optimisation-methods/">
+                    6CCS3OME 最优算法
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmpnn-pattern-recognition-neural-networks-deep-learning/">
+                    7CCSMPNN 模式识别
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#lecture-2">lecture 2</a></li>
+<li><a href="#lecture-3">lecture 3</a></li>
+<li><a href="#lecture-4">lecture 4</a></li>
+<li><a href="#lecture-5">lecture 5</a></li>
+<li><a href="#lecture-6">lecture 6</a></li>
+<li><a href="#lecture-7">lecture 7</a></li>
+<li><a href="#lecture-8">lecture 8</a></li>
+<li><a href="#lecture-9">lecture 9</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-16</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 10 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMBIM 生物启发算法</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>最优方式：传统数值方法
+<ol>
+<li>Analytical Optimisation：解析法（求导）</li>
+<li>Exhaustive Search：穷举法</li>
+<li>Nelder-Mead Downhill Simplex Method：多面体法：Reflection ; Expansion; Contraction; Shrinking</li>
+<li>Gradient Descent：梯度下降，x_k+1 = x_k - h_k ▼f (x)</li>
+<li>Line Minimisation：泰勒函数的展开式，结果同梯度下降，找到随机点，求导直到代价函数increase。更像是数学推导</li>
+<li>Random Walk：随机dk，随机hk，随机数与固定门限比较，从而确定x_k+1，通过比较代价函数确定x_best</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Binary Genetic Algorithm：(BGA) 二进制遗传算法
+<ol>
+<li>Encoding：编码</li>
+<li>Natural Selection：自然选择</li>
+<li>Selection：选择父代</li>
+<li>Crossover：交配成子代</li>
+<li>Multation：子代突变</li>
+<li>其他概念：
+<ol>
+<li>chromosome：染色体</li>
+<li>generation：迭代次数</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Natural Selection：自然选择：删掉需要死亡的人，X_rate，thresholding</li>
+<li>selection：选择两个人进行交配
+<ol>
+<li>Pairing from top to bottom：自上而下</li>
+<li>Random pairing：随机选择</li>
+<li>Weighted random pairing
+<ol>
+<li>Rank weighting：自上而下被选择的概率依次降低</li>
+<li>Cost weighting：依照权重差值，差值越大概率越高</li>
+</ol>
+</li>
+<li>Tournament selection：随机选择多个爹，选择这里面权重最好的当爹。重新随机选择多个妈，然后取权重最好的当妈。允许自交，视problem而定。</li>
+</ol>
+</li>
+<li>Crossover：交配过程
+<ol>
+<li>Single-point crossover：单侧交配</li>
+<li>Double-point crossover：双侧交配</li>
+<li>Uniform crossover：对于每个bit，根据随机决定是否交配</li>
+</ol>
+</li>
+<li>Mutations：突变
+<ol>
+<li>设置突变率</li>
+<li>设置是否精英模式，精英chromosome不突变</li>
+</ol>
+</li>
+<li>Convergence：停止算法的方式：千奇百怪</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Continuous Genetic Algorithm：连续遗传算法：没有编码过程，直接使用连续的数值
+<ol>
+<li>Crossover: Blending, Extrapolation：交配使用公式，与随机数相加减</li>
+<li>Mutations：p'n = pn +σNn(0;1)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Multiple-Objective Optimisation：多目标优化：要求多个目标的总输出最小
+<ol>
+<li>Weighted Sum Approach：使用权重，f = Σw`f</li>
+<li>Gray Codes：格雷码，Hamming distance：汉明距离
+<ol>
+<li>使十进制与二进制码长相相似，3--011，4--100这个就长得不一样</li>
+<li>XOR方式</li>
+<li>减小大的跳变，适用于local search</li>
+</ol>
+</li>
+<li>Permutation Problem：排列问题：属于crossover。适用于每个变量选不同的数：比如可以是1 2 3，2 1 3，3 1 2，不能是1 1 1，1 1 2 ...
+<ol>
+<li>Partially matched crossover (PMX)：正常先换俩，然后再换俩</li>
+<li>Ordered crossover (OX)：先换俩，剩下的问号根据parent剩下的数按序补足</li>
+<li>Cycle crossover (CX)：从左开始交配，遇到相同数字，对该位置进行交配，直到没有相同数字</li>
+<li>Coding with reference list：按照索引对parent进行编码</li>
+</ol>
+</li>
+<li>Mutation 突变方式：
+<ol>
+<li>Inversion：对一串位置进行翻转</li>
+<li>Insertion and Displacement：一串位置前移几位</li>
+<li>Reciprocal exchange：交换位置</li>
+</ol>
+</li>
+<li>Penalty Function：本质上也是cost function，将cost func与所有相加的约束，求其最小</li>
+<li>example：travelling salesman problem (TSP)销售路径问题</li>
+<li>genetic programming (GP)：遗传编程/基因编程：树形结构
+<ol>
+<li>Function set ：and/or/exp/+/-/...</li>
+<li>Terminal set：x1, x2</li>
+</ol>
+</li>
+<li>Schema Theorem：图解理论证明GA算法：
+<ol>
+<li>通过计算图形S在多次迭代后，长得是S的染色体是多了还是少了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Evolution Strategy(ES)：进化策略：随机选父母，生成指定个数的子代（可能每次就一个子代），多次循环直到生成确定数目的子代。初始化，交配，突变，评估，选择。</li>
+<li>(1+1)-ES：一个父母x，一个孩子σ，单亲，没有交配环节
+<ol>
+<li>子代突变方式：
+<ol>
+<li>静态constant</li>
+<li>考虑1/5次进化，如果变好，子代参数增加，否则减少</li>
+<li>运行10次根据成功次数来变化子代参数</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>(μ+1)-ES：将μ&gt;1的父母随机分两类，然后每个子代，根据随机数来确认选择哪个类的作为子代</li>
+<li>(μ+λ)-ES (plus strategy)：(一般μ&gt;λ) 把μ父母生成的子代λ放到poplution（μ个）中，从(μ+λ)中选出最好的μ个作为下次循环的父母</li>
+<li>(μ, λ)-ES (comma strategy)：μ≤λ 从λ子代中选出优秀的μ个作为父母</li>
+<li>crossover
+<ol>
+<li>Local crossover: (p = 2)，两个父母（这俩父母都是矩阵，有nx个 基因？？）</li>
+<li>Global crossover: (2 &lt; p ≤ μ) ：多个父母</li>
+<li>Discrete recombination: 通过随机数随意选一个类中的父母作为子代</li>
+<li>Intermediate recombination: 随机权重将两个类中的父母求和作为子代，多个类父母的话就取平均了</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Ant Colony Optimisation algorithms：蚁群最优算法</li>
+<li>Binary Bridge Experiments：二进制桥实验</li>
+<li>Simple Ant Colony Optimisation (SACO)：
+<ol>
+<li>tij(t): Pheromone concentration：信息素浓度</li>
+<li>pk ij(t)：Transition probability：根据信息素浓度计算每条路径的概率</li>
+<li>Evaporation of Pheromone Intensity (negative feedback)：t的负反馈调节</li>
+<li>Update of Pheromone Intensity (positive feedback)：t的正反馈调节</li>
+<li>随机确定t，计算p，让每个蚂蚁都从起点走到了终点（遇到内部循环则删除循环节），然后对t进行负正反馈</li>
+</ol>
+</li>
+<li>Ant System (AS)：蚂蚁系统：基于SACO发展的系统，增加更多边界信息和约束条件
+<ol>
+<li>n ij(t)：t的权重priori effectiveness</li>
+<li>正反馈计算Δt有三种模式：Ant-cycle AS（Q/f）（考虑全局问题，f=Σd），Ant-density AS（Q），Ant-quantity AS（Q/d）（考虑本地问题）</li>
+<li>Elitist Strategy：精英策略：正反馈调节中仅对最优解增加权重（ 精英蚁群数x Δt）</li>
+</ol>
+</li>
+<li>example：travelling salesman problem (TSP)：行商问题</li>
+<li>Ant Colony System (ACS)：蚁群系统
+<ol>
+<li>p的计算方式更改：首先增加强随机数门限user-specified parameter，如果在此门限内，概率选取所有路径t x n中的最大值</li>
+<li>负反馈更改：
+<ol>
+<li>Local update rule：仅对于普通边缘的修改：增加pt0，t0为小常量</li>
+<li>Global update rule：仅对于最佳solution的边缘的修改：增加pΔt，Δt=1/f+，f+是best solusion</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>PARTICLE SWARM OPTIMISATION (PSO)：粒子群算法</li>
+<li>Global best PSO (gbest PSO): 星型拓扑结构（每个粒子跟所有粒子建立联系），速度快但更容易找到local minima</li>
+<li>Local best PSO (lbest PSO)：环形拓扑结构（每个粒子跟相邻粒子建立关系），速度慢但更容易找到global minima</li>
+<li>Global Best PSO：
+<ol>
+<li>x：数据（每个燕子）xi(t=1)=[1,0,0,1]，y：每个x在其运行的t时间后，每次获得的最优解 yi(t=1)=[1,0,0,1], yi(t=2)=[1,1,0,1]，y^ ：将所有的yi比较后的一个最优解 y^ =[[1,1,0,1],...]。v：每次x将要运行的方向，x(t+1)=x(t)+v(t+1)。xij：i是population size，就是实例；j是attribute</li>
+</ol>
+</li>
+<li>Local Best PSO：
+<ol>
+<li>仅有一处改动，将y^ 变为y^ i，i是instance，每个y^ i都有一组（neighbor）比如(y1, y2, y3)，判断这里面的y哪个更小，则y^ i = y2</li>
+<li>每个粒子可以是多个邻域的成员</li>
+</ol>
+</li>
+<li>Velocity Components： 三部分：初始速度，自己之前走过的最优方向，社会最优方向</li>
+<li>Particle clustering algorithm：粒子聚类算法：目的是停止迭代。不断移动中心点，确认绝大部分的粒子都在这些中心点的范围内。不单一使用一个中心点所在范围</li>
+<li>Velocity Clamping：
+<ol>
+<li>速度夹紧：速度过大容易仅在边界附近搜索。解决：增加Vmax参数限制速度</li>
+<li>Dynamic Velocity Approaches：动态速度：如果前5次都没有发现最优解，则速度改为γVmax，γ是个梯度方程</li>
+</ol>
+</li>
+<li>Inertia Weight：惯性权重：在初始速度上乘以一定权重，也可以是个方程</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>DIFFERENTIAL EVOLUTION（DE）：差分进化</li>
+<li>population, mutation, crossover, selection：先突变后杂交。通过突变获得子代ui，子代一般不是亲生的xi，然后父子杂交获得二胎x'i。父代和二胎进行比较，谁好谁作为下一代。</li>
+<li>mutation：ui=xi1+β(xi2-xi3)，ui是子代，等于三个干爹的向量和
+<ol>
+<li>xi1：target vector：目标向量，可以随机挑干爹，也可挑最佳干爹</li>
+<li>xi2，xi3：difference vector差分向量，(xi2-xi3)这算一组差分向量，不算俩</li>
+</ol>
+</li>
+<li>crossover：选择ux(attribute个数)中有多少用于杂交的J
+<ol>
+<li>Binomial crossover：先随机选一个放到J里面，然后nx里面逐次判断，随机数大于阈值的就放进J里面</li>
+<li>Exponential crossover：随机选择nx里的一个位置放入J中并逐次向后判断，随机数大于阈值或J满了就跳出</li>
+</ol>
+</li>
+<li>DE/x/y/z：DE/target vector/difference vector/crossover method
+<ol>
+<li>z: bin/exp</li>
+<li>DE/rand/1/z: ui = xi1 + β(xi2-xi3)</li>
+<li>DE/best/1/z: ui = x^ + β(xi2-xi3)</li>
+<li>DE/x/nv/z: ui = xi1 + βΣ(xi2-xi3)</li>
+<li>DE/rand-to-best/nv/z: ui = γx^ +(1-γ)xi1 + βΣ(xi2-xi3)</li>
+<li>DE/current-to-best/1+nv/z: ui = xi + β(x^ + xi) + βΣ(xi2-xi3)</li>
+</ol>
+</li>
+<li>Switching DE strategies：每次迭代时，通过随机数确定两种方法用哪种。数次迭代后重新计算选取这两种方法的概率。这两种方法一般为exploration探索和exploitation开采</li>
+<li>Hybrid DE strategies：混合DE
+<ol>
+<li>Gradient-based hybrid DE：DE与梯度下降结合
+<ol>
+<li>Acceleration operator：将x^ t+1与x^ t比较，如果x^ t+1更好则不变（使用DE），否则使用梯度下降，x^ t-η▽f强制将其变小（使用梯度下降）</li>
+<li>migration operator：如果population中某一属性间隔过小，需要将该属性的距离拉开。</li>
+</ol>
+</li>
+<li>Evolutionary algorithm-based hybrid DE：用等级方法修正crossover和mutation，也就是按顺序选干爹</li>
+<li>Particle Swarm Optimization Hybrids：switch选用PSO还是DE</li>
+</ol>
+</li>
+<li>Self-adaptive DE strategies：pr（probability of crossover）和β随时间变化。β越大探索能力越强，β越小开采能力越强</li>
+</ol>
+<p>.</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/6cc3ome-optimisation-methods/">
+                    6CCS3OME 最优算法
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmpnn-pattern-recognition-neural-networks-deep-learning/">
+                    7CCSMPNN 模式识别
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>

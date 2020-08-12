@@ -1,0 +1,1303 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="lecture 1
+
+Input: data：输入：数据
+
+instances：数据例子，一般是行。 attributes：数据指标，一般是列
+numeric, nominal, ordinal, dichotomous, interval..." />
+    <meta name="keywords" content="semester2" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-15</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 16 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMDM1 数据挖掘</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>Input: data：输入：数据
+<ol>
+<li>instances：数据例子，一般是行。 attributes：数据指标，一般是列</li>
+<li>numeric, nominal, ordinal, dichotomous, interval</li>
+</ol>
+</li>
+<li>Model: Patterns / Rules：调整模型参数
+<ol>
+<li>classification, numeric prediction, association, clustering</li>
+</ol>
+</li>
+<li>Output: Knowledge Representation：模型预测结果
+<ol>
+<li>tables, trees, rules, instances, clusters, linear models, networks</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Overview of Classification and Regression 分类和回归
+<ol>
+<li>regression：回归，错误率：这里的回归是回归到真实值，错误率是均方差</li>
+<li>N-fold cross-validation：N型折叠交叉验证</li>
+</ol>
+</li>
+<li>Linear Regression 线性回归
+<ol>
+<li>w权重</li>
+<li>Perceptron Learning Rule：与线性回归w相同</li>
+<li>feed-forward neural network：前向回馈神经网络</li>
+</ol>
+</li>
+<li>probabilistic：概率分布
+<ol>
+<li>joint probability distribution：联合概率分布</li>
+<li>Bayes theorem：贝叶斯定理</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Rudimentary Rules：基本规则
+<ol>
+<li>1R算法：单规则算法，每个属性只产生一层决策树</li>
+</ol>
+</li>
+<li>decision trees：决策树
+<ol>
+<li>Gini：基尼系数：分类比例平方和：G=ΣP<sup>2</sup>，范围0.5-1之间，1是分类结果最好</li>
+<li>Information Gain(Entropy Reduction)：信息增益(熵减少)：熵=信息量。E=-Σ(P · logP)。范围0-1之间，越小越好。一个事件越确定，它包含的信息越少。低概率时间可能含有高熵，高概率事件很少有低熵。</li>
+<li>Chi-square：卡方检验：观察频率与期望频率求和，除以期望频率。越大越好，没有上限</li>
+<li>CART, ID3, C5.0：三种决策树算法
+<ol>
+<li>CART：Classification and Regression Trees：分类和回归树：先种树不断分裂提高纯度purity，然后修剪树，相同父类进行合并，按照错误率删除小树。输入为数值或分类，分裂方式为gini，提纯方式为自下而上最小cost。
+<ol>
+<li>purity纯度：测量在决策树节点内出现了多少不同的分类</li>
+</ol>
+</li>
+<li>ID3：Iterative Dichotomizer：迭代二分：先用部分instances作为window集合构建子树，然后将子树适用在其他instances，将误分类的例子放到window中重新建树。输入只能为分类，分裂方式为Information Gain，没有提纯方式。</li>
+<li>C5.0：与CART类似，用错误率进行修剪树。输入为为数值或分类，分裂方式为Information Gain，提纯方式为比较修剪和不修剪的错误率置信区间</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>logistic Regression：01回归, Naive Bayes：条件概率</li>
+<li>Evaluation：模型评估手段：
+<ol>
+<li>训练集，验证集，测试集：用于学习分类模型；用于选取最优超参数；用于评估模型</li>
+<li>Cross-validation交叉验证：不放回抽样。Bootstrap抽样：是否有放回的抽样。 -- 0.632-Bootstrap：0.632自助法：n个样本，有放回的取n次作为训练集（目前训练集有n个包含重复实例的集合），由于有重复数据，大约有63.2%个数据作为训练集，余下的作为测试集。</li>
+<li>Confusion Matrix：混淆矩阵：监督学习，Success Rate=(T+T)/(T+T+F+F)，error rate=1-S，True Positive Rate=TP/(TP+FN)，False Positive Rate=FP/(FP+TN)，Precision=TP/(TP+FP)，Recall=TP/(TP+FN)</li>
+<li>Cohen’s Kappa：科恩卡帕系数：衡量上述混淆矩阵是否good：K=(Pr(a)−Pr(e)) / (1−Pr(e))</li>
+<li>Lift：提升图：lift曲线，随机取10样本的准确率30%，但是取前10个样本准确率80%，把真正率(TP)和假正率(FP)当作横纵轴</li>
+<li>ROC：Receiver Operating Characteristic 受试者工作特征曲线：把真正率(TP)和假正率(FP)当作横纵轴。与lift类似，也是考虑排序靠前的几个样本</li>
+<li>AUC：area under the curve曲线下面积，如果AUC=1则模型最好</li>
+<li>各曲线详细解释：https://blog.csdn.net/zwqjoy/article/details/84859405#四%20Lift%20%2C%20Gain</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>probility, likelihood的区别：probility概率：已知p=0.5，观察正面向上的次数。likelihood似然：已知正面向上的次数，求p</li>
+<li>Maximum Likelihood Estimation (MLE)：估计参数parameter值，使得likelihood最大化。 Bias和Variance区别：差和方差</li>
+<li>Score Functions：正态分布函数，likehood = ∏f</li>
+<li>clustering聚类算法
+<ol>
+<li>k-means</li>
+<li>Hierarchical：阶层式集群：树形结构</li>
+<li>Incremental：增量聚类算法：从根节点开始创建树，每增加一个实例，就对树进行扩展。判断方式：category utility metric类别效用度量</li>
+<li>Density-Based：DBSCAN Algorithm
+<ol>
+<li>Core point: 核心点：该点所处区域的密度很大（&gt;MinPts），且每个核心点的都可通过指定距离到达（&lt;ε，Eps）</li>
+<li>Border point: 边界点：距离可达，但处于可达边界点，该点区域密度小</li>
+<li>Noise point：噪声点：距离不可达</li>
+</ol>
+</li>
+<li>singleton cluster：单例聚类：每个instance只在一个类里。overlapping是在多个类里</li>
+</ol>
+</li>
+<li>clustering distance：
+<ol>
+<li>Cluster Diameter：同一类中两个点的最大距离</li>
+<li>Single-Link or Single-Linkage：不同类间两点最小距离</li>
+<li>Complete-Link or Complete-Linkage ：不同类间两点最大距离</li>
+<li>Average-Link, Average-Linkage or Group Average ：不同类间所有点平均距离</li>
+<li>Centroid-Link or Centroid-Linkage：不同类间中心点距离</li>
+</ol>
+</li>
+<li>Cluster Evaluation
+<ol>
+<li>Within Cluster Score：WC，同一类间两点距离，越小越好</li>
+<li>Between Cluster Score：BC，不同类间的距离，越大越好</li>
+<li>Overall Clustering Score</li>
+<li>Calinski-Harabaz Index：(WC/BC)(n-K/K-1)，越大越好</li>
+<li>Silhouette Coefficient：si =(bi − ai)/max{ai,bi}，范围在[-1,1]，相近类的类间距离 - 同一类的内部距离</li>
+<li>Minimum Description Length（MDL）：评估聚类好坏所需的参数信息</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Parametric Models：参数模型
+<ol>
+<li>central limit theorem：中心极限定理，大数据其均值和标准差服从正态分布</li>
+<li>Probability density function：PDF: 概率密度函数</li>
+<li>Iso-density Contours：等密度轮廓</li>
+<li>Mixture Models：混合分布，概率分布的一种，例如男生女生身高</li>
+<li>Poisson Distribution：泊松分布</li>
+<li>Gaussian Mixture Models：(GMM)高斯混合模型</li>
+</ol>
+</li>
+<li>non-parametric models非参数模型：Histograms，Kernel density estimators，KNN</li>
+<li>Expectation-Maximization (EM) Algorithm：最大期望算法
+<ol>
+<li>E步骤：根据概率求期望Expected</li>
+<li>M步骤：根据期望重新估计概率</li>
+<li>Hill-climbing algorithm：爬坡算法</li>
+</ol>
+</li>
+<li>Instance-Based Models：基于实例的模型
+<ol>
+<li>Memory Based Reasoning：MBR: 基于记忆的理解：找邻居
+<ol>
+<li>缺点：其实比决策树等计算更耗时，且存储容量大</li>
+<li>KNN算法，k=1时为look-alike models</li>
+<li>实例：歌曲辨别，转为频域，比较频域峰值，判断一个时间段内的频域相似度</li>
+<li>kD-trees：将每个点放在平面上，将平面分割成多个空间，每个空间只有一个数据点。k是维度</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Association Rules：关联规则：如果你买一本书，商城会给你推荐另一本书
+<ol>
+<li>Coverage or support count：同时具备相关的几个物体的例子</li>
+<li>Support = 同时具备相关的两个物体的例子2个/数据集为5</li>
+<li>Confidence or accurracy = 同时具备相关的两个物体的例子2个/数据集含先决条件的orange有4个</li>
+</ol>
+</li>
+<li>Apriori algorithm：先验算法：
+<ol>
+<li>逐个比较1-item，2-item。。。的数据，看看数据集内有多少个数量（Coverage），大于门限的保留</li>
+<li>计算minimum confidence（Confidence）并与门限比较，大于门限的保留</li>
+</ol>
+</li>
+<li>Measures for evaluating the quality of association rules：评估关联规则的方法
+<ol>
+<li>Coverage，Support，Confidence，Lift，χ2 or Chi-square</li>
+<li>Market Basket Analysis：市场篮子分析：即使confidence（2/4）很高，也要考虑support（2/5）是不是很高</li>
+<li>Lift：观察有用程度，contigency table关联表</li>
+<li>χ2 or Chi-square：测量偶然产生关联表的概率。数值越高代表关联表的随机性越高。对于感兴趣的关联规则，是不会随机分离数据的。因此对于关联规则χ2越小越好。</li>
+</ol>
+</li>
+<li>关联规则的属性：
+<ol>
+<li>Actionable可控的：买芭比娃娃的人也买糖果</li>
+<li>Trivial不重要的：买维修协议的也会买大型家电</li>
+<li>Inexplicable费解的：五金店开张卖得最多的是马桶清洁剂</li>
+</ol>
+</li>
+<li>Apriori algorithm for learning association rules:</li>
+<li>FP-Growth Algorithm (frequent pattern tree)：实线是正常的树，虚线是该节点出现的总数</li>
+<li>Sequence Analysis：引入了购买顺序</li>
+<li>Link Analysis ：图理论，节点是item，边缘是相关性</li>
+<li>Time Series Analysis：时间序列分析
+<ol>
+<li>Moving Average (MA)：对一个时间段内取平均</li>
+<li>AutoRegressive (AR)：t+1的状态与t状态呈线性回归</li>
+<li>Exponential Smoothing：平滑因子</li>
+</ol>
+</li>
+<li>Challenges with time series data:挑战
+<ol>
+<li>Representation：表示
+<ol>
+<li>Piecewise Linear Approximation：分段线性近似</li>
+<li>Discrete Fourier Transformation (DFT)：离散傅里叶变换</li>
+<li>Singular Value Decomposition (SVD)：奇异值分解</li>
+</ol>
+</li>
+<li>Similarity：相似
+<ol>
+<li>Whole series matching：全序列匹配</li>
+<li>Subsequence matching：子序列匹配</li>
+<li>Euclidean Distance：欧式距离</li>
+<li>Dynamic Time Warping：动态时间扭曲，将一个序列压缩以匹配另一序列</li>
+<li>Longest Common Subsequences：最长公共子序列，允许序列内部存在杂质</li>
+</ol>
+</li>
+<li>Indexing：索引
+<ol>
+<li>线性索引</li>
+<li>将相同序列分组，降维索引</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Time series mining tasks: 时间序列挖掘任务
+<ol>
+<li>Forecasting：基于历史数据对未来数据进行预测</li>
+<li>Classification：分类：心跳信号正常或不正常</li>
+<li>Temporal Association Rules：时序关联规则：每段信号对应一个符号，查找符号之间关联</li>
+<li>Clustering：聚类：相似信号分组</li>
+<li>Anomaly Detection：异常检测：outlier噪声</li>
+<li>Motif Discovery：motif探索，查找连续出现的信号</li>
+</ol>
+</li>
+<li>Survival Analysis or Time-to-Event Analysis：生存分析或时间事件分析：客户什么时候与其他公司合作
+<ol>
+<li>Survival curve：生存曲线：从100%降到0%，可能几十年以后发生（一款游戏老用户的存活时间）</li>
+<li>Customer Half-Time &amp; Average Customer Lifetime：客户半衰期和平均客户寿命</li>
+<li>Survival Function：生存函数：在t年后活下来的概率。可以是离散的（就是将时间分段）</li>
+<li>Hazard Function：冒险函数：也称特定年龄的失败率</li>
+<li>Kaplan-Meier Estimator of Survival Function：生存函数的Kaplan-Meier估计：也叫乘积极限估计，极限函数 = 对每个i，当前发生的事件event的乘积（1 - number of events (e.g., deaths) / individuals known to have survived (have not yet had an event or been censored) up to time ti）</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Natural Language Processing (NLP): 自然语言处理</li>
+<li>语言模型：
+<ol>
+<li>string, language, grammar, semantics, corpus, natural language, Sentences, language model</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<p>计算机视觉的内容，略</p>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>Methods for Classification and Regression</li>
+<li>Kernel Methods：
+<ol>
+<li>Kernel Density Estimate：核密度估计：将直方图变得平滑取平均，就变成密度函数了，f(x) = 1/m ΣK(x-xi  /h)，h是bandwidth，h越大直方图越平滑。</li>
+<li>K：kernel function，这里的核函数与后面的SVM不同，这里是用于低维直方图类型的，用以显示直方图的走势，积分和为1</li>
+<li>Regression：回归方式：直接连接数据点，knn，knn线性回归，局部权重线性回归</li>
+<li>Locally Weighted Linear Regression：局部权重线性回归：权重K( d(x, xi) )，一种例子是距离越小权重越大。这里面h的值要比k的函数选取更重要</li>
+</ol>
+</li>
+<li>Support Vector Machines（SVMs）：支持向量机
+<ol>
+<li>Linear separator: a set of points</li>
+<li>Support vectors: the points closest to the separator</li>
+<li>将x1，x2分为三个特征（新建三维坐标系）：x1^2, x2^2, x1x2，这样在新的三维空间内，数据就是线性可分的</li>
+</ol>
+</li>
+<li>Ensemble Methods：集成方法=set
+<ol>
+<li>好处：统计学，计算，表现三方面：
+<ol>
+<li>Statistical reason：数据量太小，分类器的分类范围太大，多个分类器叠加能更好确定数据边界</li>
+<li>Computational reason：单一分类器容易陷入局部最小值</li>
+<li>Representational reason：与knn类似，真正的分类f不会被现有的H表现出来，但是可由多个h1,h2,h3来估计f</li>
+</ol>
+</li>
+<li>概念：H/h：hypotheses = classifiers，假说就是分类器</li>
+<li>Bayesian Voting：贝叶斯投票：每个假说都有一个概率，数据点对不同假说（分类器）进行投票</li>
+<li>Bagging (Bootstrap Aggregation)：装袋（引导聚合）：对一个算法运行多次，每次取部分训练点，从而得出不同的训练模型，对这些模型进行投票
+<ol>
+<li>对于数据量小的训练集：决策树和神经网络是不稳定的；knn和线性回归是稳定的</li>
+</ol>
+</li>
+<li>Boosting (AdaBoost Algorithm)：推进（自适应算法）：每个样本初始具有相等权重，每次迭代中使用学习算法，将大权重分配给误分类，最终要求最小化权重。与bagging类似</li>
+</ol>
+</li>
+<li>Methods for Sequence Analysis：序列分析方法：Markov Models，Hidden Variables，Hidden Markov Models。详见AIN
+<ol>
+<li>Markov Models：当前xt的概率与x1:t-1有关  →</li>
+<li>Hidden Variables：隐变量也叫潜在变量：变量之间的相互关系，比如年龄变量与教育和秃顶有关  ↑</li>
+<li>Hidden Markov Models：隐藏式马尔可夫模型：第t天下雨啊带伞啊概率啊什么的</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>Single-Variable Transformations：单变量变换
+<ol>
+<li>Standardize Numeric Values：聚类找均值，设置标准差</li>
+<li>Convert Numeric Values into Percentiles：计算值低于每个值的百分比，不懂？</li>
+<li>Convert Counts into Rates：数量转换为比率（限定某个自变量）</li>
+<li>Replace Categorical Variables with Numeric Variables：文字转数值.</li>
+<li>Replace Numeric Variables with Categorical Variables：数值转文字，应该是多个变量的整合？</li>
+</ol>
+</li>
+<li>Combining Variables：组合变量：身高和体重跟糖尿病没啥关系，但是组合变量BMI和糖尿病有关系
+<ol>
+<li>highly correlated variables：有时候两个变量强相关，在回归模型中这是有害的。这时建议删掉一个。</li>
+<li>也可将两个强相关变量作比率，学生/工作人员 = 学校能力blabla，但是该比率应具有高方差。</li>
+</ol>
+</li>
+<li>Extracting Features from Structured Data：从结构化数据中提取特征
+<ol>
+<li>Time series data：时序数据：考虑趋势，季节性</li>
+<li>Geographic data：地理数据：地理位置，分布</li>
+</ol>
+</li>
+<li>Handling Sparse Data：处理稀疏数据：每个银行客户只办理了少数几款理财产品
+<ol>
+<li>处理方式：建立少数的密集数据集（不稀疏的数据集）；增加attribute；进行填充</li>
+<li>举例，Netflix收视率，只有user id, movie id, date, rating四个属性，可以构造派生变量，比如{love,hate} ratings</li>
+</ol>
+</li>
+<li>Problems with High-Dimensional Data：高维数据的问题
+<ol>
+<li>相关性问题：有些变量可能相关性很强；聚类时有些变量可能过度加权</li>
+<li>过拟合问题：严格按照训练数据进行拟合，比如神经网络回归</li>
+<li>稀疏数据问题：一个数据占一个维度，无法找到变量之间的关系</li>
+</ol>
+</li>
+<li>Variable Selection：变量选取：删去无关变量，使用变量子集
+<ol>
+<li>变量间的关系：
+<ol>
+<li>independence：两变量条件独立</li>
+<li>correlation：两个变量相关性计算</li>
+<li>Average Mutual Information：平均互信息，用于categorical</li>
+</ol>
+</li>
+<li>Exhaustive Feature Selection：考虑变量间的所有组合，12,13,23,123...变量多的话就没法用了</li>
+<li>Selection using a target variable：用target找输入（怎么找？），如果高维数据instance太少的话，可能构建不出一组数据</li>
+<li>Sequential feature selection：每次只考虑一个变量。Forward selection：依次考虑1个，2个，3个...变量。Backward selection：依次考虑10个，9个，8个...变量。</li>
+</ol>
+</li>
+<li>Variable Transformation：变量变换的方式
+<ol>
+<li>Linear Algebra and Statistics Revision：线性代数和统计修订：对(x,y)进行线性变换，平移翻转之类的；获取特征值特征向量；计算均值标准差；协方差矩阵</li>
+<li>Principal Component Analysis (PCA)：数据降维，无监督学习，缺点是原始空间中的一些信息未被捕获</li>
+</ol>
+</li>
+<li>Singular Value Decomposition (SVD)：奇异值分解：A=UΣV<sup>T</sup>。
+<ol>
+<li>其中，U是AA<sup>T</sup>（左奇异向量）的特征向量mxm，V是U是A<sup>T</sup>A（右奇异向量）的特征向量nxn，Σ为只有对角线有数字（奇异值）的mxn矩阵。通过选择高的奇异值来达到降维效果。其中，左奇异矩阵用于行数压缩，右奇异矩阵用于维度压缩（同PCA，减小PCA在计算协方差矩阵时的计算量）。</li>
+<li>用于NLP中document-term matrix，U是document，V是term</li>
+<li>Latent Semantic Indexing：潜在语义索引：减小行数和维度但不改变内部结构</li>
+<li>Projection Pursuit Regression (PPR)：投影寻踪函数：与核函数类似，在不同投影钟寻找最优结构。与神经网络具有相同估计任意函数的能力，但PPR并未广泛采用。选取的核函数与NN类似，都采用平滑的思想，如sigmoid。缺点：超参数太多，高维数据计算量太大。</li>
+</ol>
+</li>
+</ol>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmpnn-pattern-recognition-neural-networks-deep-learning/">
+                    7CCSMPNN 模式识别
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmaip-ai-planning/">
+                    7CCSMAIP AI规划
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#lecture-1">lecture 1</a></li>
+<li><a href="#lecture-2">lecture 2</a></li>
+<li><a href="#lecture-3">lecture 3</a></li>
+<li><a href="#lecture-4">lecture 4</a></li>
+<li><a href="#lecture-5">lecture 5</a></li>
+<li><a href="#lecture-6">lecture 6</a></li>
+<li><a href="#lecture-7">lecture 7</a></li>
+<li><a href="#lecture-8">lecture 8</a></li>
+<li><a href="#lecture-9">lecture 9</a></li>
+<li><a href="#lecture-10">lecture 10</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-15</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 16 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMDM1 数据挖掘</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>Input: data：输入：数据
+<ol>
+<li>instances：数据例子，一般是行。 attributes：数据指标，一般是列</li>
+<li>numeric, nominal, ordinal, dichotomous, interval</li>
+</ol>
+</li>
+<li>Model: Patterns / Rules：调整模型参数
+<ol>
+<li>classification, numeric prediction, association, clustering</li>
+</ol>
+</li>
+<li>Output: Knowledge Representation：模型预测结果
+<ol>
+<li>tables, trees, rules, instances, clusters, linear models, networks</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Overview of Classification and Regression 分类和回归
+<ol>
+<li>regression：回归，错误率：这里的回归是回归到真实值，错误率是均方差</li>
+<li>N-fold cross-validation：N型折叠交叉验证</li>
+</ol>
+</li>
+<li>Linear Regression 线性回归
+<ol>
+<li>w权重</li>
+<li>Perceptron Learning Rule：与线性回归w相同</li>
+<li>feed-forward neural network：前向回馈神经网络</li>
+</ol>
+</li>
+<li>probabilistic：概率分布
+<ol>
+<li>joint probability distribution：联合概率分布</li>
+<li>Bayes theorem：贝叶斯定理</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Rudimentary Rules：基本规则
+<ol>
+<li>1R算法：单规则算法，每个属性只产生一层决策树</li>
+</ol>
+</li>
+<li>decision trees：决策树
+<ol>
+<li>Gini：基尼系数：分类比例平方和：G=ΣP<sup>2</sup>，范围0.5-1之间，1是分类结果最好</li>
+<li>Information Gain(Entropy Reduction)：信息增益(熵减少)：熵=信息量。E=-Σ(P · logP)。范围0-1之间，越小越好。一个事件越确定，它包含的信息越少。低概率时间可能含有高熵，高概率事件很少有低熵。</li>
+<li>Chi-square：卡方检验：观察频率与期望频率求和，除以期望频率。越大越好，没有上限</li>
+<li>CART, ID3, C5.0：三种决策树算法
+<ol>
+<li>CART：Classification and Regression Trees：分类和回归树：先种树不断分裂提高纯度purity，然后修剪树，相同父类进行合并，按照错误率删除小树。输入为数值或分类，分裂方式为gini，提纯方式为自下而上最小cost。
+<ol>
+<li>purity纯度：测量在决策树节点内出现了多少不同的分类</li>
+</ol>
+</li>
+<li>ID3：Iterative Dichotomizer：迭代二分：先用部分instances作为window集合构建子树，然后将子树适用在其他instances，将误分类的例子放到window中重新建树。输入只能为分类，分裂方式为Information Gain，没有提纯方式。</li>
+<li>C5.0：与CART类似，用错误率进行修剪树。输入为为数值或分类，分裂方式为Information Gain，提纯方式为比较修剪和不修剪的错误率置信区间</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>logistic Regression：01回归, Naive Bayes：条件概率</li>
+<li>Evaluation：模型评估手段：
+<ol>
+<li>训练集，验证集，测试集：用于学习分类模型；用于选取最优超参数；用于评估模型</li>
+<li>Cross-validation交叉验证：不放回抽样。Bootstrap抽样：是否有放回的抽样。 -- 0.632-Bootstrap：0.632自助法：n个样本，有放回的取n次作为训练集（目前训练集有n个包含重复实例的集合），由于有重复数据，大约有63.2%个数据作为训练集，余下的作为测试集。</li>
+<li>Confusion Matrix：混淆矩阵：监督学习，Success Rate=(T+T)/(T+T+F+F)，error rate=1-S，True Positive Rate=TP/(TP+FN)，False Positive Rate=FP/(FP+TN)，Precision=TP/(TP+FP)，Recall=TP/(TP+FN)</li>
+<li>Cohen’s Kappa：科恩卡帕系数：衡量上述混淆矩阵是否good：K=(Pr(a)−Pr(e)) / (1−Pr(e))</li>
+<li>Lift：提升图：lift曲线，随机取10样本的准确率30%，但是取前10个样本准确率80%，把真正率(TP)和假正率(FP)当作横纵轴</li>
+<li>ROC：Receiver Operating Characteristic 受试者工作特征曲线：把真正率(TP)和假正率(FP)当作横纵轴。与lift类似，也是考虑排序靠前的几个样本</li>
+<li>AUC：area under the curve曲线下面积，如果AUC=1则模型最好</li>
+<li>各曲线详细解释：https://blog.csdn.net/zwqjoy/article/details/84859405#四%20Lift%20%2C%20Gain</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>probility, likelihood的区别：probility概率：已知p=0.5，观察正面向上的次数。likelihood似然：已知正面向上的次数，求p</li>
+<li>Maximum Likelihood Estimation (MLE)：估计参数parameter值，使得likelihood最大化。 Bias和Variance区别：差和方差</li>
+<li>Score Functions：正态分布函数，likehood = ∏f</li>
+<li>clustering聚类算法
+<ol>
+<li>k-means</li>
+<li>Hierarchical：阶层式集群：树形结构</li>
+<li>Incremental：增量聚类算法：从根节点开始创建树，每增加一个实例，就对树进行扩展。判断方式：category utility metric类别效用度量</li>
+<li>Density-Based：DBSCAN Algorithm
+<ol>
+<li>Core point: 核心点：该点所处区域的密度很大（&gt;MinPts），且每个核心点的都可通过指定距离到达（&lt;ε，Eps）</li>
+<li>Border point: 边界点：距离可达，但处于可达边界点，该点区域密度小</li>
+<li>Noise point：噪声点：距离不可达</li>
+</ol>
+</li>
+<li>singleton cluster：单例聚类：每个instance只在一个类里。overlapping是在多个类里</li>
+</ol>
+</li>
+<li>clustering distance：
+<ol>
+<li>Cluster Diameter：同一类中两个点的最大距离</li>
+<li>Single-Link or Single-Linkage：不同类间两点最小距离</li>
+<li>Complete-Link or Complete-Linkage ：不同类间两点最大距离</li>
+<li>Average-Link, Average-Linkage or Group Average ：不同类间所有点平均距离</li>
+<li>Centroid-Link or Centroid-Linkage：不同类间中心点距离</li>
+</ol>
+</li>
+<li>Cluster Evaluation
+<ol>
+<li>Within Cluster Score：WC，同一类间两点距离，越小越好</li>
+<li>Between Cluster Score：BC，不同类间的距离，越大越好</li>
+<li>Overall Clustering Score</li>
+<li>Calinski-Harabaz Index：(WC/BC)(n-K/K-1)，越大越好</li>
+<li>Silhouette Coefficient：si =(bi − ai)/max{ai,bi}，范围在[-1,1]，相近类的类间距离 - 同一类的内部距离</li>
+<li>Minimum Description Length（MDL）：评估聚类好坏所需的参数信息</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Parametric Models：参数模型
+<ol>
+<li>central limit theorem：中心极限定理，大数据其均值和标准差服从正态分布</li>
+<li>Probability density function：PDF: 概率密度函数</li>
+<li>Iso-density Contours：等密度轮廓</li>
+<li>Mixture Models：混合分布，概率分布的一种，例如男生女生身高</li>
+<li>Poisson Distribution：泊松分布</li>
+<li>Gaussian Mixture Models：(GMM)高斯混合模型</li>
+</ol>
+</li>
+<li>non-parametric models非参数模型：Histograms，Kernel density estimators，KNN</li>
+<li>Expectation-Maximization (EM) Algorithm：最大期望算法
+<ol>
+<li>E步骤：根据概率求期望Expected</li>
+<li>M步骤：根据期望重新估计概率</li>
+<li>Hill-climbing algorithm：爬坡算法</li>
+</ol>
+</li>
+<li>Instance-Based Models：基于实例的模型
+<ol>
+<li>Memory Based Reasoning：MBR: 基于记忆的理解：找邻居
+<ol>
+<li>缺点：其实比决策树等计算更耗时，且存储容量大</li>
+<li>KNN算法，k=1时为look-alike models</li>
+<li>实例：歌曲辨别，转为频域，比较频域峰值，判断一个时间段内的频域相似度</li>
+<li>kD-trees：将每个点放在平面上，将平面分割成多个空间，每个空间只有一个数据点。k是维度</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Association Rules：关联规则：如果你买一本书，商城会给你推荐另一本书
+<ol>
+<li>Coverage or support count：同时具备相关的几个物体的例子</li>
+<li>Support = 同时具备相关的两个物体的例子2个/数据集为5</li>
+<li>Confidence or accurracy = 同时具备相关的两个物体的例子2个/数据集含先决条件的orange有4个</li>
+</ol>
+</li>
+<li>Apriori algorithm：先验算法：
+<ol>
+<li>逐个比较1-item，2-item。。。的数据，看看数据集内有多少个数量（Coverage），大于门限的保留</li>
+<li>计算minimum confidence（Confidence）并与门限比较，大于门限的保留</li>
+</ol>
+</li>
+<li>Measures for evaluating the quality of association rules：评估关联规则的方法
+<ol>
+<li>Coverage，Support，Confidence，Lift，χ2 or Chi-square</li>
+<li>Market Basket Analysis：市场篮子分析：即使confidence（2/4）很高，也要考虑support（2/5）是不是很高</li>
+<li>Lift：观察有用程度，contigency table关联表</li>
+<li>χ2 or Chi-square：测量偶然产生关联表的概率。数值越高代表关联表的随机性越高。对于感兴趣的关联规则，是不会随机分离数据的。因此对于关联规则χ2越小越好。</li>
+</ol>
+</li>
+<li>关联规则的属性：
+<ol>
+<li>Actionable可控的：买芭比娃娃的人也买糖果</li>
+<li>Trivial不重要的：买维修协议的也会买大型家电</li>
+<li>Inexplicable费解的：五金店开张卖得最多的是马桶清洁剂</li>
+</ol>
+</li>
+<li>Apriori algorithm for learning association rules:</li>
+<li>FP-Growth Algorithm (frequent pattern tree)：实线是正常的树，虚线是该节点出现的总数</li>
+<li>Sequence Analysis：引入了购买顺序</li>
+<li>Link Analysis ：图理论，节点是item，边缘是相关性</li>
+<li>Time Series Analysis：时间序列分析
+<ol>
+<li>Moving Average (MA)：对一个时间段内取平均</li>
+<li>AutoRegressive (AR)：t+1的状态与t状态呈线性回归</li>
+<li>Exponential Smoothing：平滑因子</li>
+</ol>
+</li>
+<li>Challenges with time series data:挑战
+<ol>
+<li>Representation：表示
+<ol>
+<li>Piecewise Linear Approximation：分段线性近似</li>
+<li>Discrete Fourier Transformation (DFT)：离散傅里叶变换</li>
+<li>Singular Value Decomposition (SVD)：奇异值分解</li>
+</ol>
+</li>
+<li>Similarity：相似
+<ol>
+<li>Whole series matching：全序列匹配</li>
+<li>Subsequence matching：子序列匹配</li>
+<li>Euclidean Distance：欧式距离</li>
+<li>Dynamic Time Warping：动态时间扭曲，将一个序列压缩以匹配另一序列</li>
+<li>Longest Common Subsequences：最长公共子序列，允许序列内部存在杂质</li>
+</ol>
+</li>
+<li>Indexing：索引
+<ol>
+<li>线性索引</li>
+<li>将相同序列分组，降维索引</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Time series mining tasks: 时间序列挖掘任务
+<ol>
+<li>Forecasting：基于历史数据对未来数据进行预测</li>
+<li>Classification：分类：心跳信号正常或不正常</li>
+<li>Temporal Association Rules：时序关联规则：每段信号对应一个符号，查找符号之间关联</li>
+<li>Clustering：聚类：相似信号分组</li>
+<li>Anomaly Detection：异常检测：outlier噪声</li>
+<li>Motif Discovery：motif探索，查找连续出现的信号</li>
+</ol>
+</li>
+<li>Survival Analysis or Time-to-Event Analysis：生存分析或时间事件分析：客户什么时候与其他公司合作
+<ol>
+<li>Survival curve：生存曲线：从100%降到0%，可能几十年以后发生（一款游戏老用户的存活时间）</li>
+<li>Customer Half-Time &amp; Average Customer Lifetime：客户半衰期和平均客户寿命</li>
+<li>Survival Function：生存函数：在t年后活下来的概率。可以是离散的（就是将时间分段）</li>
+<li>Hazard Function：冒险函数：也称特定年龄的失败率</li>
+<li>Kaplan-Meier Estimator of Survival Function：生存函数的Kaplan-Meier估计：也叫乘积极限估计，极限函数 = 对每个i，当前发生的事件event的乘积（1 - number of events (e.g., deaths) / individuals known to have survived (have not yet had an event or been censored) up to time ti）</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Natural Language Processing (NLP): 自然语言处理</li>
+<li>语言模型：
+<ol>
+<li>string, language, grammar, semantics, corpus, natural language, Sentences, language model</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<p>计算机视觉的内容，略</p>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>Methods for Classification and Regression</li>
+<li>Kernel Methods：
+<ol>
+<li>Kernel Density Estimate：核密度估计：将直方图变得平滑取平均，就变成密度函数了，f(x) = 1/m ΣK(x-xi  /h)，h是bandwidth，h越大直方图越平滑。</li>
+<li>K：kernel function，这里的核函数与后面的SVM不同，这里是用于低维直方图类型的，用以显示直方图的走势，积分和为1</li>
+<li>Regression：回归方式：直接连接数据点，knn，knn线性回归，局部权重线性回归</li>
+<li>Locally Weighted Linear Regression：局部权重线性回归：权重K( d(x, xi) )，一种例子是距离越小权重越大。这里面h的值要比k的函数选取更重要</li>
+</ol>
+</li>
+<li>Support Vector Machines（SVMs）：支持向量机
+<ol>
+<li>Linear separator: a set of points</li>
+<li>Support vectors: the points closest to the separator</li>
+<li>将x1，x2分为三个特征（新建三维坐标系）：x1^2, x2^2, x1x2，这样在新的三维空间内，数据就是线性可分的</li>
+</ol>
+</li>
+<li>Ensemble Methods：集成方法=set
+<ol>
+<li>好处：统计学，计算，表现三方面：
+<ol>
+<li>Statistical reason：数据量太小，分类器的分类范围太大，多个分类器叠加能更好确定数据边界</li>
+<li>Computational reason：单一分类器容易陷入局部最小值</li>
+<li>Representational reason：与knn类似，真正的分类f不会被现有的H表现出来，但是可由多个h1,h2,h3来估计f</li>
+</ol>
+</li>
+<li>概念：H/h：hypotheses = classifiers，假说就是分类器</li>
+<li>Bayesian Voting：贝叶斯投票：每个假说都有一个概率，数据点对不同假说（分类器）进行投票</li>
+<li>Bagging (Bootstrap Aggregation)：装袋（引导聚合）：对一个算法运行多次，每次取部分训练点，从而得出不同的训练模型，对这些模型进行投票
+<ol>
+<li>对于数据量小的训练集：决策树和神经网络是不稳定的；knn和线性回归是稳定的</li>
+</ol>
+</li>
+<li>Boosting (AdaBoost Algorithm)：推进（自适应算法）：每个样本初始具有相等权重，每次迭代中使用学习算法，将大权重分配给误分类，最终要求最小化权重。与bagging类似</li>
+</ol>
+</li>
+<li>Methods for Sequence Analysis：序列分析方法：Markov Models，Hidden Variables，Hidden Markov Models。详见AIN
+<ol>
+<li>Markov Models：当前xt的概率与x1:t-1有关  →</li>
+<li>Hidden Variables：隐变量也叫潜在变量：变量之间的相互关系，比如年龄变量与教育和秃顶有关  ↑</li>
+<li>Hidden Markov Models：隐藏式马尔可夫模型：第t天下雨啊带伞啊概率啊什么的</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>Single-Variable Transformations：单变量变换
+<ol>
+<li>Standardize Numeric Values：聚类找均值，设置标准差</li>
+<li>Convert Numeric Values into Percentiles：计算值低于每个值的百分比，不懂？</li>
+<li>Convert Counts into Rates：数量转换为比率（限定某个自变量）</li>
+<li>Replace Categorical Variables with Numeric Variables：文字转数值.</li>
+<li>Replace Numeric Variables with Categorical Variables：数值转文字，应该是多个变量的整合？</li>
+</ol>
+</li>
+<li>Combining Variables：组合变量：身高和体重跟糖尿病没啥关系，但是组合变量BMI和糖尿病有关系
+<ol>
+<li>highly correlated variables：有时候两个变量强相关，在回归模型中这是有害的。这时建议删掉一个。</li>
+<li>也可将两个强相关变量作比率，学生/工作人员 = 学校能力blabla，但是该比率应具有高方差。</li>
+</ol>
+</li>
+<li>Extracting Features from Structured Data：从结构化数据中提取特征
+<ol>
+<li>Time series data：时序数据：考虑趋势，季节性</li>
+<li>Geographic data：地理数据：地理位置，分布</li>
+</ol>
+</li>
+<li>Handling Sparse Data：处理稀疏数据：每个银行客户只办理了少数几款理财产品
+<ol>
+<li>处理方式：建立少数的密集数据集（不稀疏的数据集）；增加attribute；进行填充</li>
+<li>举例，Netflix收视率，只有user id, movie id, date, rating四个属性，可以构造派生变量，比如{love,hate} ratings</li>
+</ol>
+</li>
+<li>Problems with High-Dimensional Data：高维数据的问题
+<ol>
+<li>相关性问题：有些变量可能相关性很强；聚类时有些变量可能过度加权</li>
+<li>过拟合问题：严格按照训练数据进行拟合，比如神经网络回归</li>
+<li>稀疏数据问题：一个数据占一个维度，无法找到变量之间的关系</li>
+</ol>
+</li>
+<li>Variable Selection：变量选取：删去无关变量，使用变量子集
+<ol>
+<li>变量间的关系：
+<ol>
+<li>independence：两变量条件独立</li>
+<li>correlation：两个变量相关性计算</li>
+<li>Average Mutual Information：平均互信息，用于categorical</li>
+</ol>
+</li>
+<li>Exhaustive Feature Selection：考虑变量间的所有组合，12,13,23,123...变量多的话就没法用了</li>
+<li>Selection using a target variable：用target找输入（怎么找？），如果高维数据instance太少的话，可能构建不出一组数据</li>
+<li>Sequential feature selection：每次只考虑一个变量。Forward selection：依次考虑1个，2个，3个...变量。Backward selection：依次考虑10个，9个，8个...变量。</li>
+</ol>
+</li>
+<li>Variable Transformation：变量变换的方式
+<ol>
+<li>Linear Algebra and Statistics Revision：线性代数和统计修订：对(x,y)进行线性变换，平移翻转之类的；获取特征值特征向量；计算均值标准差；协方差矩阵</li>
+<li>Principal Component Analysis (PCA)：数据降维，无监督学习，缺点是原始空间中的一些信息未被捕获</li>
+</ol>
+</li>
+<li>Singular Value Decomposition (SVD)：奇异值分解：A=UΣV<sup>T</sup>。
+<ol>
+<li>其中，U是AA<sup>T</sup>（左奇异向量）的特征向量mxm，V是U是A<sup>T</sup>A（右奇异向量）的特征向量nxn，Σ为只有对角线有数字（奇异值）的mxn矩阵。通过选择高的奇异值来达到降维效果。其中，左奇异矩阵用于行数压缩，右奇异矩阵用于维度压缩（同PCA，减小PCA在计算协方差矩阵时的计算量）。</li>
+<li>用于NLP中document-term matrix，U是document，V是term</li>
+<li>Latent Semantic Indexing：潜在语义索引：减小行数和维度但不改变内部结构</li>
+<li>Projection Pursuit Regression (PPR)：投影寻踪函数：与核函数类似，在不同投影钟寻找最优结构。与神经网络具有相同估计任意函数的能力，但PPR并未广泛采用。选取的核函数与NN类似，都采用平滑的思想，如sigmoid。缺点：超参数太多，高维数据计算量太大。</li>
+</ol>
+</li>
+</ol>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmpnn-pattern-recognition-neural-networks-deep-learning/">
+                    7CCSMPNN 模式识别
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmaip-ai-planning/">
+                    7CCSMAIP AI规划
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>

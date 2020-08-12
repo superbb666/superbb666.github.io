@@ -1,0 +1,908 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="lecture 1
+
+数据形式：Structured，Unstructured，Semi-structured，Metadata（元数据，用于描述数据的数据，就像电脑文件名，重命名文件并不改变文件内容）
+大数据特征：Volume（量大），V..." />
+    <meta name="keywords" content="semester2" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-06-11</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 9 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMBDT 大数据技术</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>数据形式：Structured，Unstructured，Semi-structured，Metadata（元数据，用于描述数据的数据，就像电脑文件名，重命名文件并不改变文件内容）</li>
+<li>大数据特征：Volume（量大），Velocity（速度快），Variety（形式多样），Veracity（真实，存在噪声），Value（数据效益）</li>
+<li>大数据特征在线上游戏工业中的表现：Volume（玩家交互的数据），Velocity（游戏运动时的数据流），Variety（玩家数量，玩家行为，玩家关系等），Veracity（假账户，无用的用户信息），Value（通过分析增加玩家数量，最大化收益）</li>
+<li>数据分析类型：
+<ol>
+<li>descriptive：what has happened</li>
+<li>Diagnostic： why it has happened</li>
+<li>Predictive：what is likely to happen</li>
+<li>Prescriptive：what can we do to make something happen</li>
+</ol>
+</li>
+<li>Computational analytic tasks for descriptive analytics：
+<ol>
+<li>Basic statistics：均值，标准差。。。问题：无法获取全部数据（数据量太大）</li>
+<li>Linear algebraic computations：线性回归，PCA，SVD。。。问题：同上，无法构造一个全部数据矩阵M</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for diagnostic analytics：
+<ol>
+<li>Linear algebraic computations：分析为什么用PCA进行聚类分析是失败的。问题：矩阵太大</li>
+<li>Generalized N-body problems：比如聚类，分类。。问题：高维问题</li>
+<li>Graph-theoretic computations：最短路径。。问题：边缘数量太多（节点之间关联太多）</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for predictive analytics：构建预测模型
+<ol>
+<li>Linear algebraic computations, Generalized N-body problems, Graph-theoretic computations, Integration(计算高维积分), Alignment problems(匹配)</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for Prescriptive analytics：使用多种预测模型，来预测输出
+<ol>
+<li>Generalized N-body problems, Graph-theoretic computations, Alignment problems, Optimization(最大化最小化问题)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Analytics flow for big data:
+<ol>
+<li>Data collection</li>
+<li>Data Preparation</li>
+<li>Analysis types</li>
+<li>Analysis modes</li>
+<li>Visualizations</li>
+</ol>
+</li>
+<li>Data preparation（开源软件GoogleRefine能做下面这些事）: Data cleaning(删除噪声数据), Data wrangling(将数据由一种形式转换为另一种形式), De-duplication(删除重复数据), Normalization, Sampling(提取), Filtering(删除不正确的超范围的数据)</li>
+<li>Analysis types&amp;modes：分析模式
+<ol>
+<li>Batch mode：更新结果每日或每月：Hadoop / MapReduce, Pig, Spark, Solr</li>
+<li>Real-time mode：更新结果每秒：Spark Streaming component, Storm</li>
+<li>Interactive mode：交互时更新：Hive, Spark SQL component</li>
+</ol>
+</li>
+<li>Visualizations：验证方式
+<ol>
+<li>Service database，Web framework，Static，Dynamic， Interactive</li>
+</ol>
+</li>
+<li>Data collection：数据收集
+<ol>
+<li>Data access connectors：数据访问连接器：用于从不同源中获取大数据
+<ol>
+<li>Publish-subscribe messaging：消息-订阅信息传递：Publishers-&gt;Brokers-&gt;Subscribers</li>
+<li>Source-sink connectors：源-库连接器：Source connectors(从数据库到中心化的文件系统) - Sink connectors(导出数据到另一个系统HDFS)</li>
+<li>HDFS: Hadoop Distributed File System: 分布式文件系统</li>
+<li>Database connectors：数据库连接器：DBMSes-&gt;big data framework</li>
+<li>Messaging Queues：消息队列：Producers &amp; Consumers</li>
+<li>Custom connectors：自定义连接器：从social networks 提取数据</li>
+</ol>
+</li>
+<li>Database connector: Apache sqoop
+<ol>
+<li>Sqoop: RDBMS&lt;-&gt;HDFS，内置支持RDBMS: MySQL, PostgreSQL, Oracle, SQL Server, DB2, and Netezza。文件存储在HDFS，而不是在本地系统中</li>
+<li>import: connect, username, password, table.</li>
+<li>import process：1. Metadata获取元数据；2. 创建JAVA代码用于获取数据；3. 连接到Hadoop聚类并提交到MapReduce job，该job中存在多个map和hdfs。使用Sqoop优势是能够从多个machine中同时获得想要的数据。</li>
+<li>parallelism：并行处理，属性-m: 期望并行获取的mapper。split-by：用于对table进行分区（分mapper）的属性，比如id号</li>
+<li>updates：更新时可以在已有数据的基础上更新新的数据，而不需要全部读取，--incremental append。选择--check-column叠加数据所用的属性，以及--last-value上次读到哪儿了</li>
+<li>export: connect, username, password, table, export-dir.</li>
+<li>export process: from HDFS into relational databases。首先创建table，然后执行导出</li>
+</ol>
+</li>
+<li>Apache flume：
+<ol>
+<li>从不同的数据源汇总到中心化大数据存储中（DFS或NoSQL数据库）</li>
+<li>结构：Web Server-&gt;Agent-&gt;Agent-&gt;...-&gt;HDFS</li>
+<li>Event: Headers-Payload：就跟键值对一样。Payload对Flume是不透明的</li>
+<li>Agent: Web Server-&gt;Source-&gt;Channel-&gt;Sink-&gt;HDFS
+<ol>
+<li>Source: 获取数据并发送到一个或多个channels。类型：Twitter, HTTP, Custom, ...</li>
+<li>Channels: 就是缓冲池buffer。因为数据传输速度时快时慢，比如推特早上比晚上东西少。而且保证进程重启后能用。类型：Memory, File, JDBC, ...</li>
+<li>Sink: 从一个channel里移除Events数据，并传到终点。类型：HDFS, Hbase, File Roll, Custom, ...</li>
+<li>额外组件：
+<ol>
+<li>Interceptor: 用于source和channel之间。滤波器, 或者整合不同类型的header</li>
+<li>Channel processor: 用于source和channel之间，interceptor之后。用于分配将source分配到哪些channel的策略。类型：Replicating(复制), Multiplexing(多路复用), Custom</li>
+<li>Sink selector: 用于channel和sink之间。用于sink选择哪路channel，默认是不选择。类型：Load balancing(sink接收失败，则随机选择另一个sink接收)。Failover(为sink设置优先级)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Messaging Queue：Producer先入，先出的交给Customer。Load levelling：给一个customer。Load balancing：给多个customer。例子：ZeroMQ</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>提出问题：社交网络太庞大，比如google搜索了200亿个结果，如何排序。(2011年推测google有一百万台设备)</li>
+<li>解决方案：使用多台设备构建设备网（商品网络，以太网），像树形结构一样</li>
+<li>新的问题：如何分布式计算？如何写分布式程序？如何处理设备坏了？</li>
+<li>软件解决方案：Distributed file system(Hadoop)和Programming model(MapReduce)</li>
+<li>Distributed file system (DFS):分布式文件系统：存储大数据、提供复制、防止失败
+<ol>
+<li>global file namespace：提供全局文件名：无论文件存在哪台电脑，都能用全局文件名找到。适用情况：数据量巨大、数据极少更新、数据常被读取和扩展。比如Google GFS, Hadoop HDFS, CloudStore</li>
+<li>Chunks：文件被打包成块。然后这些块，复制存储到不同设备上，即一个块在多个设备上都存在。</li>
+<li>Master node就是元数据metadata，会被复制存储。Directory每个块都存在了哪些设备上，像个索引，也会被复制存储。Client library 用于访问文件</li>
+<li>Hadoop HDFS：Chunks<mark>blocks(文件块), Master node</mark>Namenode(字典), Chunkserver==Datanode(设备)
+<ol>
+<li>读取方式：获取文件位置--文件存在且有许可--找到包含该chunks且离client最近的设备--server不可用时换下一个设备</li>
+<li>写入方式：写入请求--文件存在且有许可--数据切片放入队列--namenode分配新block--clent连接到datanode--设备1从队列中读取文件块，存储后复制给设备2，收到设备2成功复制的结果后回传给client--停止写入请求</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Programming model：程序设计模型：执行大规模分布式计算；也能容忍硬件坏了</li>
+<li>MapReduce：
+<ol>
+<li>OVERVIEW：Input chunks--Map tasks(并行处理)--Group by keys(洗牌和排序)--Reduce tasks(整合滤波)--Conbined output
+<ol>
+<li>Map task: 提取你关心的任务；从DFS获取chunks；将chunks转换为键值对key-value pairs (k,v)</li>
+<li>Shuffle and sort task: 按键排序。然后将键值对按键合并(排序后相同的键就在一起了)</li>
+<li>Reduce task: 聚合，总结，滤波，转换，取决于我们的代码，下章讲。对相同键的不同值进行合并(k,[v,w])；按reducers分开；每个reducer获取同一个键的所有值，即(k,[v,w])而不是(k,v)</li>
+</ol>
+</li>
+<li>WordCount Example：mapper:{(the, 1), (crow, 1), (the, 1)} --&gt; group:{(the, 1), (the, 1), (crow, 1)} --&gt; reducer:{(the, 2), (crow, 1)}</li>
+<li>Environment：Workflow：
+<ol>
+<li>输入切片--设置master和workers--map worker输出键值对，存到buffer中--将buffer中的键值对存到硬盘里，并将位置传给master--reducer worker获取位置后读取键值对并group--worker输出到文件中--一切完成后回传给user。</li>
+</ol>
+</li>
+<li>failure：
+<ol>
+<li>master fail：任务失败，只能重启</li>
+<li>map fail：设置该map的正在进行和已完成的任务为空闲状态，然后通知reducer这个map日程表重新排了</li>
+<li>reducer fail：设置该reducer的正在进行的任务为空闲状态，任务被重排过会儿启动</li>
+</ol>
+</li>
+<li>数量：Rule of thumb
+<ol>
+<li>M(map workers) &gt;&gt;number of nodes in the cluster即machines的个数</li>
+<li>R&lt;&lt;M，和number of nodes的个数一样少</li>
+</ol>
+</li>
+<li>问题：有些worker太慢了，可能硬盘不好，可能存在其他工作。解决方案：将进行中的任务复制一份让别人去做，别人有可能先到达终点。</li>
+<li>Refinement: 强化部分
+<ol>
+<li>Combiners：合并器。用于mapper和shuffle之间。合并器只将某个map中具有相同的key进行合并。不像reducer合并所有map。只能用于可合并的函数，比如max(1,2,3,4)=max(max(1,2), max(3,4))</li>
+<li>Partitioner：分割器。将相同的key分给同一个reducer。</li>
+</ol>
+</li>
+<li>mrjob：MapReduce jobs in Python</li>
+</ol>
+</li>
+</ol>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/mian-shi-zhun-bei-de-zhi-shi/">
+                    面试准备的知识
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/6ccs3ml1-mache-learning/">
+                    6CCS3ML1 机器学习
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#lecture-1">lecture 1</a></li>
+<li><a href="#lecture-2">lecture 2</a></li>
+<li><a href="#lecture-3">lecture 3</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-06-11</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 9 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMBDT 大数据技术</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>数据形式：Structured，Unstructured，Semi-structured，Metadata（元数据，用于描述数据的数据，就像电脑文件名，重命名文件并不改变文件内容）</li>
+<li>大数据特征：Volume（量大），Velocity（速度快），Variety（形式多样），Veracity（真实，存在噪声），Value（数据效益）</li>
+<li>大数据特征在线上游戏工业中的表现：Volume（玩家交互的数据），Velocity（游戏运动时的数据流），Variety（玩家数量，玩家行为，玩家关系等），Veracity（假账户，无用的用户信息），Value（通过分析增加玩家数量，最大化收益）</li>
+<li>数据分析类型：
+<ol>
+<li>descriptive：what has happened</li>
+<li>Diagnostic： why it has happened</li>
+<li>Predictive：what is likely to happen</li>
+<li>Prescriptive：what can we do to make something happen</li>
+</ol>
+</li>
+<li>Computational analytic tasks for descriptive analytics：
+<ol>
+<li>Basic statistics：均值，标准差。。。问题：无法获取全部数据（数据量太大）</li>
+<li>Linear algebraic computations：线性回归，PCA，SVD。。。问题：同上，无法构造一个全部数据矩阵M</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for diagnostic analytics：
+<ol>
+<li>Linear algebraic computations：分析为什么用PCA进行聚类分析是失败的。问题：矩阵太大</li>
+<li>Generalized N-body problems：比如聚类，分类。。问题：高维问题</li>
+<li>Graph-theoretic computations：最短路径。。问题：边缘数量太多（节点之间关联太多）</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for predictive analytics：构建预测模型
+<ol>
+<li>Linear algebraic computations, Generalized N-body problems, Graph-theoretic computations, Integration(计算高维积分), Alignment problems(匹配)</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for Prescriptive analytics：使用多种预测模型，来预测输出
+<ol>
+<li>Generalized N-body problems, Graph-theoretic computations, Alignment problems, Optimization(最大化最小化问题)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Analytics flow for big data:
+<ol>
+<li>Data collection</li>
+<li>Data Preparation</li>
+<li>Analysis types</li>
+<li>Analysis modes</li>
+<li>Visualizations</li>
+</ol>
+</li>
+<li>Data preparation（开源软件GoogleRefine能做下面这些事）: Data cleaning(删除噪声数据), Data wrangling(将数据由一种形式转换为另一种形式), De-duplication(删除重复数据), Normalization, Sampling(提取), Filtering(删除不正确的超范围的数据)</li>
+<li>Analysis types&amp;modes：分析模式
+<ol>
+<li>Batch mode：更新结果每日或每月：Hadoop / MapReduce, Pig, Spark, Solr</li>
+<li>Real-time mode：更新结果每秒：Spark Streaming component, Storm</li>
+<li>Interactive mode：交互时更新：Hive, Spark SQL component</li>
+</ol>
+</li>
+<li>Visualizations：验证方式
+<ol>
+<li>Service database，Web framework，Static，Dynamic， Interactive</li>
+</ol>
+</li>
+<li>Data collection：数据收集
+<ol>
+<li>Data access connectors：数据访问连接器：用于从不同源中获取大数据
+<ol>
+<li>Publish-subscribe messaging：消息-订阅信息传递：Publishers-&gt;Brokers-&gt;Subscribers</li>
+<li>Source-sink connectors：源-库连接器：Source connectors(从数据库到中心化的文件系统) - Sink connectors(导出数据到另一个系统HDFS)</li>
+<li>HDFS: Hadoop Distributed File System: 分布式文件系统</li>
+<li>Database connectors：数据库连接器：DBMSes-&gt;big data framework</li>
+<li>Messaging Queues：消息队列：Producers &amp; Consumers</li>
+<li>Custom connectors：自定义连接器：从social networks 提取数据</li>
+</ol>
+</li>
+<li>Database connector: Apache sqoop
+<ol>
+<li>Sqoop: RDBMS&lt;-&gt;HDFS，内置支持RDBMS: MySQL, PostgreSQL, Oracle, SQL Server, DB2, and Netezza。文件存储在HDFS，而不是在本地系统中</li>
+<li>import: connect, username, password, table.</li>
+<li>import process：1. Metadata获取元数据；2. 创建JAVA代码用于获取数据；3. 连接到Hadoop聚类并提交到MapReduce job，该job中存在多个map和hdfs。使用Sqoop优势是能够从多个machine中同时获得想要的数据。</li>
+<li>parallelism：并行处理，属性-m: 期望并行获取的mapper。split-by：用于对table进行分区（分mapper）的属性，比如id号</li>
+<li>updates：更新时可以在已有数据的基础上更新新的数据，而不需要全部读取，--incremental append。选择--check-column叠加数据所用的属性，以及--last-value上次读到哪儿了</li>
+<li>export: connect, username, password, table, export-dir.</li>
+<li>export process: from HDFS into relational databases。首先创建table，然后执行导出</li>
+</ol>
+</li>
+<li>Apache flume：
+<ol>
+<li>从不同的数据源汇总到中心化大数据存储中（DFS或NoSQL数据库）</li>
+<li>结构：Web Server-&gt;Agent-&gt;Agent-&gt;...-&gt;HDFS</li>
+<li>Event: Headers-Payload：就跟键值对一样。Payload对Flume是不透明的</li>
+<li>Agent: Web Server-&gt;Source-&gt;Channel-&gt;Sink-&gt;HDFS
+<ol>
+<li>Source: 获取数据并发送到一个或多个channels。类型：Twitter, HTTP, Custom, ...</li>
+<li>Channels: 就是缓冲池buffer。因为数据传输速度时快时慢，比如推特早上比晚上东西少。而且保证进程重启后能用。类型：Memory, File, JDBC, ...</li>
+<li>Sink: 从一个channel里移除Events数据，并传到终点。类型：HDFS, Hbase, File Roll, Custom, ...</li>
+<li>额外组件：
+<ol>
+<li>Interceptor: 用于source和channel之间。滤波器, 或者整合不同类型的header</li>
+<li>Channel processor: 用于source和channel之间，interceptor之后。用于分配将source分配到哪些channel的策略。类型：Replicating(复制), Multiplexing(多路复用), Custom</li>
+<li>Sink selector: 用于channel和sink之间。用于sink选择哪路channel，默认是不选择。类型：Load balancing(sink接收失败，则随机选择另一个sink接收)。Failover(为sink设置优先级)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Messaging Queue：Producer先入，先出的交给Customer。Load levelling：给一个customer。Load balancing：给多个customer。例子：ZeroMQ</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>提出问题：社交网络太庞大，比如google搜索了200亿个结果，如何排序。(2011年推测google有一百万台设备)</li>
+<li>解决方案：使用多台设备构建设备网（商品网络，以太网），像树形结构一样</li>
+<li>新的问题：如何分布式计算？如何写分布式程序？如何处理设备坏了？</li>
+<li>软件解决方案：Distributed file system(Hadoop)和Programming model(MapReduce)</li>
+<li>Distributed file system (DFS):分布式文件系统：存储大数据、提供复制、防止失败
+<ol>
+<li>global file namespace：提供全局文件名：无论文件存在哪台电脑，都能用全局文件名找到。适用情况：数据量巨大、数据极少更新、数据常被读取和扩展。比如Google GFS, Hadoop HDFS, CloudStore</li>
+<li>Chunks：文件被打包成块。然后这些块，复制存储到不同设备上，即一个块在多个设备上都存在。</li>
+<li>Master node就是元数据metadata，会被复制存储。Directory每个块都存在了哪些设备上，像个索引，也会被复制存储。Client library 用于访问文件</li>
+<li>Hadoop HDFS：Chunks<mark>blocks(文件块), Master node</mark>Namenode(字典), Chunkserver==Datanode(设备)
+<ol>
+<li>读取方式：获取文件位置--文件存在且有许可--找到包含该chunks且离client最近的设备--server不可用时换下一个设备</li>
+<li>写入方式：写入请求--文件存在且有许可--数据切片放入队列--namenode分配新block--clent连接到datanode--设备1从队列中读取文件块，存储后复制给设备2，收到设备2成功复制的结果后回传给client--停止写入请求</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Programming model：程序设计模型：执行大规模分布式计算；也能容忍硬件坏了</li>
+<li>MapReduce：
+<ol>
+<li>OVERVIEW：Input chunks--Map tasks(并行处理)--Group by keys(洗牌和排序)--Reduce tasks(整合滤波)--Conbined output
+<ol>
+<li>Map task: 提取你关心的任务；从DFS获取chunks；将chunks转换为键值对key-value pairs (k,v)</li>
+<li>Shuffle and sort task: 按键排序。然后将键值对按键合并(排序后相同的键就在一起了)</li>
+<li>Reduce task: 聚合，总结，滤波，转换，取决于我们的代码，下章讲。对相同键的不同值进行合并(k,[v,w])；按reducers分开；每个reducer获取同一个键的所有值，即(k,[v,w])而不是(k,v)</li>
+</ol>
+</li>
+<li>WordCount Example：mapper:{(the, 1), (crow, 1), (the, 1)} --&gt; group:{(the, 1), (the, 1), (crow, 1)} --&gt; reducer:{(the, 2), (crow, 1)}</li>
+<li>Environment：Workflow：
+<ol>
+<li>输入切片--设置master和workers--map worker输出键值对，存到buffer中--将buffer中的键值对存到硬盘里，并将位置传给master--reducer worker获取位置后读取键值对并group--worker输出到文件中--一切完成后回传给user。</li>
+</ol>
+</li>
+<li>failure：
+<ol>
+<li>master fail：任务失败，只能重启</li>
+<li>map fail：设置该map的正在进行和已完成的任务为空闲状态，然后通知reducer这个map日程表重新排了</li>
+<li>reducer fail：设置该reducer的正在进行的任务为空闲状态，任务被重排过会儿启动</li>
+</ol>
+</li>
+<li>数量：Rule of thumb
+<ol>
+<li>M(map workers) &gt;&gt;number of nodes in the cluster即machines的个数</li>
+<li>R&lt;&lt;M，和number of nodes的个数一样少</li>
+</ol>
+</li>
+<li>问题：有些worker太慢了，可能硬盘不好，可能存在其他工作。解决方案：将进行中的任务复制一份让别人去做，别人有可能先到达终点。</li>
+<li>Refinement: 强化部分
+<ol>
+<li>Combiners：合并器。用于mapper和shuffle之间。合并器只将某个map中具有相同的key进行合并。不像reducer合并所有map。只能用于可合并的函数，比如max(1,2,3,4)=max(max(1,2), max(3,4))</li>
+<li>Partitioner：分割器。将相同的key分给同一个reducer。</li>
+</ol>
+</li>
+<li>mrjob：MapReduce jobs in Python</li>
+</ol>
+</li>
+</ol>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/mian-shi-zhun-bei-de-zhi-shi/">
+                    面试准备的知识
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/6ccs3ml1-mache-learning/">
+                    6CCS3ML1 机器学习
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>

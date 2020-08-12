@@ -1,0 +1,775 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="lecture classical panning
+
+transition system 转换系统 = state space状态空间
+STRIPS：Stanford Research Institute Problem Solver 斯坦..." />
+    <meta name="keywords" content="semester1" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-06</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 5 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/AdcUsz3nl/" class="postlink">
+                        <i class="fa fa-tag"></i> semester1
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMAIP AI规划</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-classical-panning">lecture classical panning</h2>
+<ol>
+<li>transition system 转换系统 = state space状态空间</li>
+<li>STRIPS：Stanford Research Institute Problem Solver 斯坦福研究问题解决器：状态、初始、目标、动作</li>
+<li>SAS+：与STRIPS相似但是状态时变化的，增加domain</li>
+<li>ADL：Abstract Description Language 抽象描述语言 （at car1 SB...）</li>
+<li>三大规划方法
+<ol>
+<li>Graph/SAT Planning：图/满意度规划</li>
+<li>Symbolic Search Planning：符号搜索</li>
+<li>Heuristic State-Space Search：搜索式状态空间</li>
+</ol>
+</li>
+<li>Graph/SAT Planning ：图计划
+<ol>
+<li>planning graph：PG：规划图：不删除过去的状态</li>
+<li>mutex：exclusion relations：互斥关系：同一个action导致互斥的state；同一个state由互斥的action导出</li>
+<li>Basic GraphPlan algorithm：1. 建立PG，2. 没有mutex 3. 找不到添加level重新计算</li>
+</ol>
+</li>
+<li>Symbolic Search Planning
+<ol>
+<li>binary decision diagrams (BDDs) ：二进制设计图</li>
+<li>successor computation：继承者，自上而下；predecessor conputation：前任，自下而上</li>
+<li>BFS：breadth-first search：广度优先搜索</li>
+<li>SBBFS：symbolic bidirectional BFS：双向的</li>
+<li>symbolic dijkstra：最短路径</li>
+<li>closed list：状态已处理：所有状态都已经 产生/扩展</li>
+<li>open list：状态要处理：广度优先--队列，深度优先--栈stack</li>
+<li>forwards search：前向图：①. 每个节点只有一个路径 ②. 无向后的边</li>
+</ol>
+</li>
+<li>Heuristic State-Space Search<br>
+搜索属性：①. admissibility：&lt; cost ②. consistency：新状态，cost更低 ③. additivity 添加</li>
+</ol>
+<h2 id="lecture-heuristic-search-planning">lecture Heuristic Search Planning</h2>
+<ol>
+<li>heuristic hamilies
+<ol>
+<li>delete relaxation</li>
+<li>abstraction</li>
+<li>critical paths</li>
+<li>landmarks</li>
+<li>network flows</li>
+</ol>
+</li>
+<li>delete relaxation：ignore 'bad effects'<br>
+Relaxed Planning Graph (RPG)：松弛规划图：忽视‘delete’影响：A-&gt;B之后，同时存在AB</li>
+<li>abstract state space：抽象状态空间
+<ol>
+<li>hα(s)是最小路径：abstraction heuristic</li>
+<li>h(package,truck A)(LRR)=2：前两个是变量，若前两个状态是相同的，则归类到一起；LRR是初始状态。R _ _ 是最终状态</li>
+<li>planning pattern database（PDB）：模式数据库：pattern是状态变量的子集（L__）</li>
+<li>Saturated Cost Partitioning（SCP）：饱和成本划分：①. 按顺序 ②. 分配保留该状态所需剩余成本&lt;最小&gt;比例</li>
+<li>0/1 Cost Partition</li>
+</ol>
+</li>
+<li>Critical Path length（makespan）：关键路径长度（完成时间）</li>
+<li>Landmarks：地标<br>
+linear program(LP)：线性规划————解方程L={W,X,Y,Z}，x+y≦3 --- a1, hL(l)=w+x+y+z</li>
+<li>Network Flow：网络流，flow heuristic：搜索流：h(flow)(s)=Σcost·Y</li>
+</ol>
+<h2 id="lecture-temporal-planning">lecture temporal planning</h2>
+<ol>
+<li>Sequential Plan TIME VS. Parallel Plan TIME：顺序VS并行，并行的时间短</li>
+<li>Planning with Snap Actions：
+<ol>
+<li>若end干扰了goal，goal目标状态下不能执行任何操作，所以可以增加goal</li>
+<li>Logically sound ≠ temporally sound：classical和temporal不同</li>
+</ol>
+</li>
+<li>TCSP：sample constraint temporal problem：简单约束时序问题</li>
+<li>simple temporal network(STN)：简单时序网络
+<ol>
+<li>d-graph：距离图-40,50，STN minimum network：最小时序网络[40,50]</li>
+<li>consistency约束条件：no negative cycles无负向循环</li>
+<li>latest solution：最近--正号，earlieat solution：最早--负号</li>
+</ol>
+</li>
+<li>Latest possible times(Maximum Separation)：2≤t-t</li>
+<li>Earliest possible times(Minimum Separation)：t-t≤4，寻找最短路径</li>
+<li>shortest path problem：最短路径问题<br>
+dist(0,j)=x → maximum timestamp of j = x ：从0开始，0 1 2 3 x<br>
+dist(j,0)=y → minimum timestamp of j = -y：到0结束，-y -2 -1 0</li>
+<li>Partially Ordered Plans（POPF）：部分有序计划</li>
+<li>Timed Initial Literals（TIL）：定时初始文字<br>
+time windows：时间窗：增加TW模块和初始时间0模块</li>
+<li>CRIKEY：FF's RPG heuristic</li>
+<li>COLIN：Continuous Linear Numeric Change：连续线性数值变化</li>
+</ol>
+<h2 id="lecture-planning-with-preferences">lecture Planning with Preferences</h2>
+<ol>
+<li>Numerical Metric Planning：数值度量计划：给出initial，goal，actions(描述世界执行之后的效果)，找到顺序sequence</li>
+<li>Linear Time Logic（LTL）：线性时间逻辑：now，next，future，globally future，until</li>
+<li>sat：satisfied，vio：violate违反，E-sat：绝对满意，不会逆袭</li>
+<li>distance to go: pi ∈ condition，+ p'i：到达goal的最小action<br>
+cost to go：pi ∈≠ condition，+ p'i +cost：必须增加哪种行为</li>
+<li>c(s)=0：调用了所有的actions，所以cost=0<br>
+d(s)=0：根据goal state，仅调用goal所需的几个actions，不增加额外的，所以distance=0</li>
+</ol>
+<p>。</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmdm1-data-mining/">
+                    7CCSMDM1 数据挖掘
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmcvi-computer-vision/">
+                    7CCSMCVI 计算机视觉
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#lecture-classical-panning">lecture classical panning</a></li>
+<li><a href="#lecture-heuristic-search-planning">lecture Heuristic Search Planning</a></li>
+<li><a href="#lecture-temporal-planning">lecture temporal planning</a></li>
+<li><a href="#lecture-planning-with-preferences">lecture Planning with Preferences</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-06</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 5 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/AdcUsz3nl/" class="postlink">
+                        <i class="fa fa-tag"></i> semester1
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMAIP AI规划</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-classical-panning">lecture classical panning</h2>
+<ol>
+<li>transition system 转换系统 = state space状态空间</li>
+<li>STRIPS：Stanford Research Institute Problem Solver 斯坦福研究问题解决器：状态、初始、目标、动作</li>
+<li>SAS+：与STRIPS相似但是状态时变化的，增加domain</li>
+<li>ADL：Abstract Description Language 抽象描述语言 （at car1 SB...）</li>
+<li>三大规划方法
+<ol>
+<li>Graph/SAT Planning：图/满意度规划</li>
+<li>Symbolic Search Planning：符号搜索</li>
+<li>Heuristic State-Space Search：搜索式状态空间</li>
+</ol>
+</li>
+<li>Graph/SAT Planning ：图计划
+<ol>
+<li>planning graph：PG：规划图：不删除过去的状态</li>
+<li>mutex：exclusion relations：互斥关系：同一个action导致互斥的state；同一个state由互斥的action导出</li>
+<li>Basic GraphPlan algorithm：1. 建立PG，2. 没有mutex 3. 找不到添加level重新计算</li>
+</ol>
+</li>
+<li>Symbolic Search Planning
+<ol>
+<li>binary decision diagrams (BDDs) ：二进制设计图</li>
+<li>successor computation：继承者，自上而下；predecessor conputation：前任，自下而上</li>
+<li>BFS：breadth-first search：广度优先搜索</li>
+<li>SBBFS：symbolic bidirectional BFS：双向的</li>
+<li>symbolic dijkstra：最短路径</li>
+<li>closed list：状态已处理：所有状态都已经 产生/扩展</li>
+<li>open list：状态要处理：广度优先--队列，深度优先--栈stack</li>
+<li>forwards search：前向图：①. 每个节点只有一个路径 ②. 无向后的边</li>
+</ol>
+</li>
+<li>Heuristic State-Space Search<br>
+搜索属性：①. admissibility：&lt; cost ②. consistency：新状态，cost更低 ③. additivity 添加</li>
+</ol>
+<h2 id="lecture-heuristic-search-planning">lecture Heuristic Search Planning</h2>
+<ol>
+<li>heuristic hamilies
+<ol>
+<li>delete relaxation</li>
+<li>abstraction</li>
+<li>critical paths</li>
+<li>landmarks</li>
+<li>network flows</li>
+</ol>
+</li>
+<li>delete relaxation：ignore 'bad effects'<br>
+Relaxed Planning Graph (RPG)：松弛规划图：忽视‘delete’影响：A-&gt;B之后，同时存在AB</li>
+<li>abstract state space：抽象状态空间
+<ol>
+<li>hα(s)是最小路径：abstraction heuristic</li>
+<li>h(package,truck A)(LRR)=2：前两个是变量，若前两个状态是相同的，则归类到一起；LRR是初始状态。R _ _ 是最终状态</li>
+<li>planning pattern database（PDB）：模式数据库：pattern是状态变量的子集（L__）</li>
+<li>Saturated Cost Partitioning（SCP）：饱和成本划分：①. 按顺序 ②. 分配保留该状态所需剩余成本&lt;最小&gt;比例</li>
+<li>0/1 Cost Partition</li>
+</ol>
+</li>
+<li>Critical Path length（makespan）：关键路径长度（完成时间）</li>
+<li>Landmarks：地标<br>
+linear program(LP)：线性规划————解方程L={W,X,Y,Z}，x+y≦3 --- a1, hL(l)=w+x+y+z</li>
+<li>Network Flow：网络流，flow heuristic：搜索流：h(flow)(s)=Σcost·Y</li>
+</ol>
+<h2 id="lecture-temporal-planning">lecture temporal planning</h2>
+<ol>
+<li>Sequential Plan TIME VS. Parallel Plan TIME：顺序VS并行，并行的时间短</li>
+<li>Planning with Snap Actions：
+<ol>
+<li>若end干扰了goal，goal目标状态下不能执行任何操作，所以可以增加goal</li>
+<li>Logically sound ≠ temporally sound：classical和temporal不同</li>
+</ol>
+</li>
+<li>TCSP：sample constraint temporal problem：简单约束时序问题</li>
+<li>simple temporal network(STN)：简单时序网络
+<ol>
+<li>d-graph：距离图-40,50，STN minimum network：最小时序网络[40,50]</li>
+<li>consistency约束条件：no negative cycles无负向循环</li>
+<li>latest solution：最近--正号，earlieat solution：最早--负号</li>
+</ol>
+</li>
+<li>Latest possible times(Maximum Separation)：2≤t-t</li>
+<li>Earliest possible times(Minimum Separation)：t-t≤4，寻找最短路径</li>
+<li>shortest path problem：最短路径问题<br>
+dist(0,j)=x → maximum timestamp of j = x ：从0开始，0 1 2 3 x<br>
+dist(j,0)=y → minimum timestamp of j = -y：到0结束，-y -2 -1 0</li>
+<li>Partially Ordered Plans（POPF）：部分有序计划</li>
+<li>Timed Initial Literals（TIL）：定时初始文字<br>
+time windows：时间窗：增加TW模块和初始时间0模块</li>
+<li>CRIKEY：FF's RPG heuristic</li>
+<li>COLIN：Continuous Linear Numeric Change：连续线性数值变化</li>
+</ol>
+<h2 id="lecture-planning-with-preferences">lecture Planning with Preferences</h2>
+<ol>
+<li>Numerical Metric Planning：数值度量计划：给出initial，goal，actions(描述世界执行之后的效果)，找到顺序sequence</li>
+<li>Linear Time Logic（LTL）：线性时间逻辑：now，next，future，globally future，until</li>
+<li>sat：satisfied，vio：violate违反，E-sat：绝对满意，不会逆袭</li>
+<li>distance to go: pi ∈ condition，+ p'i：到达goal的最小action<br>
+cost to go：pi ∈≠ condition，+ p'i +cost：必须增加哪种行为</li>
+<li>c(s)=0：调用了所有的actions，所以cost=0<br>
+d(s)=0：根据goal state，仅调用goal所需的几个actions，不增加额外的，所以distance=0</li>
+</ol>
+<p>。</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmdm1-data-mining/">
+                    7CCSMDM1 数据挖掘
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmcvi-computer-vision/">
+                    7CCSMCVI 计算机视觉
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>

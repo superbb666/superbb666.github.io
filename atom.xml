@@ -1,0 +1,2038 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://superbb666.github.io</id>
+    <title>superbb666的个人博客</title>
+    <updated>2020-08-12T13:49:45.155Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://superbb666.github.io"/>
+    <link rel="self" href="https://superbb666.github.io/atom.xml"/>
+    <subtitle>将学到的知识点进行汇总</subtitle>
+    <logo>https://superbb666.github.io/images/avatar.png</logo>
+    <icon>https://superbb666.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2020, superbb666的个人博客</rights>
+    <entry>
+        <title type="html"><![CDATA[面试准备的知识]]></title>
+        <id>https://superbb666.github.io/post/mian-shi-zhun-bei-de-zhi-shi/</id>
+        <link href="https://superbb666.github.io/post/mian-shi-zhun-bei-de-zhi-shi/">
+        </link>
+        <updated>2020-07-05T14:06:01.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="线性回归">线性回归</h2>
+<p>引用：https://zhuanlan.zhihu.com/p/66519299，https://blog.csdn.net/Noob_daniel/article/details/76087829</p>
+<ol>
+<li>线性回归的原理</li>
+<li>损失函数</li>
+<li>为什么线性回归使用的是平方差形式的损失函数？（线性回归问什么要用最小二乘法计算？)：假设误差服从独立正态分布，使用极大似然法（最大化误差项目为εi的样本总体出现的概率最大）来求解参数，进一步经过推导之后得到的mse的公式而已。</li>
+<li>什么是决定系数 (R-squared)：来测量拟合优度，R<sup>2</sup>=SSR/SST=1-SSE/SST，SST是总平方和，SSR是回归平方和，SSE是残差平方和。表示的是自变量引起的变动占总变动的百分比，值越大，说明残差的影响越不明显，则权重部分的预测效果越好。</li>
+<li>回归分析的五个基本假设：
+<ol>
+<li>线性性 &amp; 可加性：公式</li>
+<li>误差项（ε）之间应相互独立</li>
+<li>自变量（X1，X2）之间应相互独立：若不满足，则称模型具有多重共线性性</li>
+<li>误差项（ε）的方差应为常数：满足则称模型具有同方差性（Homoskedasticity），若不满足，则为异方差性（Heteroskedasticity）。</li>
+<li>误差项（ε）应呈正态分布。</li>
+</ol>
+</li>
+<li>基本假设失效的影响：
+<ol>
+<li>线性性 &amp; 可加性：模型将无法很好的描述变量之间的关系，极有可能导致很大的泛化误差（generalization error）————自变量做非线性变换log(X)</li>
+<li>自相关性（Autocorrelation）：经常发生于时间序列数据集上，标准差往往会偏小，进而会导致置信区间变窄。————用DW观察</li>
+<li>多重共线性性（Multicollinearity）：导致我们测得的标准差偏大，置信区间变宽。采用添加正则项、增加数据量、减小特征或降维、数据归一化可以一定程度上减少方差，解决多重共线性性问题。————</li>
+<li>异方差性（Heteroskedasticity）：常常出现在有异常值（Outlier）的数据集上。标准差和置信区间不一定会变大还是变小。————因变量做非线性变换log(Y)</li>
+<li>误差项（ε）不呈正态分布：置信区间会变得很不稳定，我们往往需要重点关注一些异常的点（误差较大但出现频率较高），来得到更好的模型。</li>
+</ol>
+</li>
+<li>线性回归（包括逻辑回归）模型如何增强模型的表达能力？（就是说遇到非线性的问题咋整）：连续特征的离散化，特征交叉，gbdt交叉特征提取等；？？？</li>
+<li>为什么线性回归和逻辑回归要用对特征进行离散化？：离散特征的增加和减少，模型也不需要调整；稀疏向量内积乘法运算速度快；对异常数据有很强的鲁棒性(年龄[0-300]分割成年龄10，年龄20，年龄30...)；单变量离散化为N个后，每个变量有单独的权重，相当于为模型引入了非线性；离散化后可以进行特征交叉；模型会更稳定(异常值)；简化了逻辑回归模型的作用，降低了模型过拟合的风险(单一连续特征如果不离散，该变量权重太大的话会过拟合，因此将特征变为多个特征分散权重)。</li>
+<li>线性回归效果不好的原因？：很难拟合复杂的非线性关系，实际情况中基础假设难以得到满足（比如残差符合正态分布）</li>
+<li>逻辑回归 和 线性回归的区别？：两者都属于广义线性模型。；线性回归优化目标函数用的最小二乘法，而逻辑回归用的是最大似然估计。；逻辑回归就是一种减小预测范围，将预测值限定为 [0,1] 间的一种回归模型。逻辑回归的鲁棒性比线性回归要好。</li>
+</ol>
+<h2 id="逻辑回归">逻辑回归</h2>
+<p>引用：https://blog.csdn.net/weixin_42933718/article/details/88874376</p>
+<ol>
+<li>逻辑回归模型介绍：逻辑回归假设数据服从伯努利分布,通过极大化似然函数的方法，运用梯度下降来求解参数，来达到将数据二分类的目的。</li>
+<li>逻辑回归的基本假设：假设数据服从伯努利分布；第二个假设是假设样本为正的概率是p=1/(1+e<sup>-θTx</sup>)</li>
+<li>逻辑回归的损失函数：并非平方差！！是极大似然函数的对数：J=-log(L), L=∏p<sup>y</sup> (1-p)<sup>1-y</sup>, p(y=1|x,θ)=h(x)</li>
+<li>损失函数一般有四种：平方损失函数，对数损失函数，HingeLoss0-1损失函数，绝对值损失函数。</li>
+<li>逻辑回归的损失函数为什么要使用极大似然函数作为损失函数？：逻辑回归这个模型下，对数损失函数的训练求解参数的速度是比较快的，和sigmod函数本身的梯度是无关的。不选平方损失函数原因？其一是因为平方损失函数，梯度更新的速度和sigmod函数本身的梯度是很相关的。sigmod函数在它在定义域内的梯度都不大于0.25。这样训练会非常的慢。</li>
+<li>逻辑回归的优缺点：
+<ol>
+<li>优点：形式简单，可解释性非常好；训练速度较快；内存占用小；方便输出结果调整。</li>
+<li>缺点：准确率不高；很难处理正负样本不平衡的问题；处理非线性数据较麻烦；本身无法筛选特征。有时候，我们会用gbdt来筛选特征，然后再上逻辑回归。</li>
+</ol>
+</li>
+<li>如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？：不会影响分类器的效果。每一个特征都是原来特征权重值的百分之一。</li>
+<li>为什么我们还是会在训练的过程当中将高度相关的特征去掉？：可解释性更好；提高训练的速度。</li>
+<li>为什么常常要做特征组合（特征交叉）？：特征组合可以引入非线性特征，提升模型的表达能力</li>
+<li>逻辑回归是线性模型吗？：广义线性模型，虽然引入了Sigmod函数是非线性模型，但本质上还是一个线性回归模型，因为除去Sigmod函数映射关系，其他的算法原理，步骤都是线性回归的。</li>
+<li>逻辑回归输出的值[0,1]，这个值是真实的概率吗？如果你的情况满足两个假设，那么你训练模型的过程，就确实是在对概率进行建模。但这两个假设并不是那么容易满足的。所以，很多情况下无法当作真实的概率，只能作为置信度来使用。</li>
+<li>防止欠拟合：从数据层面上考虑——可以增加新特征，例如，组合、泛化、相关性、高次特征，来增大假设空间等。从模型层面上考虑——增加模型的复杂度，例如SVM的核函数，决策树不进行剪枝、DNN等更复杂的模型，去掉正则化项或者减小正则化参数，加深训练轮数等。</li>
+<li>防止过拟合：增加样本量，减少模型复杂度；减少特征数量；正则化</li>
+<li>多分类方式：one vs rest——一个为正样本p1，剩下为负样本；剩下的继续分为正p2负...。softmax函数——sigmoid函数是softmax函数的二元特例。</li>
+<li>逻辑回归可以用在线性不可分吗？那怎么才能让逻辑回归能用？：不能，因为逻辑回归决策边界为超平面，不能用于非线性。提高特征维度(特征交叉)；核函数</li>
+<li>与线性回归的对比：目标函数不同；输出范围不同</li>
+<li>与最大熵的对比：？？？</li>
+<li>与SVM的对比：
+<ol>
+<li>相同点：分类算法；监督学习；判别模型；都能通过核函数方法针对非线性情况分类；目标都是找一个分类超平面；都能减少离群点的影响</li>
+<li>不同点：损失函数不同；逻辑回归使用所有样本点，svm则只取支持向量；逻辑回归对概率建模，svm对分类超平面建模；逻辑回归是处理经验风险最小化，svm是结构风险最小化。这点体现在svm自带L2正则化项，逻辑回归并没有；逻辑回归通过非线性变换减弱分离平面较远的点的影响，svm则只取支持向量从而消去较远点的影响；逻辑回归是统计方法，svm是几何方法</li>
+</ol>
+</li>
+<li>与贝叶斯的对比：
+<ol>
+<li>相同点：分类问题和监督学习；当假设朴素贝叶斯的条件概率P(X|Y=ck)服从高斯分布时，它计算出来的P(Y=1|X)形式跟逻辑回归是一样的</li>
+<li>不同点：逻辑回归为判别模型求的是p(y|x)，朴素贝叶斯为生成模型求的是p(x,y)。逻辑回归需要迭代优化，后者不需要。在数据量少的情况下贝叶斯好，数据量足够的情况下逻辑回归好。由于朴素贝叶斯假设了条件概率P(X|Y=ck)是条件独立的，也就是每个特征权重是独立的，如果数据不符合这个情况，朴素贝叶斯的分类表现就没有逻辑回归好。</li>
+</ol>
+</li>
+</ol>
+<h2 id="梯度下降算法-梯度消失和梯度爆炸">梯度下降算法、梯度消失和梯度爆炸</h2>
+<p>引用：https://blog.csdn.net/Heitao5200/article/details/103846059，https://zhuanlan.zhihu.com/p/51490163</p>
+<ol>
+<li>机器学习中为什么需要梯度下降？：是迭代法的一种，可以用于求解最小二乘问题。</li>
+<li>梯度下降法缺点：靠近极小值时收敛速度减慢；直线搜索时可能会产生一些问题；可能会“之字形”地下降。</li>
+<li>如何对梯度下降法进行调优？：学习率；参数初始值；数据标准化处理</li>
+<li>随机梯度和批量梯度区别：
+<ol>
+<li>批量梯度下降：样本量很大的时候，训练速度慢。</li>
+<li>随机梯度下降：训练速度很快。解有可能不是全局最优。迭代方向变化很大，不能很快的收敛到局部最优解。</li>
+</ol>
+</li>
+<li>各种梯度下降法性能比较：<br>
+<img src="https://superbb666.github.io/post-images/1595206297049.PNG" alt="" loading="lazy"></li>
+<li>推导多元函数牛顿法的迭代公式：将不方便表示的f(x)转化为泰勒公式展开</li>
+<li>什么是梯度消失：w都是小数，导数小于1（sigmoid导数范围[0,0.25]），对w1求梯度会越乘越小</li>
+<li>什么是梯度爆炸：w大于1，导数大于1，层数增多越乘越大</li>
+<li>梯度消失、爆炸的解决方案：
+<ol>
+<li>预训练加微调：DBN+BP</li>
+<li>梯度剪切、正则化：用于解决梯度爆炸，设置梯度阈值</li>
+<li>改为relu等激活函数：求导等于1</li>
+<li>batch normalization：将输出变为均值和方差一致，消除w的放大或缩小</li>
+<li>使用残差网络</li>
+<li>使用LSTM</li>
+</ol>
+</li>
+<li>什么是梯度提升？：对预测值和真实值的残差进行梯度调优。</li>
+<li>梯度下降和梯度提升的区别：
+<ol>
+<li>更新对象：梯度下降是模型参数，梯度提升是模型预测值</li>
+<li>更新方法：梯度下降是损失函数对参数的真实梯度值，梯度提升是模型梯度的预测值</li>
+<li>理论基础：梯度下降是以损失函数下降速度最快方向，梯度提升残差减少（模型效果上升）速度最快的方向</li>
+</ol>
+</li>
+<li>面试题目：给定优化问题，假设已经用代码实现了求函数值和函数梯度的功能,请问,如何验证这两个功能的代码实现没有问题?？？？？？</li>
+</ol>
+<h2 id="k-means-knn">k-means、KNN</h2>
+<p>引用：https://blog.csdn.net/hua111hua/article/details/86556322</p>
+<ol>
+<li>K-means算法的原理和工作流程</li>
+<li>KNN算法的原理：K值的选择，过小则容易过拟合，过大则容易欠拟合，可以使用交叉验证法选取K值。</li>
+<li>KNN算法有哪些优点和缺点？
+<ol>
+<li>优点：可以用来做分类和回归；可用于非线性分类；训练时间复杂度为O(n)；准确度高，对数据没有假设，对离群值不敏感；</li>
+<li>缺点：计算量大；样本不平衡问题（即有些类别的样本数量很多，而其他样本的数量很少）；需要大量的内存；</li>
+</ol>
+</li>
+<li>不平衡的样本可以给KNN的预测结果造成哪些问题，有没有什么好的解决方式？距离小的权值大</li>
+<li>为了解决KNN算法计算量过大的问题，可以使用分组的方式进行计算，简述一下该方式的原理。：将样本集按近邻关系分解成组，给出每组质心的位置，以质心作为代表点，和未知样本计算距离，选出距离最近的一个或者若干个组，再在组的范围内应用一般的KNN算法。</li>
+<li>什么是欧氏距离和曼哈顿距离？l2和l1</li>
+<li>KNN中的K如何选取的？:K值一般取一个较小的数值，例如采用交叉验证法（简单来说，就是一部分样本做训练集，一部分做测试集）来选择最优的K值。</li>
+<li>K-means中常用的到中心距离的度量有哪些？欧几里得距离和余弦相似度。</li>
+<li>K-means中的k值如何选取? 场景选定法；随机法；手肘法（手肘法的核心指标是SSE误差平方和）；轮廓系数法？？？；稳定性方法（数据采样分为两组，尝试不同的k观察两组聚类的相似度）；与层次聚类结合；Canopy Method？？？</li>
+<li>K-means算法中初始点的选择对最终结果有影响吗？陷入局部最优解</li>
+<li>K-means聚类中每个类别中心的初始点如何选择？随机法；选择各批次距离尽可能远的k个点；层次聚类或者Canopy预处理</li>
+<li>K-means中空聚类的处理：一种方法是选择一个距离当前任何质心最远的点。这将消除当前对总平方误差影响最大的点。另一种方法是从具有最大SEE的簇中选择一个替补的质心。这将分裂簇并降低聚类的总SEE。</li>
+<li>K-means是否会一直陷入选择质心的循环停不下来？不会，SSE是凸函数</li>
+<li>如何快速收敛数据量超大的K-means？：Mini Batch（分批处理）</li>
+<li>K-means算法的优点和缺点是什么？：
+<ol>
+<li>优点：当潜在的簇形状是凸面（即球形）的，簇与簇之间区别较明显，且簇大小相近时，其聚类结果较理想。处理大数据集合，该算法非常高效，且伸缩性较好。</li>
+<li>缺点：要事先确定簇数K和对初始聚类中心敏感外，经常以局部最优结束，同时对“噪声”和孤立点敏感，并且该方法不适于发现非凸面形状的簇或者大小差别很大的簇。</li>
+</ol>
+</li>
+<li>如何对K-means聚类效果进行评估？：轮廓系数（点到簇内距离a，点到簇间距离b，(b-a)/max，越大越好，值为负则分类错误）</li>
+<li>K-Means与KNN有什么区别：
+<ol>
+<li>KNN是分类算法，K-means是聚类算法；</li>
+<li>KNN是监督学习，K-means是非监督学习</li>
+<li>KNN没有明显的前期训练过程，K-means有明显的前期训练过程</li>
+<li>k的区别</li>
+</ol>
+</li>
+</ol>
+<h2 id="混淆矩阵">混淆矩阵</h2>
+<ol>
+<li>查准率（precision）：= TP/(TP+FP)，= P(y=1|y^=1)，在预测结果为1时，真实值为1的概率</li>
+<li>查全率（recall）：= TP/(TP+FN)，= P(y^=1|y=1)，在真实值为1时，预测结果为1的概率</li>
+<li>F1-score = 2 P*R/(P+R)，Fbeta-score对查准率设置权重β</li>
+<li>真阳性率：TPR= TP/(TP+FN)，在真实值为1时，预测结果为1的概率。越大越好——预测的收益</li>
+<li>伪阳性率：FPR= FP/(FP+TN)，在真实值为0时，预测结果为1的概率。越小越好——预测的代价</li>
+<li>ROC曲线：横轴FPR纵轴TPR。最优点左上角(0, 1)，最差位置对角线。画图方式：在01分类中，对不同阈值α进行ROC获取。比如α&lt;0.4则分类为0，此时获得TPR/FPR；然后α&lt;0.6，以此类推。</li>
+<li>AUC：ROC曲线包含的面积。概率表示：=P(P(yk=1) &gt; P(yl=1))，某一点大于另一点对于预测=1而言的概率</li>
+</ol>
+<h2 id="svm">SVM</h2>
+<p>引用：https://blog.csdn.net/szlcw1/article/details/52259668</p>
+<ol>
+<li>SVM 原理
+<ol>
+<li>数学推导，硬间隔最大化（几何间隔）、学习的对偶问题、软间隔最大化（引入松弛变量）、非线性支持向量机（核技巧）、二次规划问题的解决方法是SMO算法，sklearn调用的是SVC<br>
+<img src="https://superbb666.github.io/post-images/1595797380637.PNG" alt="" height="450" loading="lazy"></li>
+</ol>
+</li>
+<li>为什么要将求解 SVM 的原始问题转换为其对偶问题？：便于计算；便于引入核函数处理非线性问题</li>
+<li>为什么 SVM 要引入核函数？：非线性变为线性可分</li>
+<li>为什么SVM对缺失数据敏感？：SVM 没有处理缺失值的策略。特征空间的好坏对SVM的性能很重要。</li>
+<li>SVM 核函数的种类及区别：
+<ol>
+<li>线性核：主要用于线性可分的情形，参数少，速度快，对于一般数据，分类效果已经很理想了。</li>
+<li>RBF 核（高斯核）：主要用于线性不可分的情形，参数多，分类结果非常依赖于参数。有很多人是通过训练数据的交叉验证来寻找合适的参数，不过这个过程比较耗时。</li>
+<li>如果 Feature 的数量很大，跟样本数量差不多，这时候选用线性核的 SVM。 如果 Feature 的数量比较小，样本数量一般，不算大也不算小，选用高斯核的 SVM。</li>
+</ol>
+</li>
+</ol>
+<h2 id="正则项和范数-损失值处理">正则项和范数、损失值处理</h2>
+<ol>
+<li>为什么l1和l2正则化可以降低过拟合，本质原因是？：“正则化能够增大偏差但是降低方差”；PAC-learning泛化界解释，正则化降低了模型的拟合能力，使得模型结构变得更加简单；Bayes先验解释，把正则变成先验，L1正则化是给参数引入了标准拉普拉斯先验，L2正则化是给参数引入了标准高斯分布的先验，通过贝叶斯后验概率最大化（这个时候不是用极大似然估计来求解了）可以推导出带L1或L2正则项的损失函数的表达式，引入先验相当于对参数进行了约束，使得参数必须落在标准拉普拉斯分布或者标准高斯分布的范围中；奥卡姆剃刀原则，“保证性能差别不大的情况下，越是简单的模型泛化性能越好”。</li>
+</ol>
+<h2 id="kd树">KD树</h2>
+<ol>
+<li>什么是KD树？：KD树（K-dimension tree)</li>
+<li>KD树建立过程中切分维度的顺序是否可以优化？：找方差大的维度</li>
+<li>KD树每一次继续切分都要计算该子区间在需切分维度上的中值，计算量很大,有什么方法可以对其进行优化？：空间换时间，先排序后取值，也可采样取部分数据点排序</li>
+</ol>
+<h2 id="决策树">决策树</h2>
+<p>引用：https://blog.csdn.net/manduner/article/details/90516561</p>
+<ol>
+<li>对决策树的理解？：决策树算法，无论是哪种，其目的都是为了让模型的不确定性降低的越快越好，基于其评价指标的不同，主要是ID3算法，C4.5算法和CART算法，其中ID3算法的评价指标是信息增益，C4.5算法的评价指标是信息增益率，CART算法的评价指标是基尼系数。</li>
+<li>对信息增益和信息增益率的理解？
+<ol>
+<li>熵：对随机变量不确定性的度量，也可以说是对随机变量的概率分布的一个衡量。熵越大，随机变量的不确定性就越大。随机变量为均匀分布时，熵最大（限定均值和标准差时，正态分布最大）。</li>
+<li>条件熵：是指X|Y的不确定性。</li>
+<li>熵和条件熵中概率由数据估计（特别是极大似然估计）得到时，所对应的熵与条件熵分别为经验熵与经验条件熵。</li>
+<li>信息增益：熵 - Σ条件熵。</li>
+</ol>
+</li>
+<li>信息增益准则的问题（ID3算法存在的问题）？：选择信息增益大的作为分类方法，倾向于去选择特征取值比较多的特征作为最优特征。比如每家饭店的店名唯一，按店名分类信息增益最大，但无效。</li>
+<li>采用信息增益率的算法C4.5为什么可以解决ID3算法中存在的问题呢？：实际C4.5先剔除低于平均信息增益的，然后在剩下的取增益率最大的。</li>
+<li>决策树出现过拟合的原因及其解决办法？：训练的好测试的差。
+<ol>
+<li>原因：没有剪枝；噪声数据未剔除；使用了较多的输出变量，变量较多</li>
+<li>解决办法：剪枝，可以分为预剪枝和后剪枝，我们一般采用后剪枝的方法；K−folds交叉验证；减少特征，用皮尔逊相关系数计算每一个特征和响应变量的相关性，将相关性较小的变量剔除；也可用其他的方法来进行特征筛选，比如基于决策树的特征筛选，通过正则化的方式来进行特征选取等</li>
+</ol>
+</li>
+<li>简单解释一下预剪枝和后剪枝，以及剪枝过程中可以参考的参数有哪些？
+<ol>
+<li>预剪枝：在决策树生成初期就已经设置了决策树的参数，决策树构建过程中，满足参数条件就提前停止决策树的生成。</li>
+<li>后剪枝：后剪枝是一种全局的优化方法，它是在决策树完全建立之后再返回去对决策树进行剪枝。REP算法，父节点比子节点准确率高，就把孩子剪了。</li>
+<li>参数：树的高度、叶子节点的数目、最大叶子节点数、限制不纯度。</li>
+</ol>
+</li>
+<li>决策树的优缺点？
+<ol>
+<li>优点：计算简单、速度快；可解释性强；比较适合处理有缺失属性的样本。</li>
+<li>缺点：容易发生过拟合（随机森林可以很大程度上减少过拟合）；忽略了数据之间的相关性；信息增益的结果偏向于那些具有更多数值的特征</li>
+</ol>
+</li>
+<li>决策树是如何处理缺失值的？
+<ol>
+<li>如何在训练样本属性缺失的情况下进行划分属性的选择？：对每个样本设置权重，从而计算概率</li>
+<li>如何解决测试样本中属性有缺失值的情况？：子树最大概率</li>
+</ol>
+</li>
+<li>决策树与逻辑回归的区别？：决策树可直接处理缺失值；逻辑回归擅长整体结构，决策树擅长局部结构；逻辑回归擅长线性关系；逻辑回归对极值噪声值特别敏感；决策树结果较粗糙（结果只有子节点那么几个）；决策树速度快</li>
+<li>树模型的优缺点：
+<ol>
+<li>优点：可解释性强；可处理混合类型特征；具体伸缩不变性（不用归一化特征）；有特征组合的作用；可自然地处理缺失值；对异常点鲁棒；有特征选择作用；可扩展性强， 容易并行</li>
+<li>缺点：缺乏平滑性（回归预测时输出值只能输出有限的若干种数值）；不适合处理高维稀疏数据</li>
+</ol>
+</li>
+</ol>
+<h2 id="随机森林rf">随机森林RF</h2>
+<p>引用：https://blog.csdn.net/jaffe507/article/details/105088940</p>
+<ol>
+<li>随机森林建立过程：
+<ol>
+<li>对数据集进行有放回抽样。构建多个子集。</li>
+<li>每个子集，从所有特征中随机选部分特征，按照交叉熵（plnp）进行分裂，从而构建单个决策树。</li>
+<li>生成多个决策树，像bagging一样进行使用。</li>
+</ol>
+</li>
+<li>随机森林算法优缺点：
+<ol>
+<li>优点：并行训练！对于大数据时代的大样本训练速度有优势；随机选择决策树节点划分特征，这样在样本特征维度很高的时候，仍然能高效的训练模型；在训练后，可以给出各个特征对于输出的重要性；随机采样，模型的方差小，泛化能力强；RF实现比其他树简单；对部分特征缺失不敏感。</li>
+<li>缺点：噪音大的样本集，容易过拟合；取值划分比较多的特征容易对RF的决策产生更大的影响，从而影响拟合的模型的效果。</li>
+</ol>
+</li>
+<li>为什么要有放回的抽样？：保证样本集间有重叠，若不放回，每个训练样本集及其分布都不一样。</li>
+<li>为什么RF的训练效率优于bagging？：在个体决策树的构建中，随机森林仅仅考虑一个特征子集。</li>
+<li>随机森林如何处理缺失值：
+<ol>
+<li>对缺失值进行预设置，然后构建随机森林，并记录每组数据的决策分类路径</li>
+<li>判断哪组数据和缺失数据路径最相似，引入一个相似度矩阵，来记录数据之间的相似度，比如有N组数据，相似度矩阵大小就是N*N。</li>
+<li>如果是数值型变量，通过加权平均得到新的估计值。迭代重做森林，直到估计值稳定。</li>
+</ol>
+</li>
+<li>需要剪枝吗？：不需要</li>
+<li>随机森林的过拟合问题：交叉验证</li>
+</ol>
+<h2 id="gbdt">GBDT</h2>
+<p>引用：https://zhuanlan.zhihu.com/p/148050748， https://www.cnblogs.com/modifyrong/p/7744987.html</p>
+<ol>
+<li>gbdt 的算法的流程？<br>
+<img src="https://superbb666.github.io/post-images/1596227390581.PNG" alt="" loading="lazy"></li>
+<li>gbdt 如何选择特征 ？=CART Tree生成的过程：
+<ol>
+<li>原始的gbdt的做法非常的暴力，遍历每个特征。若4个特征6个样本，则遍历24颗单层树，取最小损失值。</li>
+</ol>
+</li>
+<li>gbdt 如何构建特征 ？：将原始特征变为新的0101特征，看落在不同树的哪个节点，然后组合。</li>
+<li>gbdt 如何分类？
+<ol>
+<li>gbdt 无论用于分类还是回归一直都是使用的CART 回归树。</li>
+<li>多分类问题，若分3类，则同时训练三棵树</li>
+</ol>
+</li>
+<li>gbdt的优缺点 ？
+<ol>
+<li>优点：数据可以是连续值和离散值；相对SVM来说，调参少准确率高；使用一些健壮的损失函数，对异常值的鲁棒性非常强，比如 Huber损失函数和Quantile损失函数；不需要做特殊预处理（比如归一化）。</li>
+<li>缺点：弱学习器之间存在依赖关系，难以并行训练数据。不过可以通过自采样的SGBT来达到部分并行；在高维稀疏数据上，表现不如SVM或神经网络；在处理文本分类特征问题上，优势不明显；训练过程需要串行，只能在决策树内部采用一些局部并行手段提高训练速度。</li>
+</ol>
+</li>
+<li>gbdt 通过什么方式减少误差 ？</li>
+<li>gbdt的效果相比于传统的LR，SVM效果为什么好一些 ？</li>
+<li>gbdt 如何加速训练？</li>
+<li>gbdt的参数有哪些，如何调参 ？</li>
+<li>gbdt 实战当中遇到的一些问题 ？</li>
+<li></li>
+</ol>
+<h2 id="xgboost">XGBOOST</h2>
+<ol>
+<li>简单介绍一下XGBoost:
+<ol>
+<li>首先需要说一说GBDT，它是一种基于boosting增强策略的加法模型，训练的时候采用前向分布算法进行贪婪的学习，每次迭代都学习一棵CART树来拟合之前 t-1 棵树的预测结果与训练样本真实值的残差。</li>
+<li>XGBoost对GBDT进行了一系列优化，比如损失函数进行了二阶泰勒展开、目标函数加入正则项、支持并行和默认缺失值处理等，在可扩展性和训练速度上有了巨大的提升，但其核心思想没有大的变化。</li>
+</ol>
+</li>
+<li>xgboost对特征缺失敏感吗，对缺失值做了什么操作，存在什么问题？
+<ol>
+<li>不敏感，可以自动处理，处理方式是将missing值分别加入左节点 右节点取分裂增益最大的节点将missing样本分裂进这个节点 。这种处理方式的问题在xgboost仅仅在特征的非缺失的值上进行分裂然后missing值直接放入其中一个节点，显然当缺失值很多的情况下，比如缺失80%，那么xgb分裂的时候仅仅在20%的特征值上分裂，这是非常容易过拟合的。</li>
+</ol>
+</li>
+<li>我们可以将xgboost的中众多参数分类为哪三类？请分别写出哪些参数可以用什么方式用来控制过拟合？
+<ol>
+<li>xgboost主要有3类参数:
+<ol>
+<li>通用参数：主要对当前任务的一些基本参数的设置。常用的参数有:
+<ol>
+<li>booster:base learn是采用树模型还是线性模型。一般来讲采用gbtree的模型效果会比较好一些</li>
+<li>silent:任务运行过程中是否输出信息</li>
+</ol>
+</li>
+<li>集成参数：针对base learner生长过程中需要设定的参数
+<ol>
+<li>eta：更新过程中的收缩步长，类似于learning rate</li>
+<li>gamma:为了对叶子节点做进一步分割而必须设置的损失减小的最小值，该值越大算法越保守</li>
+<li>max_depth:用来设置最大树深，该值越小算法越保守</li>
+<li>min_child_weight:表示子树观测权重之和的最小值。如果树的生长时的某一步所生成的叶子结点，其观测权重之和小于min_child_weight，那么可以放弃该步生长。该值越小算法越保守</li>
+<li>subsample和colsample_bytree:分别控制样本的采样比例和分裂时特征个数的采样比例，可在一定程度上防止过拟合</li>
+<li>lambda和alpha:分别是L2和L1的权重，用于控制正则化的强度，该值会对模型的复杂度进行限制</li>
+</ol>
+</li>
+<li>任务参数：
+<ol>
+<li>objective：称为目标函数或者需要被最小化的损失函数，目标函数的选择跟实际的任务有很大的关系</li>
+<li>eval_metric：评估函数。该参数用于定义评价模型性能好坏的指标</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>XGBoost和GBDT的区别有哪些？
+<ol>
+<li>算法层面:
+<ol>
+<li>（1）损失函数的二阶泰勒展开；</li>
+<li>（2）树的正则化概念的引入，对叶节点数量和叶子节点输出进行了约束，方式是将二者形成的约束项加入损失函数中；</li>
+<li>（3）二阶泰勒展开与树正则化推出了新的叶子节点输出的计算公式而不是原始gbdt那样的简单平均；</li>
+<li>（4）a、对于基础学习器的改进，分裂的时候自动根据是否产生正增益指导是否进行分裂，因为引入了正则项的概念，分裂的时候这个预剪枝更加严苛；  b、对于缺失值的处理，xgboost根据左右子节点的增益大小将缺失值分到增益大的节点中，而sklearn中的gbdt是无法处理缺失值的，因为sklearn中的gbdt是以sklearn中的cart为基学习器的，而sklearn中的cart也并没有实现对缺失值的处理功能。</li>
+<li>（5）学习率，Shrinkage，对每一颗树都乘以小于1的学习率，来削弱每一颗树的影响，这样的结果就是会引入更多的树来处理使得基学习器得数量变多，从而降低过拟合，不过其实sklearn中的gbdt也实现了。。。不知道为什么这么多人把这一点也列为不同；</li>
+<li>（6）引入了随机森林使用的列采样功能，便于降低过拟合；</li>
+<li>（7）引入了许多近似直方图之类的优化算法来进一步提高树的训练速度与抗过拟合的能力，这个比较复杂，因为实现了很多种算法，后面单独写一篇来总结；</li>
+</ol>
+</li>
+<li>工程层面
+<ol>
+<li>对每个特征进行分块（block）并排序（pre_sort），将排序后的结构保存在内存中，这样后续分裂的时候就不需要重复对特征进行排序然后计算最佳分裂点了，并且能够进行并行化计算.这个结构加速了split finding的过程，只需要在建树前排序一次，后面节点分裂时直接根据索引得到梯度信息。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="马尔可夫策略决策">马尔可夫策略决策</h2>
+<h2 id="朴素贝叶斯">朴素贝叶斯</h2>
+<h2 id="动态贝叶斯网络">动态贝叶斯网络</h2>
+<h2 id="cnn-rnn">CNN、RNN</h2>
+<h2 id="lstm-bi-lstm">LSTM、BI-LSTM</h2>
+<h2 id="gan">GAN</h2>
+<h2 id="mfcc梅尔频率倒谱系数">MFCC梅尔频率倒谱系数</h2>
+<ol>
+<li>语音信号预处理</li>
+<li>FFT变换到频域：目的是得到频谱包络特征和细节特征</li>
+<li>Mel滤波：将频谱转化为低频特征高、高频特征低的适用于人类的频谱</li>
+<li>取对数+DCT(类似IDFT)：将频域变时域（倒谱），使x = h + e，将包络和细节变为加法关系</li>
+</ol>
+<h2 id="gmm-hmm-dbn-hmm">GMM-HMM / DBN-HMM</h2>
+<ol>
+<li>GMM：高斯混合模型. k-means的复杂版，属于无监督聚类算法。使用EM算法迭代：E: 根据概率求期望(根据正态分布的均值标准差参数, 求每个点在这k个分布的概率). M: 根据期望反推概率(根据每个点在不同分布的概率, 求均值标准差参数).</li>
+<li>RBM: 玻尔兹曼机. 两层神经网络, 不分前向和后向, 类似对折了的自动编码器, 前向--&gt;后向为编码, 后向--&gt;前向为解码.</li>
+<li>DBN: 深层置信网络. 多个RBM组成, 但是是逐层训练每个RBM. 首先训练x--h1;  然后固定h1, 训练h1--h2; 然后h2--h3 ... 最后可以再来个BP反向传播变为有监督训练.</li>
+<li>HMM: 隐藏式马尔可夫模型. 可见链和隐含链. 可见链: 骰子掷出1,2,3,4... 隐含链: 每次掷的是骰子D4, D6, D8, D4 ...</li>
+<li>DBN-HMM: 求一串骰子序列，这串骰子序列产生观测结果的概率最大. GMM-HMM: 求每次掷出的骰子分别是某种骰子的概率.</li>
+</ol>
+<h2 id="gbdt-2">GBDT</h2>
+<ol>
+<li>Gradient Boosting Decision Tree: 梯度提升树</li>
+<li>Decision Tree: CART中的回归树, 对数据集像树一样划分为两个区域, 并生成回归树. 像k-means一样每次分两类.</li>
+<li>Gradient Boosting: 梯度提升树.
+<ol>
+<li>Boosting Tree: 提升树. 先来个通俗理解：假如有个人30岁，我们首先用20岁去拟合，发现损失有10岁，这时我们用6岁去拟合剩下的损失，发现差距还有4岁，第三轮我们用3岁拟合剩下的差距，差距就只有一岁了。-----即: 首先构建一个回归树20岁, 获得残差10岁; 再对10岁构建回归树6岁, 获得残差4岁. 最终输出回归树.</li>
+<li>梯度提升树: 利用损失函数的负梯度作为提升树算法中的残差的近似值. 即: 用梯度下降的值来构建回归树.</li>
+</ol>
+</li>
+<li>GBDT: 监督学习树.
+<ol>
+<li>标签使用Gradient Boosting的弱学习器构建初始树f0的初始残差(比如: 身高标签1.7m变为残差0.3, 即树f0为20岁, 残差为10岁).</li>
+<li>attribute使用Decision Tree来进行分类, 分类的好坏用上面计算的残差来判定.</li>
+<li>目前树已建好. 每个树的叶节点都具有残差值. 然后多次迭代生成多棵树, 每棵树的残差是越来越小的.</li>
+<li>对样本进行预测: f(x) = f0 + ηΣf. f0为初始弱学习器, 剩下的f为强学习器, 然后对后面的树求和并乘学习率.</li>
+</ol>
+</li>
+</ol>
+<h2 id="xgboost原理">XGBOOST原理</h2>
+<p>引用：https://homes.cs.washington.edu/~tqchen/pdf/BoostedTree.pdf</p>
+<ol>
+<li>如何构造目标函数</li>
+<li>如何近似目标函数</li>
+<li>如何引入树到目标函数，改造目标函数</li>
+<li>如何使用贪心算法构造树<br>
+<img src="https://superbb666.github.io/post-images/1596412099209.png" alt="" loading="lazy"></li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[7CCSMBDT 大数据技术]]></title>
+        <id>https://superbb666.github.io/post/7ccsmbdt-dig-data-technologies/</id>
+        <link href="https://superbb666.github.io/post/7ccsmbdt-dig-data-technologies/">
+        </link>
+        <updated>2020-06-11T09:33:24.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>数据形式：Structured，Unstructured，Semi-structured，Metadata（元数据，用于描述数据的数据，就像电脑文件名，重命名文件并不改变文件内容）</li>
+<li>大数据特征：Volume（量大），Velocity（速度快），Variety（形式多样），Veracity（真实，存在噪声），Value（数据效益）</li>
+<li>大数据特征在线上游戏工业中的表现：Volume（玩家交互的数据），Velocity（游戏运动时的数据流），Variety（玩家数量，玩家行为，玩家关系等），Veracity（假账户，无用的用户信息），Value（通过分析增加玩家数量，最大化收益）</li>
+<li>数据分析类型：
+<ol>
+<li>descriptive：what has happened</li>
+<li>Diagnostic： why it has happened</li>
+<li>Predictive：what is likely to happen</li>
+<li>Prescriptive：what can we do to make something happen</li>
+</ol>
+</li>
+<li>Computational analytic tasks for descriptive analytics：
+<ol>
+<li>Basic statistics：均值，标准差。。。问题：无法获取全部数据（数据量太大）</li>
+<li>Linear algebraic computations：线性回归，PCA，SVD。。。问题：同上，无法构造一个全部数据矩阵M</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for diagnostic analytics：
+<ol>
+<li>Linear algebraic computations：分析为什么用PCA进行聚类分析是失败的。问题：矩阵太大</li>
+<li>Generalized N-body problems：比如聚类，分类。。问题：高维问题</li>
+<li>Graph-theoretic computations：最短路径。。问题：边缘数量太多（节点之间关联太多）</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for predictive analytics：构建预测模型
+<ol>
+<li>Linear algebraic computations, Generalized N-body problems, Graph-theoretic computations, Integration(计算高维积分), Alignment problems(匹配)</li>
+</ol>
+</li>
+<li>Comp. analytic tasks for Prescriptive analytics：使用多种预测模型，来预测输出
+<ol>
+<li>Generalized N-body problems, Graph-theoretic computations, Alignment problems, Optimization(最大化最小化问题)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Analytics flow for big data:
+<ol>
+<li>Data collection</li>
+<li>Data Preparation</li>
+<li>Analysis types</li>
+<li>Analysis modes</li>
+<li>Visualizations</li>
+</ol>
+</li>
+<li>Data preparation（开源软件GoogleRefine能做下面这些事）: Data cleaning(删除噪声数据), Data wrangling(将数据由一种形式转换为另一种形式), De-duplication(删除重复数据), Normalization, Sampling(提取), Filtering(删除不正确的超范围的数据)</li>
+<li>Analysis types&amp;modes：分析模式
+<ol>
+<li>Batch mode：更新结果每日或每月：Hadoop / MapReduce, Pig, Spark, Solr</li>
+<li>Real-time mode：更新结果每秒：Spark Streaming component, Storm</li>
+<li>Interactive mode：交互时更新：Hive, Spark SQL component</li>
+</ol>
+</li>
+<li>Visualizations：验证方式
+<ol>
+<li>Service database，Web framework，Static，Dynamic， Interactive</li>
+</ol>
+</li>
+<li>Data collection：数据收集
+<ol>
+<li>Data access connectors：数据访问连接器：用于从不同源中获取大数据
+<ol>
+<li>Publish-subscribe messaging：消息-订阅信息传递：Publishers-&gt;Brokers-&gt;Subscribers</li>
+<li>Source-sink connectors：源-库连接器：Source connectors(从数据库到中心化的文件系统) - Sink connectors(导出数据到另一个系统HDFS)</li>
+<li>HDFS: Hadoop Distributed File System: 分布式文件系统</li>
+<li>Database connectors：数据库连接器：DBMSes-&gt;big data framework</li>
+<li>Messaging Queues：消息队列：Producers &amp; Consumers</li>
+<li>Custom connectors：自定义连接器：从social networks 提取数据</li>
+</ol>
+</li>
+<li>Database connector: Apache sqoop
+<ol>
+<li>Sqoop: RDBMS&lt;-&gt;HDFS，内置支持RDBMS: MySQL, PostgreSQL, Oracle, SQL Server, DB2, and Netezza。文件存储在HDFS，而不是在本地系统中</li>
+<li>import: connect, username, password, table.</li>
+<li>import process：1. Metadata获取元数据；2. 创建JAVA代码用于获取数据；3. 连接到Hadoop聚类并提交到MapReduce job，该job中存在多个map和hdfs。使用Sqoop优势是能够从多个machine中同时获得想要的数据。</li>
+<li>parallelism：并行处理，属性-m: 期望并行获取的mapper。split-by：用于对table进行分区（分mapper）的属性，比如id号</li>
+<li>updates：更新时可以在已有数据的基础上更新新的数据，而不需要全部读取，--incremental append。选择--check-column叠加数据所用的属性，以及--last-value上次读到哪儿了</li>
+<li>export: connect, username, password, table, export-dir.</li>
+<li>export process: from HDFS into relational databases。首先创建table，然后执行导出</li>
+</ol>
+</li>
+<li>Apache flume：
+<ol>
+<li>从不同的数据源汇总到中心化大数据存储中（DFS或NoSQL数据库）</li>
+<li>结构：Web Server-&gt;Agent-&gt;Agent-&gt;...-&gt;HDFS</li>
+<li>Event: Headers-Payload：就跟键值对一样。Payload对Flume是不透明的</li>
+<li>Agent: Web Server-&gt;Source-&gt;Channel-&gt;Sink-&gt;HDFS
+<ol>
+<li>Source: 获取数据并发送到一个或多个channels。类型：Twitter, HTTP, Custom, ...</li>
+<li>Channels: 就是缓冲池buffer。因为数据传输速度时快时慢，比如推特早上比晚上东西少。而且保证进程重启后能用。类型：Memory, File, JDBC, ...</li>
+<li>Sink: 从一个channel里移除Events数据，并传到终点。类型：HDFS, Hbase, File Roll, Custom, ...</li>
+<li>额外组件：
+<ol>
+<li>Interceptor: 用于source和channel之间。滤波器, 或者整合不同类型的header</li>
+<li>Channel processor: 用于source和channel之间，interceptor之后。用于分配将source分配到哪些channel的策略。类型：Replicating(复制), Multiplexing(多路复用), Custom</li>
+<li>Sink selector: 用于channel和sink之间。用于sink选择哪路channel，默认是不选择。类型：Load balancing(sink接收失败，则随机选择另一个sink接收)。Failover(为sink设置优先级)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Messaging Queue：Producer先入，先出的交给Customer。Load levelling：给一个customer。Load balancing：给多个customer。例子：ZeroMQ</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>提出问题：社交网络太庞大，比如google搜索了200亿个结果，如何排序。(2011年推测google有一百万台设备)</li>
+<li>解决方案：使用多台设备构建设备网（商品网络，以太网），像树形结构一样</li>
+<li>新的问题：如何分布式计算？如何写分布式程序？如何处理设备坏了？</li>
+<li>软件解决方案：Distributed file system(Hadoop)和Programming model(MapReduce)</li>
+<li>Distributed file system (DFS):分布式文件系统：存储大数据、提供复制、防止失败
+<ol>
+<li>global file namespace：提供全局文件名：无论文件存在哪台电脑，都能用全局文件名找到。适用情况：数据量巨大、数据极少更新、数据常被读取和扩展。比如Google GFS, Hadoop HDFS, CloudStore</li>
+<li>Chunks：文件被打包成块。然后这些块，复制存储到不同设备上，即一个块在多个设备上都存在。</li>
+<li>Master node就是元数据metadata，会被复制存储。Directory每个块都存在了哪些设备上，像个索引，也会被复制存储。Client library 用于访问文件</li>
+<li>Hadoop HDFS：Chunks<mark>blocks(文件块), Master node</mark>Namenode(字典), Chunkserver==Datanode(设备)
+<ol>
+<li>读取方式：获取文件位置--文件存在且有许可--找到包含该chunks且离client最近的设备--server不可用时换下一个设备</li>
+<li>写入方式：写入请求--文件存在且有许可--数据切片放入队列--namenode分配新block--clent连接到datanode--设备1从队列中读取文件块，存储后复制给设备2，收到设备2成功复制的结果后回传给client--停止写入请求</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Programming model：程序设计模型：执行大规模分布式计算；也能容忍硬件坏了</li>
+<li>MapReduce：
+<ol>
+<li>OVERVIEW：Input chunks--Map tasks(并行处理)--Group by keys(洗牌和排序)--Reduce tasks(整合滤波)--Conbined output
+<ol>
+<li>Map task: 提取你关心的任务；从DFS获取chunks；将chunks转换为键值对key-value pairs (k,v)</li>
+<li>Shuffle and sort task: 按键排序。然后将键值对按键合并(排序后相同的键就在一起了)</li>
+<li>Reduce task: 聚合，总结，滤波，转换，取决于我们的代码，下章讲。对相同键的不同值进行合并(k,[v,w])；按reducers分开；每个reducer获取同一个键的所有值，即(k,[v,w])而不是(k,v)</li>
+</ol>
+</li>
+<li>WordCount Example：mapper:{(the, 1), (crow, 1), (the, 1)} --&gt; group:{(the, 1), (the, 1), (crow, 1)} --&gt; reducer:{(the, 2), (crow, 1)}</li>
+<li>Environment：Workflow：
+<ol>
+<li>输入切片--设置master和workers--map worker输出键值对，存到buffer中--将buffer中的键值对存到硬盘里，并将位置传给master--reducer worker获取位置后读取键值对并group--worker输出到文件中--一切完成后回传给user。</li>
+</ol>
+</li>
+<li>failure：
+<ol>
+<li>master fail：任务失败，只能重启</li>
+<li>map fail：设置该map的正在进行和已完成的任务为空闲状态，然后通知reducer这个map日程表重新排了</li>
+<li>reducer fail：设置该reducer的正在进行的任务为空闲状态，任务被重排过会儿启动</li>
+</ol>
+</li>
+<li>数量：Rule of thumb
+<ol>
+<li>M(map workers) &gt;&gt;number of nodes in the cluster即machines的个数</li>
+<li>R&lt;&lt;M，和number of nodes的个数一样少</li>
+</ol>
+</li>
+<li>问题：有些worker太慢了，可能硬盘不好，可能存在其他工作。解决方案：将进行中的任务复制一份让别人去做，别人有可能先到达终点。</li>
+<li>Refinement: 强化部分
+<ol>
+<li>Combiners：合并器。用于mapper和shuffle之间。合并器只将某个map中具有相同的key进行合并。不像reducer合并所有map。只能用于可合并的函数，比如max(1,2,3,4)=max(max(1,2), max(3,4))</li>
+<li>Partitioner：分割器。将相同的key分给同一个reducer。</li>
+</ol>
+</li>
+<li>mrjob：MapReduce jobs in Python</li>
+</ol>
+</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[6CCS3ML1 机器学习]]></title>
+        <id>https://superbb666.github.io/post/6ccs3ml1-mache-learning/</id>
+        <link href="https://superbb666.github.io/post/6ccs3ml1-mache-learning/">
+        </link>
+        <updated>2020-01-18T07:05:01.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>k-means clustering：无监督学习</li>
+<li>k-nearest neighbour (kNN): Simple non-parametric classifier：监督学习，找到最近的k个neighbor，然后看这k个点的label（监督学习已知label），哪个label多就选哪个，简单粗暴</li>
+<li>k-fold cross validation</li>
+<li>错误率计算</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>decisiion tree:
+<ol>
+<li>H的计算</li>
+<li>Gain ratio = Gain / SplitInformation</li>
+<li>Gini Impurity</li>
+<li>Rule post-pruning：修剪决策树，减小过度拟合</li>
+<li>Broadening decision tree：扩展决策树——回归树 ？？</li>
+</ol>
+</li>
+<li>Linear regression：cost function代价函数</li>
+<li>Gradient descent：梯度下降算法
+<ol>
+<li>Batch gradient descent：Batch梯度下降算法：对所有样本进行同时计算，从而更新w：速度慢但是一定收敛</li>
+<li>stochastic gradient descent：随机梯度下降算法：对样本逐一计算并更新w：速度快但是可能不收敛</li>
+<li>Multivariate linear regression：多元线性回归：防止过度拟合overfitting，增加complexity：λΣw^2，λ is the regularisation parameter。complexity可以是任意形式，这里仅选用一种</li>
+</ol>
+</li>
+<li>Linear classifiers：线性分类
+<ol>
+<li>logistic regression：逻辑回归：01回归，特殊的回归曲线：1/(1+e^-wx)</li>
+</ol>
+</li>
+<li>Ensemble learning：集成学习：同时使用多种算法
+<ol>
+<li>Boosting：增强：增强权重：1. 等权重计算classifier1 2. 增加misclassified examples的权重计算classifier2 3. 比较两个classifier</li>
+<li>AdaBoost：多变量增强算法，初始classifier为随机弱模型，这样就得到classifier的训练集</li>
+<li>Bagging：Bootstrap aggregation引导聚合：对训练集training set进行分割成多个训练集，并对每个训练集创建分类器classifier，然后评估分类器，可投票voting或取平均averaging决定</li>
+<li>Random forests：使用决策树的Bagging：random subspace method：随即选取每个树的特征，然后替代？？，最后bagging</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>probability, Bayesian learning</li>
+<li>Expectation Maximisation (EM) algorithm：期望最大化算法
+<ol>
+<li>E步骤：根据概率求期望Expected</li>
+<li>M步骤：根据期望重新估计概率</li>
+<li>交替运算，直到收敛</li>
+</ol>
+</li>
+<li>k-means算法</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Hidden Markov Models (HMM)：
+<ol>
+<li>A: transition probability matrix：(昨天下雨，今天是否下雨的概率)(上次用好骰子，这次用坏骰子的概率)，→</li>
+<li>B: emission probability matrix：（今天下雨，今天是否打伞的概率)(此次用好骰子，掷出概率为6的概率)，↓</li>
+<li>N：n个状态，(下雨，多云，晴天)(输赢)。。。s1-sN，其中：O为初始状态，E为结束状态</li>
+<li>M：m个观察结果，(带伞，不带伞)(骰子点数为123456)。。。k1-kM</li>
+<li>HMM： µ = (A, B)</li>
+</ol>
+</li>
+<li>HMM 基本任务：
+<ol>
+<li>Labelled Learning：已知O和X，求µ</li>
+<li>Unlabelled Learning：已知O，求µ</li>
+<li>Likelihood：已知O和µ，求P(O|µ)</li>
+<li>Decoding：已知O和µ，求X</li>
+</ol>
+</li>
+<li>Decoding：已知µ，求X = max P(X, O|µ)：Viterbi Algorithm 维特比算法
+<ol>
+<li>Optimal substructure property：序列X1-Xt最优，则X1-Xj最优</li>
+<li>Overlapping subsolutions property：序列Xu和Xt最优，u&gt;t，则Xt在Xu序列内</li>
+<li>时间复杂度从O(N^T)降为 O(N^2 T)，或O(N^o T)，其中o是the order of the HMM。</li>
+<li>Viterbi probability δ：计算在时间t上，状态S为Sj的概率：δj(t) = max[δi(t-1)aij bj(Ot)]：计算从Si，到达Sj的最佳概率。aij：→，bj(Ot)：Sj状态下Ot的概率</li>
+<li>baseline algorithms：基线算法：Baseline for HMM：给予基线，判断算法优劣</li>
+</ol>
+</li>
+<li>Statistical Significance Testing：统计显著性检验
+<ol>
+<li>significance level (α)：显著性水平，判断是否拒绝假设</li>
+<li>binary event model：二进制事件模型：两个系统之间比较，若system1 &gt; system2，则positive，反之negative</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>maximum margin：线性回归线可移动的最大边缘</li>
+<li>特征空间</li>
+<li>kernel function / kernel trick：核函数，x-&gt;H，x到特征空间的映射，向量内积，二维度：K(x, z) = (x ` z)^2</li>
+<li>slack variables：松弛变量</li>
+<li>ε-insensitive loss function：不敏感损失函数</li>
+<li>Non-parametric methods：非参数法</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Neural Networks：说的我都会</li>
+<li>单层网络，多层网络，反向传播
+<ol>
+<li>Design choices</li>
+<li>Recurrent networks</li>
+<li>Training tips</li>
+<li>When to Consider Neural Networks</li>
+</ol>
+</li>
+<li>Deep learning = deep neural networks = NNs with lots of layers.</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Genetic Algorithms (GAs):遗传算法</li>
+<li>Genetic Programming (GPs): 遗传规划，树节点是+-*/</li>
+<li>Co-evolutionary Algorithms:  协同进化算法：？？？</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>Reinforcement Learning：强化学习
+<ol>
+<li>explore：探索</li>
+<li>exploit：开采</li>
+</ol>
+</li>
+<li>马尔可夫决策过程（pacman）</li>
+</ol>
+<p>.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[6CCS3OME 最优算法]]></title>
+        <id>https://superbb666.github.io/post/6cc3ome-optimisation-methods/</id>
+        <link href="https://superbb666.github.io/post/6cc3ome-optimisation-methods/">
+        </link>
+        <updated>2020-01-17T06:11:27.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>Single-source shortest-paths problem</li>
+<li>concepts: Negative weights, exchange-rates, negative cycles, A shortest-paths tree</li>
+<li>Relaxation technique：松弛操作（所有算法都可归结为松弛操作）：初始化所有节点的d，然后不断更新更小的d，直到不能再更新，就能获得最优路径δ</li>
+<li>Effective relax operations：若d&gt;δ，那么里面一定有可以松弛的节点</li>
+<li>Bellman-Ford algorithm：最基本的寻路算法，先设置s到所有节点距离为∞，然后从s开始每个点都计算一遍全部路径（逐点最优），时间复杂度是最高的：θ(mn)，n为节点数m为边数</li>
+<li>Bellman-Ford algorithm FIFO：队列Q里先放个s，while Q不为空，从Q中提取u，遍历邻居v，将v放入Q。时间复杂度O(mn)</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Dijkstra’s shortest-paths algorithm：条件：所有边都是非负的。闭列表S和开列表Q，每次提取Q中最小d的节点，然后遍历该节点的所有边，并更新所有节点的d。</li>
+<li>算法复杂度：初始化θ(n) + 提取最小边O(n<sup>2</sup>) + 松弛操作O(m) = O(n<sup>2</sup>)
+<ol>
+<li>提取最小边：O(n)，全部：O(n<sup>2</sup>)</li>
+<li>松弛Relax操作：O(1)，全部：O(m)</li>
+</ol>
+</li>
+<li>Dijkstra’s algorithm with Heap：降低Dijkstra在搜索Q中最小路径中的复杂度，算法中每次寻找Q集中dis值最小的点的复杂度为O(n)，我们可以用堆（heap）来优化这一过程，使其复杂度降到O(logn)，这样总体复杂度降到O(mlogn)</li>
+<li>Single-source shortest paths in DAG’s：有向无环图的最短路径算法， directed acyclic graph (DAG)
+<ol>
+<li>Bellman-Ford: 贝尔曼-福特算法：O(mn)</li>
+<li>Topological Sorting：拓扑排序：O(n + m)</li>
+<li>Breadth-First Search (BFS)：广度优先搜索，Depth-First Search (DFS)：深度优先搜索。O(n + m)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Johnson’s algorithm： All-pairs shortest-paths problem。边可以是负数。
+<ol>
+<li>w^ = w + h(u) - h(v), 对每个节点增加一个数字，使新的w^ &gt; 0</li>
+<li>计算h(u): 增加节点s，边缘=0，计算到每个节点的最小负值，该值就是h</li>
+</ol>
+</li>
+<li>Dijkstra’s shortest-paths algorithm：Single-source single-destination shortest-path problem。O(n^2)
+<ol>
+<li>起点s和终点d，同时开始搜索</li>
+<li>Dijkstra’s algorithm for “geographical” networks：与Johnson’s algorithm类似，增加新节点d，该节点使距离各个城镇的直线距离，wˆ(u, v) = w(u, v) − dist(u, d) + dist(v, d)。{w(u, v) + dist(v, d) &gt; dist(u, d)}</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Maximum network-flow problem：就像河流流量，边缘=1，3，4，则河水经过这些河流的流量最大只能是1。但是每个节点可以由多个河流汇入</li>
+<li>Flow-Feasibility problem (Transshipment problem)：流动可行性问题（转运问题）：
+<ol>
+<li>Flows – formal definition: 相关定义：flow, Capacity constraints, Flow conservation</li>
+<li>Maximum flow problem：对于起始点s，f = Σ从s的输出流 - Σ到s的输入流  == 对于到达点t，f =  Σ到t的输入流 -  Σ从t的输出流</li>
+<li>saturated edge：饱和边：f(v, u) = c(v, u)</li>
+</ol>
+</li>
+<li>Reduction from flow-feasibility to maximum-flow
+<ol>
+<li>将流量可行性问题转换为最大流量问题：增加supply node s和demand node t</li>
+<li>根据守恒定律重置每个edge的流速</li>
+<li>删去s和t，就变成了守恒的flow-feasibility</li>
+</ol>
+</li>
+<li>Ford-Fulkerson method：Increase the flow using the residual network
+<ol>
+<li>residual network：根据容量确定</li>
+<li>根据现有的flow，画出residual network，然后寻找s-&gt;t的路径，如果找到了，则具有更优的flow。value flow 8 = current flow 7 + value in residual network 1</li>
+<li>时间复杂度：视情况而定</li>
+</ol>
+</li>
+<li>Cuts：将所有节点分成两类，一类包含起点source s，另一类包含终点t
+<ol>
+<li>cut = 在原始图（非residual图）中，起点类的所有输出capacity，not flow</li>
+<li>f = 在原始图（非residual图）中，起点类的所有输出flow - 所有输入flow = |f|</li>
+<li>f≤c，因此f最大值小于等于c的最小值</li>
+<li>找cut必须在residual里看，计算cut在原始图看更方便</li>
+</ol>
+</li>
+<li>The Max-flow Min-cut theorem：
+<ol>
+<li>max f = min c</li>
+<li>f 为max = no augmenting path Gf = 存在cut，使c=f</li>
+<li>查找Minimun cut的方法：
+<ol>
+<li>将图根据residual方式得到最优解</li>
+<li>画出residual network</li>
+<li>在该图上从起点s开始，如果有从s到其他节点的箭头，则cut集包含该节点。直到该cut集没有向外输出的箭头。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>The Edmonds-Karp algorithm：在Ford-Fulkerson method基础上，每次迭代选择最小augmenting path（这条路线经过的节点数最少）
+<ol>
+<li>running time：O(nm2)</li>
+</ol>
+</li>
+<li>maximum bipartite matching problem：最大二分匹配问题
+<ol>
+<li>增加s和t，变为最大流问题，capacity = 1</li>
+<li>running time：O(mn)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Minimum cost flow problem：最小花费流问题
+<ol>
+<li>G(V, E, u, c, d): vertex, edge, capacity, cost, supply/demand: 点，边，容量，花费，供给</li>
+<li>Application: Production and distribution problems</li>
+</ol>
+</li>
+<li>Successive shortest path algorithm：SUCCESSIVE SP：连续最短路径算法
+<ol>
+<li>选择节点v，计算最短路径 (可以用Dijkstra)</li>
+<li>依旧是找负循环，发送一个flow，cost为负的，则还存在最优</li>
+<li>运行时间：O(m<sup>2</sup> log<sup>2</sup> n)</li>
+<li>具体步骤如下：说的太好了就不翻译了
+<ol>
+<li>The first step of SSP is to select a supply node v.</li>
+<li>The second step is to construct the residual network Gf.</li>
+<li>The third step is to compute the shortest path tree T(v) rooted at node v in the residual network Gf. That is, we have a shortest path from v to every node u reachable from v in Gf.</li>
+<li>The fourth step is to select a demand node w reachable from v (any node will do) in T(v).</li>
+<li>The fifth step is to send q units of flow along the path from v to w.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Multicommodity flow problems：多物网络流问题</li>
+<li>Minimum-cost multicommodity-flow problem：最小花费</li>
+<li>Minimum-congestion multicommodity-flow problem：最小拥挤，=max( flow/capacity )，可能大于100%</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Combinatorial Optimisation Problem：COP组合最优问题：（R, C）问题：给定一个配置R，得到成本C，目标可以是是C最小。前几章所有方法都是COP问题</li>
+<li>Satisfiability Problem - SAT：对于给定的CNF(conjunctive normal form)问题，有一个布尔函数决定该变量是否=1</li>
+<li>NP, NP-Complete, and NP-Hard Problems：略</li>
+<li>MAX-3-SAT：对于给定长度为3的CNF，找到满足情况的最大数量——同理MAX SAT</li>
+<li>Tree Graph：
+<ol>
+<li>无环，两个顶点之间有一个边，打破任何一个边就不能连接到树</li>
+<li>Complete Graph：most connected。Tree Graph：least connected</li>
+<li>Number of Edges in Complete Graphs：n(n-1)/2</li>
+<li>Number of Edges in Tree Graphs：n-1</li>
+<li>Spanning Trees：生成树，就是子树</li>
+<li>Number of Spanning Trees：n^(n-2)</li>
+<li>find Spanning Trees：DFS，BFS</li>
+<li>Minimum Cost Spanning Trees (MST)：生成树的所有边缘权重求和最小</li>
+</ol>
+</li>
+<li>Prim’s Algorithm：用于寻找MST：从顶点开始，按照与点相连的最小edge，逐渐增加顶点，确保无circle。O(n^2)</li>
+<li>Kruskal’s Algorithm：用于寻找MST：将edge从小到大排序，逐渐增加最小edge（顶点对），确保无circle。O(Eln(V)) （E为边数）</li>
+<li>Symmetric TSP：对称行商问题（最短路径问题）（travelling salesman problem, TSP）</li>
+<li>Christofides’ Algorithm：近似算法的一种
+<ol>
+<li>找到MST树；找到具有奇数边缘的节点；找到这些节点的最小匹配edge（可能属于MST树的edge）；Eulerian Walk从1号节点逐步遍历所有节点，依靠MST树的边缘和新建的匹配边缘；Embedded Tour删除重复遍历的节点，不走重复路</li>
+<li>Christofides’ Algorithm is a 1.5-approximation algorithm：costT+costM &lt; OPT+OPT/2  (OPT：最优tour，因为不容易找到，所以才有近似算法)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Combinatorial Optimisation Problems (COP): 组合最优问题，是NP问题</li>
+<li>Polynomial Time: 多项式时间内O(n<sup>3</sup>), O(nlogn)</li>
+<li>Exponential Time: 指数时间O(2<sup>cn</sup>), O(n2<sup>n</sup>)</li>
+<li>P：所有问题都能被解决，具有所有确定的正确解，在规定时间内（多项式时间内）。All problems are NP that can be solved in polynomial time 。举例：MST</li>
+<li>NP：问题正确解不易寻找，但该解决方案能够被验证在规定时间内，一定具有验证算法。All problems that have a verification  polynomial algorithm</li>
+<li>NP-hard：问题正确解不易寻找，且可能maybe没有验证算法。difficult to solve, and maybe difficult to verify 。举例：Chess，规定步数内找到玩家获胜方式</li>
+<li>NPC(NP-complete)：同时是NP和NP-hard，即问题正确解不易寻找，但是容易验证。（如果所有NP问题在规定时间内能够被解决）。difficult to solve, but easy to verify。举例：TSP</li>
+<li>区别：（我的理解）从验证算法的复杂程度（是否在规定时间内验证）进行区分，验证算法速度极快是NP，速度贴近规定时间是NPC，贴近或超过规定时间(没有算法)是NP-hard。所有的非P问题，都不能在多项式时间内解决。<br>
+（网上理解）所有NP问题能在多项式时间内转换为问题A，则A是NPC问题<br>
+所有NPC问题能在多项式时间内转换为问题A，则A是NP-hard问题</li>
+<li>Branch-and-bound ：分支定界法，参见tutorial 第2题</li>
+<li>WGBP ( weighted graph-bisection problem)：加权图平分问题：
+<ol>
+<li>输入：无向图G，假定节点个数是偶数</li>
+<li>输出：将节点分为两类L和R，使得从L到R的总权重最小</li>
+</ol>
+</li>
+<li>bounding procedure for WGBP：分支绑定方法：
+<ol>
+<li>将几个节点绑定在一起，形成新的无向图，被绑定的两类节点分别作为s和t（起始点和终止点）</li>
+<li>计算从s到t的最小权重minimun weight，使用最大流问题maximum flow</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>minimum-congestion multicommodity-flow problem：
+<ol>
+<li>最小化拥挤程度：minimise：λ</li>
+<li>所有边都小于拥挤程度：fuv / c(u,v) ≤ λ</li>
+<li>非起始点和非终止点的其他节点，输入等于输出： Σf<sup>q</sup>vu = Σf<sup>q</sup>uv</li>
+<li>起始点的输出-输入等于库存：Σf<sup>q</sup>sv - Σf<sup>q</sup>vs = dq</li>
+<li>所有流都是正的：fquv ≥ 0</li>
+</ol>
+</li>
+<li>0-1 Knapsack Problem：背包问题
+<ol>
+<li>先序遍历树</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>Simulated Annealing（SA）模拟退火算法：
+<ol>
+<li>将所有节点分为两类（L，R）</li>
+<li>2-change modification：随机从L和R中各取一点，并将这两个节点交换，得到新的路径组合</li>
+<li>计算原有路径长度config和新的路径长度new_config，并迭代寻找最优解</li>
+<li>运行时间：O(d)，d为一个节点需改动连接的最大边数</li>
+</ol>
+</li>
+<li>Greedy constructive heuristics for TSP - Nearest Neighbour：NN启发式算法：
+<ol>
+<li>从起始点开始，逐个把邻居相连，最后回到起始点</li>
+<li>使用 2-change modification逐渐寻找最优解</li>
+<li>运行时间：每个城市都要寻找最近的城市O(n)，共有n个城市。总时间O(n<sup>2</sup>)</li>
+</ol>
+</li>
+<li>Greedy constructive heuristics for TSP - Insertion：
+<ol>
+<li>先由三个城市构造一个环路，然后依次往这个环路里加节点城市</li>
+<li>可以使用 2-change modification但需要系统地检查</li>
+<li>运行时间：O(n<sup>3</sup>)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>Genetic Algorithms：遗传算法：求最大化最优解
+<ol>
+<li>crossover：取两个路径环（abcdefgh, abghcdcd），每个环取一半然后交配：（abcdghcd）。但要满足三角形定理：c(i,j)≤c(i,k)+c(k,j)</li>
+<li>fitness function：适应度函数，将最小化问题转为最大化问题：Fitness(h)=Cmax-C+r，r为恒定的非负数，目的是所有F&gt;0</li>
+<li>mutate：stimulated annealing：突变使用模拟退火法</li>
+<li>流程：fitness得到概率；从中选rk个进行crossover并形成rk个子代；从父代中选(1-r)k个与子代一起形成新的种群；从中选qk个突变。超参数：r,k,q</li>
+<li>selection: 选择策略：roulette wheel selection；rank selection；tournament selection（随机选q个，然后从中挑最好的）</li>
+</ol>
+</li>
+</ol>
+<p>.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[7CCSMBIM 生物启发算法]]></title>
+        <id>https://superbb666.github.io/post/7ccsmbim-nature-inspired-learning-algorithms/</id>
+        <link href="https://superbb666.github.io/post/7ccsmbim-nature-inspired-learning-algorithms/">
+        </link>
+        <updated>2020-01-16T23:43:24.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>最优方式：传统数值方法
+<ol>
+<li>Analytical Optimisation：解析法（求导）</li>
+<li>Exhaustive Search：穷举法</li>
+<li>Nelder-Mead Downhill Simplex Method：多面体法：Reflection ; Expansion; Contraction; Shrinking</li>
+<li>Gradient Descent：梯度下降，x_k+1 = x_k - h_k ▼f (x)</li>
+<li>Line Minimisation：泰勒函数的展开式，结果同梯度下降，找到随机点，求导直到代价函数increase。更像是数学推导</li>
+<li>Random Walk：随机dk，随机hk，随机数与固定门限比较，从而确定x_k+1，通过比较代价函数确定x_best</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Binary Genetic Algorithm：(BGA) 二进制遗传算法
+<ol>
+<li>Encoding：编码</li>
+<li>Natural Selection：自然选择</li>
+<li>Selection：选择父代</li>
+<li>Crossover：交配成子代</li>
+<li>Multation：子代突变</li>
+<li>其他概念：
+<ol>
+<li>chromosome：染色体</li>
+<li>generation：迭代次数</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Natural Selection：自然选择：删掉需要死亡的人，X_rate，thresholding</li>
+<li>selection：选择两个人进行交配
+<ol>
+<li>Pairing from top to bottom：自上而下</li>
+<li>Random pairing：随机选择</li>
+<li>Weighted random pairing
+<ol>
+<li>Rank weighting：自上而下被选择的概率依次降低</li>
+<li>Cost weighting：依照权重差值，差值越大概率越高</li>
+</ol>
+</li>
+<li>Tournament selection：随机选择多个爹，选择这里面权重最好的当爹。重新随机选择多个妈，然后取权重最好的当妈。允许自交，视problem而定。</li>
+</ol>
+</li>
+<li>Crossover：交配过程
+<ol>
+<li>Single-point crossover：单侧交配</li>
+<li>Double-point crossover：双侧交配</li>
+<li>Uniform crossover：对于每个bit，根据随机决定是否交配</li>
+</ol>
+</li>
+<li>Mutations：突变
+<ol>
+<li>设置突变率</li>
+<li>设置是否精英模式，精英chromosome不突变</li>
+</ol>
+</li>
+<li>Convergence：停止算法的方式：千奇百怪</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Continuous Genetic Algorithm：连续遗传算法：没有编码过程，直接使用连续的数值
+<ol>
+<li>Crossover: Blending, Extrapolation：交配使用公式，与随机数相加减</li>
+<li>Mutations：p'n = pn +σNn(0;1)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Multiple-Objective Optimisation：多目标优化：要求多个目标的总输出最小
+<ol>
+<li>Weighted Sum Approach：使用权重，f = Σw`f</li>
+<li>Gray Codes：格雷码，Hamming distance：汉明距离
+<ol>
+<li>使十进制与二进制码长相相似，3--011，4--100这个就长得不一样</li>
+<li>XOR方式</li>
+<li>减小大的跳变，适用于local search</li>
+</ol>
+</li>
+<li>Permutation Problem：排列问题：属于crossover。适用于每个变量选不同的数：比如可以是1 2 3，2 1 3，3 1 2，不能是1 1 1，1 1 2 ...
+<ol>
+<li>Partially matched crossover (PMX)：正常先换俩，然后再换俩</li>
+<li>Ordered crossover (OX)：先换俩，剩下的问号根据parent剩下的数按序补足</li>
+<li>Cycle crossover (CX)：从左开始交配，遇到相同数字，对该位置进行交配，直到没有相同数字</li>
+<li>Coding with reference list：按照索引对parent进行编码</li>
+</ol>
+</li>
+<li>Mutation 突变方式：
+<ol>
+<li>Inversion：对一串位置进行翻转</li>
+<li>Insertion and Displacement：一串位置前移几位</li>
+<li>Reciprocal exchange：交换位置</li>
+</ol>
+</li>
+<li>Penalty Function：本质上也是cost function，将cost func与所有相加的约束，求其最小</li>
+<li>example：travelling salesman problem (TSP)销售路径问题</li>
+<li>genetic programming (GP)：遗传编程/基因编程：树形结构
+<ol>
+<li>Function set ：and/or/exp/+/-/...</li>
+<li>Terminal set：x1, x2</li>
+</ol>
+</li>
+<li>Schema Theorem：图解理论证明GA算法：
+<ol>
+<li>通过计算图形S在多次迭代后，长得是S的染色体是多了还是少了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Evolution Strategy(ES)：进化策略：随机选父母，生成指定个数的子代（可能每次就一个子代），多次循环直到生成确定数目的子代。初始化，交配，突变，评估，选择。</li>
+<li>(1+1)-ES：一个父母x，一个孩子σ，单亲，没有交配环节
+<ol>
+<li>子代突变方式：
+<ol>
+<li>静态constant</li>
+<li>考虑1/5次进化，如果变好，子代参数增加，否则减少</li>
+<li>运行10次根据成功次数来变化子代参数</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>(μ+1)-ES：将μ&gt;1的父母随机分两类，然后每个子代，根据随机数来确认选择哪个类的作为子代</li>
+<li>(μ+λ)-ES (plus strategy)：(一般μ&gt;λ) 把μ父母生成的子代λ放到poplution（μ个）中，从(μ+λ)中选出最好的μ个作为下次循环的父母</li>
+<li>(μ, λ)-ES (comma strategy)：μ≤λ 从λ子代中选出优秀的μ个作为父母</li>
+<li>crossover
+<ol>
+<li>Local crossover: (p = 2)，两个父母（这俩父母都是矩阵，有nx个 基因？？）</li>
+<li>Global crossover: (2 &lt; p ≤ μ) ：多个父母</li>
+<li>Discrete recombination: 通过随机数随意选一个类中的父母作为子代</li>
+<li>Intermediate recombination: 随机权重将两个类中的父母求和作为子代，多个类父母的话就取平均了</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Ant Colony Optimisation algorithms：蚁群最优算法</li>
+<li>Binary Bridge Experiments：二进制桥实验</li>
+<li>Simple Ant Colony Optimisation (SACO)：
+<ol>
+<li>tij(t): Pheromone concentration：信息素浓度</li>
+<li>pk ij(t)：Transition probability：根据信息素浓度计算每条路径的概率</li>
+<li>Evaporation of Pheromone Intensity (negative feedback)：t的负反馈调节</li>
+<li>Update of Pheromone Intensity (positive feedback)：t的正反馈调节</li>
+<li>随机确定t，计算p，让每个蚂蚁都从起点走到了终点（遇到内部循环则删除循环节），然后对t进行负正反馈</li>
+</ol>
+</li>
+<li>Ant System (AS)：蚂蚁系统：基于SACO发展的系统，增加更多边界信息和约束条件
+<ol>
+<li>n ij(t)：t的权重priori effectiveness</li>
+<li>正反馈计算Δt有三种模式：Ant-cycle AS（Q/f）（考虑全局问题，f=Σd），Ant-density AS（Q），Ant-quantity AS（Q/d）（考虑本地问题）</li>
+<li>Elitist Strategy：精英策略：正反馈调节中仅对最优解增加权重（ 精英蚁群数x Δt）</li>
+</ol>
+</li>
+<li>example：travelling salesman problem (TSP)：行商问题</li>
+<li>Ant Colony System (ACS)：蚁群系统
+<ol>
+<li>p的计算方式更改：首先增加强随机数门限user-specified parameter，如果在此门限内，概率选取所有路径t x n中的最大值</li>
+<li>负反馈更改：
+<ol>
+<li>Local update rule：仅对于普通边缘的修改：增加pt0，t0为小常量</li>
+<li>Global update rule：仅对于最佳solution的边缘的修改：增加pΔt，Δt=1/f+，f+是best solusion</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>PARTICLE SWARM OPTIMISATION (PSO)：粒子群算法</li>
+<li>Global best PSO (gbest PSO): 星型拓扑结构（每个粒子跟所有粒子建立联系），速度快但更容易找到local minima</li>
+<li>Local best PSO (lbest PSO)：环形拓扑结构（每个粒子跟相邻粒子建立关系），速度慢但更容易找到global minima</li>
+<li>Global Best PSO：
+<ol>
+<li>x：数据（每个燕子）xi(t=1)=[1,0,0,1]，y：每个x在其运行的t时间后，每次获得的最优解 yi(t=1)=[1,0,0,1], yi(t=2)=[1,1,0,1]，y^ ：将所有的yi比较后的一个最优解 y^ =[[1,1,0,1],...]。v：每次x将要运行的方向，x(t+1)=x(t)+v(t+1)。xij：i是population size，就是实例；j是attribute</li>
+</ol>
+</li>
+<li>Local Best PSO：
+<ol>
+<li>仅有一处改动，将y^ 变为y^ i，i是instance，每个y^ i都有一组（neighbor）比如(y1, y2, y3)，判断这里面的y哪个更小，则y^ i = y2</li>
+<li>每个粒子可以是多个邻域的成员</li>
+</ol>
+</li>
+<li>Velocity Components： 三部分：初始速度，自己之前走过的最优方向，社会最优方向</li>
+<li>Particle clustering algorithm：粒子聚类算法：目的是停止迭代。不断移动中心点，确认绝大部分的粒子都在这些中心点的范围内。不单一使用一个中心点所在范围</li>
+<li>Velocity Clamping：
+<ol>
+<li>速度夹紧：速度过大容易仅在边界附近搜索。解决：增加Vmax参数限制速度</li>
+<li>Dynamic Velocity Approaches：动态速度：如果前5次都没有发现最优解，则速度改为γVmax，γ是个梯度方程</li>
+</ol>
+</li>
+<li>Inertia Weight：惯性权重：在初始速度上乘以一定权重，也可以是个方程</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>DIFFERENTIAL EVOLUTION（DE）：差分进化</li>
+<li>population, mutation, crossover, selection：先突变后杂交。通过突变获得子代ui，子代一般不是亲生的xi，然后父子杂交获得二胎x'i。父代和二胎进行比较，谁好谁作为下一代。</li>
+<li>mutation：ui=xi1+β(xi2-xi3)，ui是子代，等于三个干爹的向量和
+<ol>
+<li>xi1：target vector：目标向量，可以随机挑干爹，也可挑最佳干爹</li>
+<li>xi2，xi3：difference vector差分向量，(xi2-xi3)这算一组差分向量，不算俩</li>
+</ol>
+</li>
+<li>crossover：选择ux(attribute个数)中有多少用于杂交的J
+<ol>
+<li>Binomial crossover：先随机选一个放到J里面，然后nx里面逐次判断，随机数大于阈值的就放进J里面</li>
+<li>Exponential crossover：随机选择nx里的一个位置放入J中并逐次向后判断，随机数大于阈值或J满了就跳出</li>
+</ol>
+</li>
+<li>DE/x/y/z：DE/target vector/difference vector/crossover method
+<ol>
+<li>z: bin/exp</li>
+<li>DE/rand/1/z: ui = xi1 + β(xi2-xi3)</li>
+<li>DE/best/1/z: ui = x^ + β(xi2-xi3)</li>
+<li>DE/x/nv/z: ui = xi1 + βΣ(xi2-xi3)</li>
+<li>DE/rand-to-best/nv/z: ui = γx^ +(1-γ)xi1 + βΣ(xi2-xi3)</li>
+<li>DE/current-to-best/1+nv/z: ui = xi + β(x^ + xi) + βΣ(xi2-xi3)</li>
+</ol>
+</li>
+<li>Switching DE strategies：每次迭代时，通过随机数确定两种方法用哪种。数次迭代后重新计算选取这两种方法的概率。这两种方法一般为exploration探索和exploitation开采</li>
+<li>Hybrid DE strategies：混合DE
+<ol>
+<li>Gradient-based hybrid DE：DE与梯度下降结合
+<ol>
+<li>Acceleration operator：将x^ t+1与x^ t比较，如果x^ t+1更好则不变（使用DE），否则使用梯度下降，x^ t-η▽f强制将其变小（使用梯度下降）</li>
+<li>migration operator：如果population中某一属性间隔过小，需要将该属性的距离拉开。</li>
+</ol>
+</li>
+<li>Evolutionary algorithm-based hybrid DE：用等级方法修正crossover和mutation，也就是按顺序选干爹</li>
+<li>Particle Swarm Optimization Hybrids：switch选用PSO还是DE</li>
+</ol>
+</li>
+<li>Self-adaptive DE strategies：pr（probability of crossover）和β随时间变化。β越大探索能力越强，β越小开采能力越强</li>
+</ol>
+<p>.</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[7CCSMPNN 模式识别]]></title>
+        <id>https://superbb666.github.io/post/7ccsmpnn-pattern-recognition-neural-networks-deep-learning/</id>
+        <link href="https://superbb666.github.io/post/7ccsmpnn-pattern-recognition-neural-networks-deep-learning/">
+        </link>
+        <updated>2020-01-16T03:31:20.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Linear Discriminant Functions：线性判别函数：g(x)=w^t * x + w0</li>
+<li>Batch/Sequential Perceptron Learning Algorithm
+<ol>
+<li>Batch: 构造函数：g(x) = a^T*y &gt;0，代价函数∇J_p(a) = ∑(− y)，a← a+η∑y</li>
+<li>Sequential：构造函数：g(x) = a^T*y，a← a+ηy_k</li>
+<li>若使用二分法Dichotomizer，类w1=1，类w2=-1。batch: a← a+η∑ω' y，Sequential：a← a+ηω 'k yk</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Minimum Squared Error (MSE) Procedures：J_s(a)=e^2 =∥Ya−b∥^2</li>
+</ol>
+</li>
+<li>Widrow-Hoff (or LMS) Learning Algorithm：a←a+η(b_k−a^t y_k) y_k, Iterate until ∑|(b_k−a^t y_k) y_k|&lt;θ</li>
+<li>Batch or Sequential Gradient Descent: mini-batch</li>
+<li>kNN classifier</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>artificial neural networks：ANN，3层--2层，分为传递函数 transfer function和激活函数activation function</li>
+<li>Linear Threshold Unit（Perceptron）：线性阈值单位：y=H(∑w_i*x_i−θ)，等价于generalised linear discriminant functions</li>
+<li>Delta Learning Rule：监督学习。Sequential Delta Learning Algorithm：顺序增量学习算法</li>
+<li>Hebbian Learning Rule：无监督学习。</li>
+<li>Competitive Learning Networks：竞争学习网络
+<ol>
+<li>inhibitory lateral weights</li>
+<li>selection process：winner-takes-all (WTA)：赢者通吃</li>
+</ol>
+</li>
+<li>Negative Feedback Networks：负反馈网络：inhibitory feedback：抑制反馈：为了接收输入而竞争：minimising the reconstruction error减小重建误差</li>
+<li>Autoencoder Networks：自编码网络：不需要迭代运算，仍然可以学习权重，减小误差。3层网络，重构输入层。de-noising autoencoders：去噪，在输入层。
+<ol>
+<li>Stacked Restricted Boltzmann Machines (RBMs – a particular type of autoencoder) are called Deep Belief Networks</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Feedforward Neural Networks：前向神经网络：三层：输入层，隐藏层，输出层，2层和3层都有函数f。</li>
+<li>XOR problem：input: X, T; Hidden: Y, Output: Z。目的：将非线性问题X转化为线性问题Y</li>
+<li>任何结构都可以使用三层结构解决      为线性问题</li>
+<li>Backpropagation Algorithm（BP算法，反向传输算法）：神经网络结构的w迭代算法，与线性回归相似，不过更更复杂。根据已知结果，从后往前更新w</li>
+<li>Learning Curves：学习曲线：training, validation and test sets：验证集防止过度拟合</li>
+<li>Radial Basis Function Neural Networks：(RBF Network Learning)径向基函数神经网络：
+<ol>
+<li>1层和2层之间的w（输入wx）变为，x与c的距离（输入dj=||x-c||），即y=h(wx) -&gt; y=h(||x-c||)</li>
+<li>没有输入层的bias=1，h的形式偏向固定比如高斯函数</li>
+<li>参数：w, σ, c</li>
+</ol>
+</li>
+<li>fully connected network：输入对应所有输出都有w</li>
+<li>Multilayer perceptron (MLP)：多层感知器</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Deep Neural Network：深度神经网络=deep learning，&gt;&gt;3层</li>
+<li>recurrent neural networks：(RNN)循环神经网络：隐藏层多次循环</li>
+<li>problem:
+<ol>
+<li>Vanishing gradient problem：若w&lt;1，多次循环w逐渐增大，故循环前期对学习无贡献</li>
+<li>Exploding gradient problem：若w&gt;1，多次循环w逐渐减小，故循环后期对学习无贡献</li>
+</ol>
+</li>
+<li>解决问题方式
+<ol>
+<li>Activation Functions with Non-Vanishing Derivatives：解决上述问题的激活函数：ReLU, LReLU, PReLU</li>
+<li>Better Ways to Initialise Weights</li>
+<li>adaptive variations on standard backpropagation：adaptive learning rate：增加动量momentum概念，将梯度下降与之前的下降平均值相加，从而构成新的下降率</li>
+<li>batch normalisation：根据数据的均值和标准差，对数据归一化</li>
+</ol>
+</li>
+<li>Convolutional Neural Networks (CNNs)：卷积神经网络：
+<ol>
+<li>使用矩阵w，与输入x进行卷积（以前是相乘），保证相似的x具备相似的输出。修改的是transfer function。called a “mask”, or “filter”, or “kernel”。输出的矩阵可以经过门限函数得到最终的y。</li>
+<li>尽管叫Convolution， 实际是cross-correlation。因为不是矩阵卷积运算，是简单的乘法运算</li>
+<li>Convolutional Layers
+<ol>
+<li>Padding：输入层扩展0。Stride：输入层跳跃计算。Dilation：输入层散状跳跃计算</li>
+<li>multi-channel：单输入多输出--由于多个矩阵w，多输入单输出--求和</li>
+<li>1x1 convolution：w为多组一个数字，多输入x多组数字-&gt;一个矩阵</li>
+</ol>
+</li>
+<li>Pooling Layers：缩小矩阵，也叫降采样</li>
+<li>Fully Connected Layers：矩阵变向量</li>
+<li>CNN的问题：
+<ol>
+<li>需要大量训练数据--将图像多次旋转放大</li>
+<li>训练计算密集--使用网络已知数据库</li>
+<li>过度拟合--正则化regularization，中途退出dropout，将其中一个神经元=0</li>
+<li>依旧有可能通过相机是否有污渍来区分图片</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Generative Adversarial Networks (GANs)：生成对抗网络：非监督式学习，两个神经网络的对抗学习
+<ol>
+<li>Explicit Model: Trackable Density：概率链式法则</li>
+<li>Explicit Model: Approximate Density：积分法</li>
+<li>Autoencoder：自动编码：半监督学习，encoder和decoder是两个网络，重叠处是latent z，目的是使输入和输出相同（蘑菇）。然后，删除encoder，随机生成z，使得输出依旧相似（蘑菇）</li>
+<li>代价函数：V(D,G) = E[ logD(x) ] + E[ log( 1-D(G(z)) ) ]</li>
+<li>当G固定，训练D：希望maxV，即V最大，即希望D(x)-&gt;1, D(G(z))-&gt;1</li>
+<li>当D固定，训练G：希望minV，即V最小，即log( 1-D(G(z)) )-&gt;log(1-1)-&gt;负无穷</li>
+</ol>
+</li>
+<li>Minibatch stochastic gradient training 计算θ的方法：
+<ol>
+<li>对于每次迭代，先进行k次循环（k是超参数，即外部参数），循环内每次取m个点进行计算θd，θd = θd + Δd，ascending！！</li>
+<li>k次循环外，取m个点计算θg，θg = θg - Δg，descending！！</li>
+</ol>
+</li>
+<li>DCGAN (Deep convolutional generative adversarial networks)：深度卷积生成对抗网络</li>
+<li>Optimization：深度学习的优化算法（说白了就是梯度下降）
+<ol>
+<li>Experience replay：deep Q learning (DQN)：属于强化学习，存储之前的创建点generated samples（过去的经验点），与新的创建点一并送入training</li>
+<li>Training with Labels：Conditional GAN (CGAN)：条件GAN，输入时增加额外信息，如标签y，代价函数为x|y, z|y</li>
+<li>Adding noise (when training the Discriminator)：Jensen Shannon Divergence (JSD)：在信号送入Discriminator之前添加噪声</li>
+<li>Unrolling GAN：Predict the move of Discriminator by unrolling：θd计算方式不变，θg选取k次循环后的θd作为D来计算。{original GAN中，θg选取k次循环前的初始θd作为D来计算}<br>
+θd = θd + ηΔd|θg=θg, θd=θd。 θg = θg -ηΔg|θg=θg, θd=αdN</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>特征选择，特征提取：将需要分析的特征提取出来，不分析不用的特征</li>
+<li>Principal Components Analysis（PCA）：主成分分析：无监督学习，N维数据圈起来，找到M个正交方向，方向方差最大方向为第一主成分，方差次大的为第二主成分（数据降维分析，投影到主成分平面）</li>
+<li>Karhunen-Loève Transform (KLT)：应用PCA的一种方法：数据方差=VEV^T，eigenvalues (E) &amp; eigenvectors (V)， 删除小的特征值，剩下的对应特征向量作为投影方向 y = V (x - μ)</li>
+<li>Neural Networks for PCA：PCA神经网络：均值为0的数据
+<ol>
+<li>Hebbian Learning：赫布理论：Δ w=η y xt，w与第一主成分一致，无边界增长</li>
+<li>Oja’s rule：Δ w=η y( x t− y w)， w与第一主成分权重一致，单位增长</li>
+<li>Sanger’s rule：Δ wji=η y j(xi−∑y k w ki)，x2的数据 - y1的结果 x 权重，然后应用oja</li>
+<li>Oja’s subspace rule：ΔW =η y( x−W t y)t，m个数据同时使用n个第一主成分分析</li>
+<li>Whitening Transform：白化转换：由于每维度数据正交歪歪扭扭，所以统一成每个方向具有相同方差。-----不像PCA，WT不会降维</li>
+</ol>
+</li>
+<li>Linear Discriminant Analysis (LDA)：线性判别分析：监督学习，用label将降维的数据依旧分得开。方式：二维数据的各lebel的均值(乘权重)差(sb)，比上 一维均值的每个label内的方差(乘权重)之和(sw)，寻找w使得J = sb/sw最大</li>
+<li>Independent Component Analysis (ICA)：独立成分分析：PCA是发现数据y的不相关性，ICA是发现数据的统计独立g(y)，g是个函数。即：各个y概率独立互不相关。对于高斯分布，PCA=ICA。即：PCA是方差方向正交向量，ICA是不同类的数据最大方向的向量（依旧是无监督类）
+<ol>
+<li>Oja’s subspace rule：g(y)是个非线性函数(如sigmoid)</li>
+</ol>
+</li>
+<li>Random Projections：随机投影：PCA, LDA, and ICA都是降维，防止数据过拟合，其他方式是升维。y=g (Vx )
+<ol>
+<li>Extreme Learning Machine：极限机器学习：与RBF network网络类似，就是隐藏层没有与c的距离（应该就是没有初值）</li>
+</ol>
+</li>
+<li>Sparse Coding：稀疏编码：只使用数据的少数几个维度来代表数据，然后升维，投影不随机
+<ol>
+<li>y=g (Vx )中，y是一些非0元素</li>
+<li>找到非零元素方式：y之间进行竞争，∥x−V t y∥2</li>
+<li>不用神经网络，在这里面使用最小化函数，从而找到非零的y，然后根据x≈V t y，就找到了少数维度的x</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>Support Vector Machines (SVMs)：支持向量机：基于线性判别函数，使用核函数（kernel function）升维，将数据分成两类</li>
+<li>Linear SVMs: Linearly Separable Case：线性可分的情况下
+<ol>
+<li>这个函数真的是太美了！！！！！！比机器学习第五节讲的好太多</li>
+<li>首先根据线性回归函数，假设（约束条件）数据能够分两类y=wx+w0≥1和y≤-1  （即y * wx+w0 ≥1）【通过使用拉格朗日构建代价函数的方式，该约束条件可以不被满足，取决于λ】</li>
+<li>根据两点间距d=y/w，得出边缘点（separators）间距为2/w</li>
+<li>因此要使得边缘点间距最大，则w越小越好，即min J = 1/2 w^2</li>
+<li>根据拉格朗日乘法器（Lagrange multipliers），与约束条件结合，得出代价函数（primal problem）：L(w,w0,λ) = 1/2 w^2  +  Σλ( y(wx+w0)-1 )</li>
+<li>也可转换为（Dual problem）：min(w)max(λ) L，即使代价函数λ最大w最小</li>
+<li>根据dL/dw = 0，得出公式带入L(w,λ)，此时计算的就是L(λ)，根据式子能够得出另一个约束条件。</li>
+<li>总结：线性可分的情况下，代价函数的求解可转化为下述4个条件：dL/dw=0, dL/dw0=0, λ≥0, λ(y(wx+w0)-1)=0【个人认为必要不充分，比如maxλ】</li>
+<li>求解后的分类：Hard classifier：分类分为+1， -1。  Soft classifier：分类为+1，z， -1</li>
+</ol>
+</li>
+<li>Linear SVMs: Non-separable Case：线性不可分的情况下（你中有我我中有你，或者非线性可分--我包围着你）
+<ol>
+<li>增加松弛变量(slack variable) ξ≥0，y * (wx+w0) ≥1 - ξ</li>
+<li>修改J函数，J = 1/2 w^2 + CΣξ，C≥0常数，C越小边缘影响越大(大边缘大误差)，C越大分类影响越大(小边缘小误差)</li>
+<li>代价函数L(w,w0,ξ, λ, μ)，其中 λ, μ是拉格朗日系数，λ是限制y≥1的，μ是限制ξ≥0的</li>
+<li>代价函数的求解可转化为下述6个条件：dL/dw=0, dL/dw0=0, dL/dξ=C-μ-λ=0,  μ,λ≥0,  μξ=0,  λ(y(wx+w0)-1)=0</li>
+</ol>
+</li>
+<li>Nonlinear SVMs：非线性SVMs，将所有非线性可分的情况，利用Φ(x)函数，将数据变为线性可分
+<ol>
+<li>将前者线性可分的所有函数中的x，替换成Φ(x)，feature mapping function</li>
+<li>核函数（Kernel function）：K(xi, x) = Φ^T(xi) * Φ(x)。其中，xi是边缘点separators
+<ol>
+<li>为什么引入核函数：如果直接对x进行函数变换，比如logx1x2，那么有限定域的x将变为无限定域的log函数。核函数能将其依旧变为存在限定域</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Multi-class SVMs：多分类SVMs
+<ol>
+<li>One against one：每两个类两两一组进行分类，存在无法分类的位置</li>
+<li>One against all：将每一类都分为A和非A两类，存在无法分类的位置，可用星型结构修正</li>
+<li>Binary decision tree：将所有数据按树的形式依次分两类</li>
+<li>Binary coded：将类进行编码，几个bit就是几个SVM，存在无法分类的编码组合</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>ENSEMBLE METHODS：集成方法</li>
+<li>Bagging：每次取数据的子集，放回取样。对子集分类（弱分类，weak clasifer）。对所有分类投票</li>
+<li>Boosting：训练D1并分类为C1，准确率要大于50%。创建D2并用C1分类，准确率大于50%，余下的用D2训练分类为C2。对于相同点C1和C2分类相同，则无需更改；若分类不同，引入C3。创建D3并分类，由C3确定误分类的部分。（二者貌似没差别，因为）</li>
+<li>Adaboost - Adaptive Boost：自适应：根本思想，将误分类的权重分配更高，以此将误分类的点在下次分类时让其更好的分类。
+<ol>
+<li>确定我们需要多少个classifier：Kmax。然后循环这些次</li>
+<li>计算每个分类器h的误分类权重和，取最小的h^作为ε。若ε大于0.5则放弃此次循环</li>
+<li>确定分类器h^在整体数据分类中所占的比例α</li>
+<li>将所有的α h^求和即为最终分类结果</li>
+</ol>
+</li>
+<li>Stacked generalization：堆叠泛化</li>
+<li>Decision Trees：决策树</li>
+<li>Random Forests：随机森林：Randomised Decision Forest或Randomised Forests
+<ol>
+<li>对x数据集，取k个数据d个特征进行提取，作为xk。</li>
+<li>循环r次，每次从d中取 r个 * (一个特征j，这样就获取了特征为j的k个数据)</li>
+<li>随机取特征j的门限t，进行决策树决策</li>
+<li>使用PlogP对该决策树进行评估，构建这r个小小树谁在上谁在下</li>
+<li>因此每个xk就含有一个决策树了</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>clustering: 聚类算法：Partitional分割式和Hierarchical层次式</li>
+<li>k-means clustering: 略</li>
+<li>Fuzzy K-means Clustering：模糊k-means聚类：fuzzy=grade=每个采样点的权重μ
+<ol>
+<li>μij：每个采样点在每个类的归一化权重，初始化随机生成。i：cluster，j：采样点</li>
+<li>中心点mi = Σμx / Σμ</li>
+</ol>
+</li>
+<li>Iterative Clustering：还是判断距离，换了个公式</li>
+<li>Hierarchical clustering：层次聚类：Agglomerative自下而上，Divisive自上而下</li>
+<li>Competitive Learning：竞争学习：与k-means类似，遍历采样点，sample离谁近，这个聚类中心点就往这个采样点凑凑
+<ol>
+<li>without normalisation：寻找最小x-wj，然后wj ← wj + η(x-wj)</li>
+<li>with normalisation：x首先augment [1 x]和normalise x/||x||，然后寻找最大W^T X，然后w权重更新 wj ← wj + ηx，w归一化wj ← wj / ||wj||</li>
+</ol>
+</li>
+<li>Clustering for Unknown Number of Clusters：未知有多少类的聚类：欧式距离小于θ。leader-follower clustering：领导者-追随者聚类
+<ol>
+<li>随机选一个x作为聚类中心，然后判断是否属于现有类（欧式距离小于θ）</li>
+<li>如果都属于现有类，进行聚类中心点更新wj ← wj + η(x-wj)</li>
+<li>如果都不属于现有类，新建聚类中心点</li>
+</ol>
+</li>
+<li>Dimension Reduction：维度缩减：线性PCA和非线性autoencoder</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[7CCSMDM1 数据挖掘]]></title>
+        <id>https://superbb666.github.io/post/7ccsmdm1-data-mining/</id>
+        <link href="https://superbb666.github.io/post/7ccsmdm1-data-mining/">
+        </link>
+        <updated>2020-01-15T03:22:05.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>Input: data：输入：数据
+<ol>
+<li>instances：数据例子，一般是行。 attributes：数据指标，一般是列</li>
+<li>numeric, nominal, ordinal, dichotomous, interval</li>
+</ol>
+</li>
+<li>Model: Patterns / Rules：调整模型参数
+<ol>
+<li>classification, numeric prediction, association, clustering</li>
+</ol>
+</li>
+<li>Output: Knowledge Representation：模型预测结果
+<ol>
+<li>tables, trees, rules, instances, clusters, linear models, networks</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Overview of Classification and Regression 分类和回归
+<ol>
+<li>regression：回归，错误率：这里的回归是回归到真实值，错误率是均方差</li>
+<li>N-fold cross-validation：N型折叠交叉验证</li>
+</ol>
+</li>
+<li>Linear Regression 线性回归
+<ol>
+<li>w权重</li>
+<li>Perceptron Learning Rule：与线性回归w相同</li>
+<li>feed-forward neural network：前向回馈神经网络</li>
+</ol>
+</li>
+<li>probabilistic：概率分布
+<ol>
+<li>joint probability distribution：联合概率分布</li>
+<li>Bayes theorem：贝叶斯定理</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Rudimentary Rules：基本规则
+<ol>
+<li>1R算法：单规则算法，每个属性只产生一层决策树</li>
+</ol>
+</li>
+<li>decision trees：决策树
+<ol>
+<li>Gini：基尼系数：分类比例平方和：G=ΣP<sup>2</sup>，范围0.5-1之间，1是分类结果最好</li>
+<li>Information Gain(Entropy Reduction)：信息增益(熵减少)：熵=信息量。E=-Σ(P · logP)。范围0-1之间，越小越好。一个事件越确定，它包含的信息越少。低概率时间可能含有高熵，高概率事件很少有低熵。</li>
+<li>Chi-square：卡方检验：观察频率与期望频率求和，除以期望频率。越大越好，没有上限</li>
+<li>CART, ID3, C5.0：三种决策树算法
+<ol>
+<li>CART：Classification and Regression Trees：分类和回归树：先种树不断分裂提高纯度purity，然后修剪树，相同父类进行合并，按照错误率删除小树。输入为数值或分类，分裂方式为gini，提纯方式为自下而上最小cost。
+<ol>
+<li>purity纯度：测量在决策树节点内出现了多少不同的分类</li>
+</ol>
+</li>
+<li>ID3：Iterative Dichotomizer：迭代二分：先用部分instances作为window集合构建子树，然后将子树适用在其他instances，将误分类的例子放到window中重新建树。输入只能为分类，分裂方式为Information Gain，没有提纯方式。</li>
+<li>C5.0：与CART类似，用错误率进行修剪树。输入为为数值或分类，分裂方式为Information Gain，提纯方式为比较修剪和不修剪的错误率置信区间</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>logistic Regression：01回归, Naive Bayes：条件概率</li>
+<li>Evaluation：模型评估手段：
+<ol>
+<li>训练集，验证集，测试集：用于学习分类模型；用于选取最优超参数；用于评估模型</li>
+<li>Cross-validation交叉验证：不放回抽样。Bootstrap抽样：是否有放回的抽样。 -- 0.632-Bootstrap：0.632自助法：n个样本，有放回的取n次作为训练集（目前训练集有n个包含重复实例的集合），由于有重复数据，大约有63.2%个数据作为训练集，余下的作为测试集。</li>
+<li>Confusion Matrix：混淆矩阵：监督学习，Success Rate=(T+T)/(T+T+F+F)，error rate=1-S，True Positive Rate=TP/(TP+FN)，False Positive Rate=FP/(FP+TN)，Precision=TP/(TP+FP)，Recall=TP/(TP+FN)</li>
+<li>Cohen’s Kappa：科恩卡帕系数：衡量上述混淆矩阵是否good：K=(Pr(a)−Pr(e)) / (1−Pr(e))</li>
+<li>Lift：提升图：lift曲线，随机取10样本的准确率30%，但是取前10个样本准确率80%，把真正率(TP)和假正率(FP)当作横纵轴</li>
+<li>ROC：Receiver Operating Characteristic 受试者工作特征曲线：把真正率(TP)和假正率(FP)当作横纵轴。与lift类似，也是考虑排序靠前的几个样本</li>
+<li>AUC：area under the curve曲线下面积，如果AUC=1则模型最好</li>
+<li>各曲线详细解释：https://blog.csdn.net/zwqjoy/article/details/84859405#四%20Lift%20%2C%20Gain</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>probility, likelihood的区别：probility概率：已知p=0.5，观察正面向上的次数。likelihood似然：已知正面向上的次数，求p</li>
+<li>Maximum Likelihood Estimation (MLE)：估计参数parameter值，使得likelihood最大化。 Bias和Variance区别：差和方差</li>
+<li>Score Functions：正态分布函数，likehood = ∏f</li>
+<li>clustering聚类算法
+<ol>
+<li>k-means</li>
+<li>Hierarchical：阶层式集群：树形结构</li>
+<li>Incremental：增量聚类算法：从根节点开始创建树，每增加一个实例，就对树进行扩展。判断方式：category utility metric类别效用度量</li>
+<li>Density-Based：DBSCAN Algorithm
+<ol>
+<li>Core point: 核心点：该点所处区域的密度很大（&gt;MinPts），且每个核心点的都可通过指定距离到达（&lt;ε，Eps）</li>
+<li>Border point: 边界点：距离可达，但处于可达边界点，该点区域密度小</li>
+<li>Noise point：噪声点：距离不可达</li>
+</ol>
+</li>
+<li>singleton cluster：单例聚类：每个instance只在一个类里。overlapping是在多个类里</li>
+</ol>
+</li>
+<li>clustering distance：
+<ol>
+<li>Cluster Diameter：同一类中两个点的最大距离</li>
+<li>Single-Link or Single-Linkage：不同类间两点最小距离</li>
+<li>Complete-Link or Complete-Linkage ：不同类间两点最大距离</li>
+<li>Average-Link, Average-Linkage or Group Average ：不同类间所有点平均距离</li>
+<li>Centroid-Link or Centroid-Linkage：不同类间中心点距离</li>
+</ol>
+</li>
+<li>Cluster Evaluation
+<ol>
+<li>Within Cluster Score：WC，同一类间两点距离，越小越好</li>
+<li>Between Cluster Score：BC，不同类间的距离，越大越好</li>
+<li>Overall Clustering Score</li>
+<li>Calinski-Harabaz Index：(WC/BC)(n-K/K-1)，越大越好</li>
+<li>Silhouette Coefficient：si =(bi − ai)/max{ai,bi}，范围在[-1,1]，相近类的类间距离 - 同一类的内部距离</li>
+<li>Minimum Description Length（MDL）：评估聚类好坏所需的参数信息</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Parametric Models：参数模型
+<ol>
+<li>central limit theorem：中心极限定理，大数据其均值和标准差服从正态分布</li>
+<li>Probability density function：PDF: 概率密度函数</li>
+<li>Iso-density Contours：等密度轮廓</li>
+<li>Mixture Models：混合分布，概率分布的一种，例如男生女生身高</li>
+<li>Poisson Distribution：泊松分布</li>
+<li>Gaussian Mixture Models：(GMM)高斯混合模型</li>
+</ol>
+</li>
+<li>non-parametric models非参数模型：Histograms，Kernel density estimators，KNN</li>
+<li>Expectation-Maximization (EM) Algorithm：最大期望算法
+<ol>
+<li>E步骤：根据概率求期望Expected</li>
+<li>M步骤：根据期望重新估计概率</li>
+<li>Hill-climbing algorithm：爬坡算法</li>
+</ol>
+</li>
+<li>Instance-Based Models：基于实例的模型
+<ol>
+<li>Memory Based Reasoning：MBR: 基于记忆的理解：找邻居
+<ol>
+<li>缺点：其实比决策树等计算更耗时，且存储容量大</li>
+<li>KNN算法，k=1时为look-alike models</li>
+<li>实例：歌曲辨别，转为频域，比较频域峰值，判断一个时间段内的频域相似度</li>
+<li>kD-trees：将每个点放在平面上，将平面分割成多个空间，每个空间只有一个数据点。k是维度</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Association Rules：关联规则：如果你买一本书，商城会给你推荐另一本书
+<ol>
+<li>Coverage or support count：同时具备相关的几个物体的例子</li>
+<li>Support = 同时具备相关的两个物体的例子2个/数据集为5</li>
+<li>Confidence or accurracy = 同时具备相关的两个物体的例子2个/数据集含先决条件的orange有4个</li>
+</ol>
+</li>
+<li>Apriori algorithm：先验算法：
+<ol>
+<li>逐个比较1-item，2-item。。。的数据，看看数据集内有多少个数量（Coverage），大于门限的保留</li>
+<li>计算minimum confidence（Confidence）并与门限比较，大于门限的保留</li>
+</ol>
+</li>
+<li>Measures for evaluating the quality of association rules：评估关联规则的方法
+<ol>
+<li>Coverage，Support，Confidence，Lift，χ2 or Chi-square</li>
+<li>Market Basket Analysis：市场篮子分析：即使confidence（2/4）很高，也要考虑support（2/5）是不是很高</li>
+<li>Lift：观察有用程度，contigency table关联表</li>
+<li>χ2 or Chi-square：测量偶然产生关联表的概率。数值越高代表关联表的随机性越高。对于感兴趣的关联规则，是不会随机分离数据的。因此对于关联规则χ2越小越好。</li>
+</ol>
+</li>
+<li>关联规则的属性：
+<ol>
+<li>Actionable可控的：买芭比娃娃的人也买糖果</li>
+<li>Trivial不重要的：买维修协议的也会买大型家电</li>
+<li>Inexplicable费解的：五金店开张卖得最多的是马桶清洁剂</li>
+</ol>
+</li>
+<li>Apriori algorithm for learning association rules:</li>
+<li>FP-Growth Algorithm (frequent pattern tree)：实线是正常的树，虚线是该节点出现的总数</li>
+<li>Sequence Analysis：引入了购买顺序</li>
+<li>Link Analysis ：图理论，节点是item，边缘是相关性</li>
+<li>Time Series Analysis：时间序列分析
+<ol>
+<li>Moving Average (MA)：对一个时间段内取平均</li>
+<li>AutoRegressive (AR)：t+1的状态与t状态呈线性回归</li>
+<li>Exponential Smoothing：平滑因子</li>
+</ol>
+</li>
+<li>Challenges with time series data:挑战
+<ol>
+<li>Representation：表示
+<ol>
+<li>Piecewise Linear Approximation：分段线性近似</li>
+<li>Discrete Fourier Transformation (DFT)：离散傅里叶变换</li>
+<li>Singular Value Decomposition (SVD)：奇异值分解</li>
+</ol>
+</li>
+<li>Similarity：相似
+<ol>
+<li>Whole series matching：全序列匹配</li>
+<li>Subsequence matching：子序列匹配</li>
+<li>Euclidean Distance：欧式距离</li>
+<li>Dynamic Time Warping：动态时间扭曲，将一个序列压缩以匹配另一序列</li>
+<li>Longest Common Subsequences：最长公共子序列，允许序列内部存在杂质</li>
+</ol>
+</li>
+<li>Indexing：索引
+<ol>
+<li>线性索引</li>
+<li>将相同序列分组，降维索引</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Time series mining tasks: 时间序列挖掘任务
+<ol>
+<li>Forecasting：基于历史数据对未来数据进行预测</li>
+<li>Classification：分类：心跳信号正常或不正常</li>
+<li>Temporal Association Rules：时序关联规则：每段信号对应一个符号，查找符号之间关联</li>
+<li>Clustering：聚类：相似信号分组</li>
+<li>Anomaly Detection：异常检测：outlier噪声</li>
+<li>Motif Discovery：motif探索，查找连续出现的信号</li>
+</ol>
+</li>
+<li>Survival Analysis or Time-to-Event Analysis：生存分析或时间事件分析：客户什么时候与其他公司合作
+<ol>
+<li>Survival curve：生存曲线：从100%降到0%，可能几十年以后发生（一款游戏老用户的存活时间）</li>
+<li>Customer Half-Time &amp; Average Customer Lifetime：客户半衰期和平均客户寿命</li>
+<li>Survival Function：生存函数：在t年后活下来的概率。可以是离散的（就是将时间分段）</li>
+<li>Hazard Function：冒险函数：也称特定年龄的失败率</li>
+<li>Kaplan-Meier Estimator of Survival Function：生存函数的Kaplan-Meier估计：也叫乘积极限估计，极限函数 = 对每个i，当前发生的事件event的乘积（1 - number of events (e.g., deaths) / individuals known to have survived (have not yet had an event or been censored) up to time ti）</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Natural Language Processing (NLP): 自然语言处理</li>
+<li>语言模型：
+<ol>
+<li>string, language, grammar, semantics, corpus, natural language, Sentences, language model</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<p>计算机视觉的内容，略</p>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>Methods for Classification and Regression</li>
+<li>Kernel Methods：
+<ol>
+<li>Kernel Density Estimate：核密度估计：将直方图变得平滑取平均，就变成密度函数了，f(x) = 1/m ΣK(x-xi  /h)，h是bandwidth，h越大直方图越平滑。</li>
+<li>K：kernel function，这里的核函数与后面的SVM不同，这里是用于低维直方图类型的，用以显示直方图的走势，积分和为1</li>
+<li>Regression：回归方式：直接连接数据点，knn，knn线性回归，局部权重线性回归</li>
+<li>Locally Weighted Linear Regression：局部权重线性回归：权重K( d(x, xi) )，一种例子是距离越小权重越大。这里面h的值要比k的函数选取更重要</li>
+</ol>
+</li>
+<li>Support Vector Machines（SVMs）：支持向量机
+<ol>
+<li>Linear separator: a set of points</li>
+<li>Support vectors: the points closest to the separator</li>
+<li>将x1，x2分为三个特征（新建三维坐标系）：x1^2, x2^2, x1x2，这样在新的三维空间内，数据就是线性可分的</li>
+</ol>
+</li>
+<li>Ensemble Methods：集成方法=set
+<ol>
+<li>好处：统计学，计算，表现三方面：
+<ol>
+<li>Statistical reason：数据量太小，分类器的分类范围太大，多个分类器叠加能更好确定数据边界</li>
+<li>Computational reason：单一分类器容易陷入局部最小值</li>
+<li>Representational reason：与knn类似，真正的分类f不会被现有的H表现出来，但是可由多个h1,h2,h3来估计f</li>
+</ol>
+</li>
+<li>概念：H/h：hypotheses = classifiers，假说就是分类器</li>
+<li>Bayesian Voting：贝叶斯投票：每个假说都有一个概率，数据点对不同假说（分类器）进行投票</li>
+<li>Bagging (Bootstrap Aggregation)：装袋（引导聚合）：对一个算法运行多次，每次取部分训练点，从而得出不同的训练模型，对这些模型进行投票
+<ol>
+<li>对于数据量小的训练集：决策树和神经网络是不稳定的；knn和线性回归是稳定的</li>
+</ol>
+</li>
+<li>Boosting (AdaBoost Algorithm)：推进（自适应算法）：每个样本初始具有相等权重，每次迭代中使用学习算法，将大权重分配给误分类，最终要求最小化权重。与bagging类似</li>
+</ol>
+</li>
+<li>Methods for Sequence Analysis：序列分析方法：Markov Models，Hidden Variables，Hidden Markov Models。详见AIN
+<ol>
+<li>Markov Models：当前xt的概率与x1:t-1有关  →</li>
+<li>Hidden Variables：隐变量也叫潜在变量：变量之间的相互关系，比如年龄变量与教育和秃顶有关  ↑</li>
+<li>Hidden Markov Models：隐藏式马尔可夫模型：第t天下雨啊带伞啊概率啊什么的</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>Single-Variable Transformations：单变量变换
+<ol>
+<li>Standardize Numeric Values：聚类找均值，设置标准差</li>
+<li>Convert Numeric Values into Percentiles：计算值低于每个值的百分比，不懂？</li>
+<li>Convert Counts into Rates：数量转换为比率（限定某个自变量）</li>
+<li>Replace Categorical Variables with Numeric Variables：文字转数值.</li>
+<li>Replace Numeric Variables with Categorical Variables：数值转文字，应该是多个变量的整合？</li>
+</ol>
+</li>
+<li>Combining Variables：组合变量：身高和体重跟糖尿病没啥关系，但是组合变量BMI和糖尿病有关系
+<ol>
+<li>highly correlated variables：有时候两个变量强相关，在回归模型中这是有害的。这时建议删掉一个。</li>
+<li>也可将两个强相关变量作比率，学生/工作人员 = 学校能力blabla，但是该比率应具有高方差。</li>
+</ol>
+</li>
+<li>Extracting Features from Structured Data：从结构化数据中提取特征
+<ol>
+<li>Time series data：时序数据：考虑趋势，季节性</li>
+<li>Geographic data：地理数据：地理位置，分布</li>
+</ol>
+</li>
+<li>Handling Sparse Data：处理稀疏数据：每个银行客户只办理了少数几款理财产品
+<ol>
+<li>处理方式：建立少数的密集数据集（不稀疏的数据集）；增加attribute；进行填充</li>
+<li>举例，Netflix收视率，只有user id, movie id, date, rating四个属性，可以构造派生变量，比如{love,hate} ratings</li>
+</ol>
+</li>
+<li>Problems with High-Dimensional Data：高维数据的问题
+<ol>
+<li>相关性问题：有些变量可能相关性很强；聚类时有些变量可能过度加权</li>
+<li>过拟合问题：严格按照训练数据进行拟合，比如神经网络回归</li>
+<li>稀疏数据问题：一个数据占一个维度，无法找到变量之间的关系</li>
+</ol>
+</li>
+<li>Variable Selection：变量选取：删去无关变量，使用变量子集
+<ol>
+<li>变量间的关系：
+<ol>
+<li>independence：两变量条件独立</li>
+<li>correlation：两个变量相关性计算</li>
+<li>Average Mutual Information：平均互信息，用于categorical</li>
+</ol>
+</li>
+<li>Exhaustive Feature Selection：考虑变量间的所有组合，12,13,23,123...变量多的话就没法用了</li>
+<li>Selection using a target variable：用target找输入（怎么找？），如果高维数据instance太少的话，可能构建不出一组数据</li>
+<li>Sequential feature selection：每次只考虑一个变量。Forward selection：依次考虑1个，2个，3个...变量。Backward selection：依次考虑10个，9个，8个...变量。</li>
+</ol>
+</li>
+<li>Variable Transformation：变量变换的方式
+<ol>
+<li>Linear Algebra and Statistics Revision：线性代数和统计修订：对(x,y)进行线性变换，平移翻转之类的；获取特征值特征向量；计算均值标准差；协方差矩阵</li>
+<li>Principal Component Analysis (PCA)：数据降维，无监督学习，缺点是原始空间中的一些信息未被捕获</li>
+</ol>
+</li>
+<li>Singular Value Decomposition (SVD)：奇异值分解：A=UΣV<sup>T</sup>。
+<ol>
+<li>其中，U是AA<sup>T</sup>（左奇异向量）的特征向量mxm，V是U是A<sup>T</sup>A（右奇异向量）的特征向量nxn，Σ为只有对角线有数字（奇异值）的mxn矩阵。通过选择高的奇异值来达到降维效果。其中，左奇异矩阵用于行数压缩，右奇异矩阵用于维度压缩（同PCA，减小PCA在计算协方差矩阵时的计算量）。</li>
+<li>用于NLP中document-term matrix，U是document，V是term</li>
+<li>Latent Semantic Indexing：潜在语义索引：减小行数和维度但不改变内部结构</li>
+<li>Projection Pursuit Regression (PPR)：投影寻踪函数：与核函数类似，在不同投影钟寻找最优结构。与神经网络具有相同估计任意函数的能力，但PPR并未广泛采用。选取的核函数与NN类似，都采用平滑的思想，如sigmoid。缺点：超参数太多，高维数据计算量太大。</li>
+</ol>
+</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[7CCSMAIP AI规划]]></title>
+        <id>https://superbb666.github.io/post/7ccsmaip-ai-planning/</id>
+        <link href="https://superbb666.github.io/post/7ccsmaip-ai-planning/">
+        </link>
+        <updated>2020-01-06T13:45:50.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-classical-panning">lecture classical panning</h2>
+<ol>
+<li>transition system 转换系统 = state space状态空间</li>
+<li>STRIPS：Stanford Research Institute Problem Solver 斯坦福研究问题解决器：状态、初始、目标、动作</li>
+<li>SAS+：与STRIPS相似但是状态时变化的，增加domain</li>
+<li>ADL：Abstract Description Language 抽象描述语言 （at car1 SB...）</li>
+<li>三大规划方法
+<ol>
+<li>Graph/SAT Planning：图/满意度规划</li>
+<li>Symbolic Search Planning：符号搜索</li>
+<li>Heuristic State-Space Search：搜索式状态空间</li>
+</ol>
+</li>
+<li>Graph/SAT Planning ：图计划
+<ol>
+<li>planning graph：PG：规划图：不删除过去的状态</li>
+<li>mutex：exclusion relations：互斥关系：同一个action导致互斥的state；同一个state由互斥的action导出</li>
+<li>Basic GraphPlan algorithm：1. 建立PG，2. 没有mutex 3. 找不到添加level重新计算</li>
+</ol>
+</li>
+<li>Symbolic Search Planning
+<ol>
+<li>binary decision diagrams (BDDs) ：二进制设计图</li>
+<li>successor computation：继承者，自上而下；predecessor conputation：前任，自下而上</li>
+<li>BFS：breadth-first search：广度优先搜索</li>
+<li>SBBFS：symbolic bidirectional BFS：双向的</li>
+<li>symbolic dijkstra：最短路径</li>
+<li>closed list：状态已处理：所有状态都已经 产生/扩展</li>
+<li>open list：状态要处理：广度优先--队列，深度优先--栈stack</li>
+<li>forwards search：前向图：①. 每个节点只有一个路径 ②. 无向后的边</li>
+</ol>
+</li>
+<li>Heuristic State-Space Search<br>
+搜索属性：①. admissibility：&lt; cost ②. consistency：新状态，cost更低 ③. additivity 添加</li>
+</ol>
+<h2 id="lecture-heuristic-search-planning">lecture Heuristic Search Planning</h2>
+<ol>
+<li>heuristic hamilies
+<ol>
+<li>delete relaxation</li>
+<li>abstraction</li>
+<li>critical paths</li>
+<li>landmarks</li>
+<li>network flows</li>
+</ol>
+</li>
+<li>delete relaxation：ignore 'bad effects'<br>
+Relaxed Planning Graph (RPG)：松弛规划图：忽视‘delete’影响：A-&gt;B之后，同时存在AB</li>
+<li>abstract state space：抽象状态空间
+<ol>
+<li>hα(s)是最小路径：abstraction heuristic</li>
+<li>h(package,truck A)(LRR)=2：前两个是变量，若前两个状态是相同的，则归类到一起；LRR是初始状态。R _ _ 是最终状态</li>
+<li>planning pattern database（PDB）：模式数据库：pattern是状态变量的子集（L__）</li>
+<li>Saturated Cost Partitioning（SCP）：饱和成本划分：①. 按顺序 ②. 分配保留该状态所需剩余成本&lt;最小&gt;比例</li>
+<li>0/1 Cost Partition</li>
+</ol>
+</li>
+<li>Critical Path length（makespan）：关键路径长度（完成时间）</li>
+<li>Landmarks：地标<br>
+linear program(LP)：线性规划————解方程L={W,X,Y,Z}，x+y≦3 --- a1, hL(l)=w+x+y+z</li>
+<li>Network Flow：网络流，flow heuristic：搜索流：h(flow)(s)=Σcost·Y</li>
+</ol>
+<h2 id="lecture-temporal-planning">lecture temporal planning</h2>
+<ol>
+<li>Sequential Plan TIME VS. Parallel Plan TIME：顺序VS并行，并行的时间短</li>
+<li>Planning with Snap Actions：
+<ol>
+<li>若end干扰了goal，goal目标状态下不能执行任何操作，所以可以增加goal</li>
+<li>Logically sound ≠ temporally sound：classical和temporal不同</li>
+</ol>
+</li>
+<li>TCSP：sample constraint temporal problem：简单约束时序问题</li>
+<li>simple temporal network(STN)：简单时序网络
+<ol>
+<li>d-graph：距离图-40,50，STN minimum network：最小时序网络[40,50]</li>
+<li>consistency约束条件：no negative cycles无负向循环</li>
+<li>latest solution：最近--正号，earlieat solution：最早--负号</li>
+</ol>
+</li>
+<li>Latest possible times(Maximum Separation)：2≤t-t</li>
+<li>Earliest possible times(Minimum Separation)：t-t≤4，寻找最短路径</li>
+<li>shortest path problem：最短路径问题<br>
+dist(0,j)=x → maximum timestamp of j = x ：从0开始，0 1 2 3 x<br>
+dist(j,0)=y → minimum timestamp of j = -y：到0结束，-y -2 -1 0</li>
+<li>Partially Ordered Plans（POPF）：部分有序计划</li>
+<li>Timed Initial Literals（TIL）：定时初始文字<br>
+time windows：时间窗：增加TW模块和初始时间0模块</li>
+<li>CRIKEY：FF's RPG heuristic</li>
+<li>COLIN：Continuous Linear Numeric Change：连续线性数值变化</li>
+</ol>
+<h2 id="lecture-planning-with-preferences">lecture Planning with Preferences</h2>
+<ol>
+<li>Numerical Metric Planning：数值度量计划：给出initial，goal，actions(描述世界执行之后的效果)，找到顺序sequence</li>
+<li>Linear Time Logic（LTL）：线性时间逻辑：now，next，future，globally future，until</li>
+<li>sat：satisfied，vio：violate违反，E-sat：绝对满意，不会逆袭</li>
+<li>distance to go: pi ∈ condition，+ p'i：到达goal的最小action<br>
+cost to go：pi ∈≠ condition，+ p'i +cost：必须增加哪种行为</li>
+<li>c(s)=0：调用了所有的actions，所以cost=0<br>
+d(s)=0：根据goal state，仅调用goal所需的几个actions，不增加额外的，所以distance=0</li>
+</ol>
+<p>。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[7CCSMCVI 计算机视觉]]></title>
+        <id>https://superbb666.github.io/post/7ccsmcvi-computer-vision/</id>
+        <link href="https://superbb666.github.io/post/7ccsmcvi-computer-vision/">
+        </link>
+        <updated>2020-01-02T09:24:37.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>region growing algorithm：区域增长算法<br>
+所有pixel不分配，从头开始比较</li>
+<li>region merging algorithm：区域合并算法<br>
+每个pixel都是个体，比较取平均值</li>
+<li>split and merge algorithm：分块归并算法<br>
+先分块四象限，可以分无限小的四象限，后平均值比较</li>
+<li>k-means clustering algorithm：k-means聚类算法</li>
+<li>agglomerative hierarchical clustering algorithm：聚合层次聚类算法
+<ol>
+<li>single-link clustering：单链聚类 —— 最小距离</li>
+<li>complete-link clustering：全链聚类 —— 最大距离</li>
+<li>group-average clustering：组平均聚类 —— 平均距离</li>
+<li>centroid clustering：质心聚类 —— 像质心一样内部取平均</li>
+</ol>
+</li>
+<li>Normalised Cuts algorithm：归一化切割算法</li>
+<li>Hough transform for straight lines：对直线的霍夫变换<br>
+累加器计算r=ycosθ-xsinθ</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[7CCSMAMS多代理系统]]></title>
+        <id>https://superbb666.github.io/post/7ccsmams-agents-and-multiagent-system/</id>
+        <link href="https://superbb666.github.io/post/7ccsmams-agents-and-multiagent-system/">
+        </link>
+        <updated>2020-01-01T17:02:28.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>Plurality voting：多数投票<br>
+看第一轮大家投谁</li>
+<li>Condocret principle：孔多塞原则<br>
+候选人两两相比，看谁票多</li>
+<li>Condorcet's paradox：孔多塞悖论</li>
+<li>Linear sequential majority elections —— majority graph：多数派图
+<ol>
+<li>基于孔多塞原则画图</li>
+<li>修改议程来决定胜负</li>
+</ol>
+</li>
+<li>Instant runoff rule：排序复选制<br>
+末位淘汰，淘汰票数加进第二倾向候选人</li>
+<li>Copeland rule：科普兰法<br>
+仅考虑候选倾向次序，不考虑选票，根据倾向次序得分</li>
+<li>Borda Count：波达计数法<br>
+倾向次序 = 权重3210</li>
+<li>Positional scoring rules：位置得分原则<br>
+权重不仅仅是3，2，1</li>
+<li>Median voter rule：中间选民理论<br>
+取中间</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>English auctions：英语拍卖<br>
+First price, open cry, ascending</li>
+<li>Dutch auctions：荷兰式拍卖<br>
+First price, open cry, descending</li>
+<li>First-Price sealed bid auctions：盲拍（投标式拍卖）<br>
+First price, sealed bit, one shot 一次性，不bb</li>
+<li>Vickrey auctions：维克里拍卖<br>
+Second price, sealed bit, one shot</li>
+<li>Heuristic winner determination —— greedy 贪心算法<br>
+只考虑个体谁最大，不考虑整体社会福利</li>
+<li>Vickrey-Clarke-Groves mechanism：VCG机制</li>
+</ol>
+<p>.</p>
+]]></content>
+    </entry>
+</feed>

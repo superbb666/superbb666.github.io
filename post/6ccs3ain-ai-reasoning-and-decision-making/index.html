@@ -1,0 +1,818 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="lecture 1
+
+sensors, actions, environment
+classify environment
+calculate the probability
+&quot;clean the room&quot;
+
+lect..." />
+    <meta name="keywords" content="semester1" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2019-12-22</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 5 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/AdcUsz3nl/" class="postlink">
+                        <i class="fa fa-tag"></i> semester1
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>6CCS3AIN  AI与策略决策</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>sensors, actions, environment</li>
+<li>classify environment</li>
+<li>calculate the probability</li>
+<li>&quot;clean the room&quot;</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>p 和 P 的区别</li>
+<li>贝叶斯规则</li>
+<li>P的计算：α&lt; &gt;</li>
+<li>可能性分布，乘积法则，贝叶斯规则，链式法则<br>
+probability distribution可能性分布<br>
+Product rule乘积法则<br>
+Bayes rule贝叶斯规则<br>
+Chain rule链式法则</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>naive Bayes朴素贝叶斯<br>
+朴素贝叶斯：所有变量都是独立的，是一种特殊的贝叶斯网络</li>
+<li>贝叶斯网络</li>
+<li>Markov blanket马尔可夫毯<br>
+parents + children + children’s parents：爹 + 孩 + 孩他爹</li>
+<li>Compact conditional distributions紧凑的条件分布——Noisy-OR<br>
+Parents include all causes父系包含全部因素<br>
+It assumes that inhibition of each parent is independent of<br>
+inhibition of any other parents.否定状态下的条件独立</li>
+<li>贝叶斯网络的推断方法：
+<ol>
+<li>枚举法<br>
+利用概率的公式法则进行直接计算，不涉及随机数值</li>
+<li>先验采样<br>
+依照贝叶斯网络，由上至下由左至右，依次判断true/false，最后得到的是state状态集</li>
+<li>拒绝采样<br>
+①. 与先验采样步骤相同<br>
+②. 遇到所要求计算的evidence（h，s）= false，则抛弃此次采样，重新开始计算</li>
+<li>可能性权重<br>
+①. 与先验采样步骤相同<br>
+②. 当遇到evidence时，默认为true，并在此时计算权重，w = w x P<br>
+③. 通过每次的权重计算概率&lt;1x0.72, 5x0.14&gt;</li>
+<li>吉布斯采样<br>
+①. 确定采样点（非evidence点，如M,T,C），此时进行随机采样并与0.5（both values equally likely）比较，获取初始state<br>
+②. 根据马尔可夫毯，计算每个sample的条件概率（遇到evidence，如H，S跳过）<br>
+③. 随机采样并与条件概率比较，判断true/false，并更新state<br>
+重复②和③<br>
+④. 根据相同类型state的次数，计算所需的条件概率（此处与先验采样相同）</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>MEU最大期待效用，maximin，maximax准则</li>
+<li>MDP马尔可夫决策过程，Bellman 贝尔曼方程</li>
+<li>POMDP 部分可见</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Dynamic Bayesian Network动态贝叶斯网络DBN<br>
+sensor model: ↓ 传递模型<br>
+transition model: → 过渡模型</li>
+<li>推导中所需的贝叶斯规则<br>
+填条件法：<br>
+填全集法：</li>
+<li>DBN具体内容<br>
+Filtering:<br>
+Prediction:<br>
+Smoothing:</li>
+<li>隐藏式马尔可夫模型HMM，卡尔曼滤波，粒子滤波</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>game theory</li>
+<li>payoff matrix</li>
+<li>四种模式
+<ol>
+<li>dominant strategy：无论j选择了啥，i选择的R均为最大值</li>
+<li>Nash Equilbrium strategy：当j=R时，i的选择是最优的；当i=S时，j的选择也是最优的</li>
+<li>Pareto Optimal strategy：与所有状态相比，更改状态后，一方变好了，另一方一定变坏</li>
+<li>Maximise social welfware：求和最大</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>conflict-free sets：冲突自由，没有任何attack</li>
+<li>admissible sets：可容许集，该{set}能够defend自身所有argument</li>
+<li>complete extensions：完整扩展，该{set}仅能够defend自身所有A，不能防御其他A</li>
+<li>Grounded extension：接地扩展，是minimal complete extension，T是所有子集的子集</li>
+<li>Preferred extension：优先扩展，是maximal complete extension，没有任何其他子集能包含T</li>
+<li>stable extension：稳定扩展，①. preferred extension，②. 内部元素能攻击子集外的所有所有人</li>
+<li>skeptical acceptance：怀疑接受，Ai在所有子集中均出现过才行(minimal)</li>
+<li>credulous acceptance：轻信接受，Ai在子集中，无论哪个子集，出现过即可</li>
+<li>概念一：空集能够防御所有Argument</li>
+<li>概念二：如果A没有被任何人袭击，那么他的防御者就是空集，也就是他就被所有人防御</li>
+<li>概念三：何时complete extension存在空集：只要存在Ai没有被任何人攻击，那么complete extension 就不含空集</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>argument game approach</li>
+<li>game tree，strategy for proponent&amp;opponent(P&amp;O)</li>
+<li>Argument game for grounded semantics:<br>
+• Proponent starts with argument D.<br>
+• Each move must reply to the previous move.<br>
+• Proponent cannot repeat moves.<br>
+• Proponent moves strict attackers, opponent moves attackers.<br>
+• A player wins if and only if the other player cannot move.</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>
+<p>decision tree learning: Some, None, Full</p>
+</li>
+<li>
+<p>choosing an attribute(决策树学习算法)</p>
+</li>
+<li>
+<p>k-means算法</p>
+</li>
+<li>
+<p>强化学习</p>
+</li>
+</ol>
+<p>.</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmams-agents-and-multiagent-system/">
+                    7CCSMAMS多代理系统
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#lecture-1">lecture 1</a></li>
+<li><a href="#lecture-2">lecture 2</a></li>
+<li><a href="#lecture-3">lecture 3</a></li>
+<li><a href="#lecture-4">lecture 4</a></li>
+<li><a href="#lecture-5">lecture 5</a></li>
+<li><a href="#lecture-6">lecture 6</a></li>
+<li><a href="#lecture-7">lecture 7</a></li>
+<li><a href="#lecture-8">lecture 8</a></li>
+<li><a href="#lecture-9">lecture 9</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2019-12-22</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 5 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/AdcUsz3nl/" class="postlink">
+                        <i class="fa fa-tag"></i> semester1
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>6CCS3AIN  AI与策略决策</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>sensors, actions, environment</li>
+<li>classify environment</li>
+<li>calculate the probability</li>
+<li>&quot;clean the room&quot;</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>p 和 P 的区别</li>
+<li>贝叶斯规则</li>
+<li>P的计算：α&lt; &gt;</li>
+<li>可能性分布，乘积法则，贝叶斯规则，链式法则<br>
+probability distribution可能性分布<br>
+Product rule乘积法则<br>
+Bayes rule贝叶斯规则<br>
+Chain rule链式法则</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>naive Bayes朴素贝叶斯<br>
+朴素贝叶斯：所有变量都是独立的，是一种特殊的贝叶斯网络</li>
+<li>贝叶斯网络</li>
+<li>Markov blanket马尔可夫毯<br>
+parents + children + children’s parents：爹 + 孩 + 孩他爹</li>
+<li>Compact conditional distributions紧凑的条件分布——Noisy-OR<br>
+Parents include all causes父系包含全部因素<br>
+It assumes that inhibition of each parent is independent of<br>
+inhibition of any other parents.否定状态下的条件独立</li>
+<li>贝叶斯网络的推断方法：
+<ol>
+<li>枚举法<br>
+利用概率的公式法则进行直接计算，不涉及随机数值</li>
+<li>先验采样<br>
+依照贝叶斯网络，由上至下由左至右，依次判断true/false，最后得到的是state状态集</li>
+<li>拒绝采样<br>
+①. 与先验采样步骤相同<br>
+②. 遇到所要求计算的evidence（h，s）= false，则抛弃此次采样，重新开始计算</li>
+<li>可能性权重<br>
+①. 与先验采样步骤相同<br>
+②. 当遇到evidence时，默认为true，并在此时计算权重，w = w x P<br>
+③. 通过每次的权重计算概率&lt;1x0.72, 5x0.14&gt;</li>
+<li>吉布斯采样<br>
+①. 确定采样点（非evidence点，如M,T,C），此时进行随机采样并与0.5（both values equally likely）比较，获取初始state<br>
+②. 根据马尔可夫毯，计算每个sample的条件概率（遇到evidence，如H，S跳过）<br>
+③. 随机采样并与条件概率比较，判断true/false，并更新state<br>
+重复②和③<br>
+④. 根据相同类型state的次数，计算所需的条件概率（此处与先验采样相同）</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>MEU最大期待效用，maximin，maximax准则</li>
+<li>MDP马尔可夫决策过程，Bellman 贝尔曼方程</li>
+<li>POMDP 部分可见</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Dynamic Bayesian Network动态贝叶斯网络DBN<br>
+sensor model: ↓ 传递模型<br>
+transition model: → 过渡模型</li>
+<li>推导中所需的贝叶斯规则<br>
+填条件法：<br>
+填全集法：</li>
+<li>DBN具体内容<br>
+Filtering:<br>
+Prediction:<br>
+Smoothing:</li>
+<li>隐藏式马尔可夫模型HMM，卡尔曼滤波，粒子滤波</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>game theory</li>
+<li>payoff matrix</li>
+<li>四种模式
+<ol>
+<li>dominant strategy：无论j选择了啥，i选择的R均为最大值</li>
+<li>Nash Equilbrium strategy：当j=R时，i的选择是最优的；当i=S时，j的选择也是最优的</li>
+<li>Pareto Optimal strategy：与所有状态相比，更改状态后，一方变好了，另一方一定变坏</li>
+<li>Maximise social welfware：求和最大</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>conflict-free sets：冲突自由，没有任何attack</li>
+<li>admissible sets：可容许集，该{set}能够defend自身所有argument</li>
+<li>complete extensions：完整扩展，该{set}仅能够defend自身所有A，不能防御其他A</li>
+<li>Grounded extension：接地扩展，是minimal complete extension，T是所有子集的子集</li>
+<li>Preferred extension：优先扩展，是maximal complete extension，没有任何其他子集能包含T</li>
+<li>stable extension：稳定扩展，①. preferred extension，②. 内部元素能攻击子集外的所有所有人</li>
+<li>skeptical acceptance：怀疑接受，Ai在所有子集中均出现过才行(minimal)</li>
+<li>credulous acceptance：轻信接受，Ai在子集中，无论哪个子集，出现过即可</li>
+<li>概念一：空集能够防御所有Argument</li>
+<li>概念二：如果A没有被任何人袭击，那么他的防御者就是空集，也就是他就被所有人防御</li>
+<li>概念三：何时complete extension存在空集：只要存在Ai没有被任何人攻击，那么complete extension 就不含空集</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>argument game approach</li>
+<li>game tree，strategy for proponent&amp;opponent(P&amp;O)</li>
+<li>Argument game for grounded semantics:<br>
+• Proponent starts with argument D.<br>
+• Each move must reply to the previous move.<br>
+• Proponent cannot repeat moves.<br>
+• Proponent moves strict attackers, opponent moves attackers.<br>
+• A player wins if and only if the other player cannot move.</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>
+<p>decision tree learning: Some, None, Full</p>
+</li>
+<li>
+<p>choosing an attribute(决策树学习算法)</p>
+</li>
+<li>
+<p>k-means算法</p>
+</li>
+<li>
+<p>强化学习</p>
+</li>
+</ol>
+<p>.</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmams-agents-and-multiagent-system/">
+                    7CCSMAMS多代理系统
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>

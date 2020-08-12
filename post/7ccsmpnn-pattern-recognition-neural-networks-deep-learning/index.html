@@ -1,0 +1,1088 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="lecture 2
+
+Linear Discriminant Functions：线性判别函数：g(x)=w^t * x + w0
+Batch/Sequential Perceptron Learning Algorithm
+
+Batch:..." />
+    <meta name="keywords" content="semester2" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-16</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 15 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMPNN 模式识别</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Linear Discriminant Functions：线性判别函数：g(x)=w^t * x + w0</li>
+<li>Batch/Sequential Perceptron Learning Algorithm
+<ol>
+<li>Batch: 构造函数：g(x) = a^T*y &gt;0，代价函数∇J_p(a) = ∑(− y)，a← a+η∑y</li>
+<li>Sequential：构造函数：g(x) = a^T*y，a← a+ηy_k</li>
+<li>若使用二分法Dichotomizer，类w1=1，类w2=-1。batch: a← a+η∑ω' y，Sequential：a← a+ηω 'k yk</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Minimum Squared Error (MSE) Procedures：J_s(a)=e^2 =∥Ya−b∥^2</li>
+</ol>
+</li>
+<li>Widrow-Hoff (or LMS) Learning Algorithm：a←a+η(b_k−a^t y_k) y_k, Iterate until ∑|(b_k−a^t y_k) y_k|&lt;θ</li>
+<li>Batch or Sequential Gradient Descent: mini-batch</li>
+<li>kNN classifier</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>artificial neural networks：ANN，3层--2层，分为传递函数 transfer function和激活函数activation function</li>
+<li>Linear Threshold Unit（Perceptron）：线性阈值单位：y=H(∑w_i*x_i−θ)，等价于generalised linear discriminant functions</li>
+<li>Delta Learning Rule：监督学习。Sequential Delta Learning Algorithm：顺序增量学习算法</li>
+<li>Hebbian Learning Rule：无监督学习。</li>
+<li>Competitive Learning Networks：竞争学习网络
+<ol>
+<li>inhibitory lateral weights</li>
+<li>selection process：winner-takes-all (WTA)：赢者通吃</li>
+</ol>
+</li>
+<li>Negative Feedback Networks：负反馈网络：inhibitory feedback：抑制反馈：为了接收输入而竞争：minimising the reconstruction error减小重建误差</li>
+<li>Autoencoder Networks：自编码网络：不需要迭代运算，仍然可以学习权重，减小误差。3层网络，重构输入层。de-noising autoencoders：去噪，在输入层。
+<ol>
+<li>Stacked Restricted Boltzmann Machines (RBMs – a particular type of autoencoder) are called Deep Belief Networks</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Feedforward Neural Networks：前向神经网络：三层：输入层，隐藏层，输出层，2层和3层都有函数f。</li>
+<li>XOR problem：input: X, T; Hidden: Y, Output: Z。目的：将非线性问题X转化为线性问题Y</li>
+<li>任何结构都可以使用三层结构解决      为线性问题</li>
+<li>Backpropagation Algorithm（BP算法，反向传输算法）：神经网络结构的w迭代算法，与线性回归相似，不过更更复杂。根据已知结果，从后往前更新w</li>
+<li>Learning Curves：学习曲线：training, validation and test sets：验证集防止过度拟合</li>
+<li>Radial Basis Function Neural Networks：(RBF Network Learning)径向基函数神经网络：
+<ol>
+<li>1层和2层之间的w（输入wx）变为，x与c的距离（输入dj=||x-c||），即y=h(wx) -&gt; y=h(||x-c||)</li>
+<li>没有输入层的bias=1，h的形式偏向固定比如高斯函数</li>
+<li>参数：w, σ, c</li>
+</ol>
+</li>
+<li>fully connected network：输入对应所有输出都有w</li>
+<li>Multilayer perceptron (MLP)：多层感知器</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Deep Neural Network：深度神经网络=deep learning，&gt;&gt;3层</li>
+<li>recurrent neural networks：(RNN)循环神经网络：隐藏层多次循环</li>
+<li>problem:
+<ol>
+<li>Vanishing gradient problem：若w&lt;1，多次循环w逐渐增大，故循环前期对学习无贡献</li>
+<li>Exploding gradient problem：若w&gt;1，多次循环w逐渐减小，故循环后期对学习无贡献</li>
+</ol>
+</li>
+<li>解决问题方式
+<ol>
+<li>Activation Functions with Non-Vanishing Derivatives：解决上述问题的激活函数：ReLU, LReLU, PReLU</li>
+<li>Better Ways to Initialise Weights</li>
+<li>adaptive variations on standard backpropagation：adaptive learning rate：增加动量momentum概念，将梯度下降与之前的下降平均值相加，从而构成新的下降率</li>
+<li>batch normalisation：根据数据的均值和标准差，对数据归一化</li>
+</ol>
+</li>
+<li>Convolutional Neural Networks (CNNs)：卷积神经网络：
+<ol>
+<li>使用矩阵w，与输入x进行卷积（以前是相乘），保证相似的x具备相似的输出。修改的是transfer function。called a “mask”, or “filter”, or “kernel”。输出的矩阵可以经过门限函数得到最终的y。</li>
+<li>尽管叫Convolution， 实际是cross-correlation。因为不是矩阵卷积运算，是简单的乘法运算</li>
+<li>Convolutional Layers
+<ol>
+<li>Padding：输入层扩展0。Stride：输入层跳跃计算。Dilation：输入层散状跳跃计算</li>
+<li>multi-channel：单输入多输出--由于多个矩阵w，多输入单输出--求和</li>
+<li>1x1 convolution：w为多组一个数字，多输入x多组数字-&gt;一个矩阵</li>
+</ol>
+</li>
+<li>Pooling Layers：缩小矩阵，也叫降采样</li>
+<li>Fully Connected Layers：矩阵变向量</li>
+<li>CNN的问题：
+<ol>
+<li>需要大量训练数据--将图像多次旋转放大</li>
+<li>训练计算密集--使用网络已知数据库</li>
+<li>过度拟合--正则化regularization，中途退出dropout，将其中一个神经元=0</li>
+<li>依旧有可能通过相机是否有污渍来区分图片</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Generative Adversarial Networks (GANs)：生成对抗网络：非监督式学习，两个神经网络的对抗学习
+<ol>
+<li>Explicit Model: Trackable Density：概率链式法则</li>
+<li>Explicit Model: Approximate Density：积分法</li>
+<li>Autoencoder：自动编码：半监督学习，encoder和decoder是两个网络，重叠处是latent z，目的是使输入和输出相同（蘑菇）。然后，删除encoder，随机生成z，使得输出依旧相似（蘑菇）</li>
+<li>代价函数：V(D,G) = E[ logD(x) ] + E[ log( 1-D(G(z)) ) ]</li>
+<li>当G固定，训练D：希望maxV，即V最大，即希望D(x)-&gt;1, D(G(z))-&gt;1</li>
+<li>当D固定，训练G：希望minV，即V最小，即log( 1-D(G(z)) )-&gt;log(1-1)-&gt;负无穷</li>
+</ol>
+</li>
+<li>Minibatch stochastic gradient training 计算θ的方法：
+<ol>
+<li>对于每次迭代，先进行k次循环（k是超参数，即外部参数），循环内每次取m个点进行计算θd，θd = θd + Δd，ascending！！</li>
+<li>k次循环外，取m个点计算θg，θg = θg - Δg，descending！！</li>
+</ol>
+</li>
+<li>DCGAN (Deep convolutional generative adversarial networks)：深度卷积生成对抗网络</li>
+<li>Optimization：深度学习的优化算法（说白了就是梯度下降）
+<ol>
+<li>Experience replay：deep Q learning (DQN)：属于强化学习，存储之前的创建点generated samples（过去的经验点），与新的创建点一并送入training</li>
+<li>Training with Labels：Conditional GAN (CGAN)：条件GAN，输入时增加额外信息，如标签y，代价函数为x|y, z|y</li>
+<li>Adding noise (when training the Discriminator)：Jensen Shannon Divergence (JSD)：在信号送入Discriminator之前添加噪声</li>
+<li>Unrolling GAN：Predict the move of Discriminator by unrolling：θd计算方式不变，θg选取k次循环后的θd作为D来计算。{original GAN中，θg选取k次循环前的初始θd作为D来计算}<br>
+θd = θd + ηΔd|θg=θg, θd=θd。 θg = θg -ηΔg|θg=θg, θd=αdN</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>特征选择，特征提取：将需要分析的特征提取出来，不分析不用的特征</li>
+<li>Principal Components Analysis（PCA）：主成分分析：无监督学习，N维数据圈起来，找到M个正交方向，方向方差最大方向为第一主成分，方差次大的为第二主成分（数据降维分析，投影到主成分平面）</li>
+<li>Karhunen-Loève Transform (KLT)：应用PCA的一种方法：数据方差=VEV^T，eigenvalues (E) &amp; eigenvectors (V)， 删除小的特征值，剩下的对应特征向量作为投影方向 y = V (x - μ)</li>
+<li>Neural Networks for PCA：PCA神经网络：均值为0的数据
+<ol>
+<li>Hebbian Learning：赫布理论：Δ w=η y xt，w与第一主成分一致，无边界增长</li>
+<li>Oja’s rule：Δ w=η y( x t− y w)， w与第一主成分权重一致，单位增长</li>
+<li>Sanger’s rule：Δ wji=η y j(xi−∑y k w ki)，x2的数据 - y1的结果 x 权重，然后应用oja</li>
+<li>Oja’s subspace rule：ΔW =η y( x−W t y)t，m个数据同时使用n个第一主成分分析</li>
+<li>Whitening Transform：白化转换：由于每维度数据正交歪歪扭扭，所以统一成每个方向具有相同方差。-----不像PCA，WT不会降维</li>
+</ol>
+</li>
+<li>Linear Discriminant Analysis (LDA)：线性判别分析：监督学习，用label将降维的数据依旧分得开。方式：二维数据的各lebel的均值(乘权重)差(sb)，比上 一维均值的每个label内的方差(乘权重)之和(sw)，寻找w使得J = sb/sw最大</li>
+<li>Independent Component Analysis (ICA)：独立成分分析：PCA是发现数据y的不相关性，ICA是发现数据的统计独立g(y)，g是个函数。即：各个y概率独立互不相关。对于高斯分布，PCA=ICA。即：PCA是方差方向正交向量，ICA是不同类的数据最大方向的向量（依旧是无监督类）
+<ol>
+<li>Oja’s subspace rule：g(y)是个非线性函数(如sigmoid)</li>
+</ol>
+</li>
+<li>Random Projections：随机投影：PCA, LDA, and ICA都是降维，防止数据过拟合，其他方式是升维。y=g (Vx )
+<ol>
+<li>Extreme Learning Machine：极限机器学习：与RBF network网络类似，就是隐藏层没有与c的距离（应该就是没有初值）</li>
+</ol>
+</li>
+<li>Sparse Coding：稀疏编码：只使用数据的少数几个维度来代表数据，然后升维，投影不随机
+<ol>
+<li>y=g (Vx )中，y是一些非0元素</li>
+<li>找到非零元素方式：y之间进行竞争，∥x−V t y∥2</li>
+<li>不用神经网络，在这里面使用最小化函数，从而找到非零的y，然后根据x≈V t y，就找到了少数维度的x</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>Support Vector Machines (SVMs)：支持向量机：基于线性判别函数，使用核函数（kernel function）升维，将数据分成两类</li>
+<li>Linear SVMs: Linearly Separable Case：线性可分的情况下
+<ol>
+<li>这个函数真的是太美了！！！！！！比机器学习第五节讲的好太多</li>
+<li>首先根据线性回归函数，假设（约束条件）数据能够分两类y=wx+w0≥1和y≤-1  （即y * wx+w0 ≥1）【通过使用拉格朗日构建代价函数的方式，该约束条件可以不被满足，取决于λ】</li>
+<li>根据两点间距d=y/w，得出边缘点（separators）间距为2/w</li>
+<li>因此要使得边缘点间距最大，则w越小越好，即min J = 1/2 w^2</li>
+<li>根据拉格朗日乘法器（Lagrange multipliers），与约束条件结合，得出代价函数（primal problem）：L(w,w0,λ) = 1/2 w^2  +  Σλ( y(wx+w0)-1 )</li>
+<li>也可转换为（Dual problem）：min(w)max(λ) L，即使代价函数λ最大w最小</li>
+<li>根据dL/dw = 0，得出公式带入L(w,λ)，此时计算的就是L(λ)，根据式子能够得出另一个约束条件。</li>
+<li>总结：线性可分的情况下，代价函数的求解可转化为下述4个条件：dL/dw=0, dL/dw0=0, λ≥0, λ(y(wx+w0)-1)=0【个人认为必要不充分，比如maxλ】</li>
+<li>求解后的分类：Hard classifier：分类分为+1， -1。  Soft classifier：分类为+1，z， -1</li>
+</ol>
+</li>
+<li>Linear SVMs: Non-separable Case：线性不可分的情况下（你中有我我中有你，或者非线性可分--我包围着你）
+<ol>
+<li>增加松弛变量(slack variable) ξ≥0，y * (wx+w0) ≥1 - ξ</li>
+<li>修改J函数，J = 1/2 w^2 + CΣξ，C≥0常数，C越小边缘影响越大(大边缘大误差)，C越大分类影响越大(小边缘小误差)</li>
+<li>代价函数L(w,w0,ξ, λ, μ)，其中 λ, μ是拉格朗日系数，λ是限制y≥1的，μ是限制ξ≥0的</li>
+<li>代价函数的求解可转化为下述6个条件：dL/dw=0, dL/dw0=0, dL/dξ=C-μ-λ=0,  μ,λ≥0,  μξ=0,  λ(y(wx+w0)-1)=0</li>
+</ol>
+</li>
+<li>Nonlinear SVMs：非线性SVMs，将所有非线性可分的情况，利用Φ(x)函数，将数据变为线性可分
+<ol>
+<li>将前者线性可分的所有函数中的x，替换成Φ(x)，feature mapping function</li>
+<li>核函数（Kernel function）：K(xi, x) = Φ^T(xi) * Φ(x)。其中，xi是边缘点separators
+<ol>
+<li>为什么引入核函数：如果直接对x进行函数变换，比如logx1x2，那么有限定域的x将变为无限定域的log函数。核函数能将其依旧变为存在限定域</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Multi-class SVMs：多分类SVMs
+<ol>
+<li>One against one：每两个类两两一组进行分类，存在无法分类的位置</li>
+<li>One against all：将每一类都分为A和非A两类，存在无法分类的位置，可用星型结构修正</li>
+<li>Binary decision tree：将所有数据按树的形式依次分两类</li>
+<li>Binary coded：将类进行编码，几个bit就是几个SVM，存在无法分类的编码组合</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>ENSEMBLE METHODS：集成方法</li>
+<li>Bagging：每次取数据的子集，放回取样。对子集分类（弱分类，weak clasifer）。对所有分类投票</li>
+<li>Boosting：训练D1并分类为C1，准确率要大于50%。创建D2并用C1分类，准确率大于50%，余下的用D2训练分类为C2。对于相同点C1和C2分类相同，则无需更改；若分类不同，引入C3。创建D3并分类，由C3确定误分类的部分。（二者貌似没差别，因为）</li>
+<li>Adaboost - Adaptive Boost：自适应：根本思想，将误分类的权重分配更高，以此将误分类的点在下次分类时让其更好的分类。
+<ol>
+<li>确定我们需要多少个classifier：Kmax。然后循环这些次</li>
+<li>计算每个分类器h的误分类权重和，取最小的h^作为ε。若ε大于0.5则放弃此次循环</li>
+<li>确定分类器h^在整体数据分类中所占的比例α</li>
+<li>将所有的α h^求和即为最终分类结果</li>
+</ol>
+</li>
+<li>Stacked generalization：堆叠泛化</li>
+<li>Decision Trees：决策树</li>
+<li>Random Forests：随机森林：Randomised Decision Forest或Randomised Forests
+<ol>
+<li>对x数据集，取k个数据d个特征进行提取，作为xk。</li>
+<li>循环r次，每次从d中取 r个 * (一个特征j，这样就获取了特征为j的k个数据)</li>
+<li>随机取特征j的门限t，进行决策树决策</li>
+<li>使用PlogP对该决策树进行评估，构建这r个小小树谁在上谁在下</li>
+<li>因此每个xk就含有一个决策树了</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>clustering: 聚类算法：Partitional分割式和Hierarchical层次式</li>
+<li>k-means clustering: 略</li>
+<li>Fuzzy K-means Clustering：模糊k-means聚类：fuzzy=grade=每个采样点的权重μ
+<ol>
+<li>μij：每个采样点在每个类的归一化权重，初始化随机生成。i：cluster，j：采样点</li>
+<li>中心点mi = Σμx / Σμ</li>
+</ol>
+</li>
+<li>Iterative Clustering：还是判断距离，换了个公式</li>
+<li>Hierarchical clustering：层次聚类：Agglomerative自下而上，Divisive自上而下</li>
+<li>Competitive Learning：竞争学习：与k-means类似，遍历采样点，sample离谁近，这个聚类中心点就往这个采样点凑凑
+<ol>
+<li>without normalisation：寻找最小x-wj，然后wj ← wj + η(x-wj)</li>
+<li>with normalisation：x首先augment [1 x]和normalise x/||x||，然后寻找最大W^T X，然后w权重更新 wj ← wj + ηx，w归一化wj ← wj / ||wj||</li>
+</ol>
+</li>
+<li>Clustering for Unknown Number of Clusters：未知有多少类的聚类：欧式距离小于θ。leader-follower clustering：领导者-追随者聚类
+<ol>
+<li>随机选一个x作为聚类中心，然后判断是否属于现有类（欧式距离小于θ）</li>
+<li>如果都属于现有类，进行聚类中心点更新wj ← wj + η(x-wj)</li>
+<li>如果都不属于现有类，新建聚类中心点</li>
+</ol>
+</li>
+<li>Dimension Reduction：维度缩减：线性PCA和非线性autoencoder</li>
+</ol>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmbim-nature-inspired-learning-algorithms/">
+                    7CCSMBIM 生物启发算法
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmdm1-data-mining/">
+                    7CCSMDM1 数据挖掘
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#lecture-2">lecture 2</a></li>
+<li><a href="#lecture-3">lecture 3</a></li>
+<li><a href="#lecture-4">lecture 4</a></li>
+<li><a href="#lecture-5">lecture 5</a></li>
+<li><a href="#lecture-6">lecture 6</a></li>
+<li><a href="#lecture-7">lecture 7</a></li>
+<li><a href="#lecture-8">lecture 8</a></li>
+<li><a href="#lecture-9">lecture 9</a></li>
+<li><a href="#lecture-10">lecture 10</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-16</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 15 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>7CCSMPNN 模式识别</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Linear Discriminant Functions：线性判别函数：g(x)=w^t * x + w0</li>
+<li>Batch/Sequential Perceptron Learning Algorithm
+<ol>
+<li>Batch: 构造函数：g(x) = a^T*y &gt;0，代价函数∇J_p(a) = ∑(− y)，a← a+η∑y</li>
+<li>Sequential：构造函数：g(x) = a^T*y，a← a+ηy_k</li>
+<li>若使用二分法Dichotomizer，类w1=1，类w2=-1。batch: a← a+η∑ω' y，Sequential：a← a+ηω 'k yk</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Minimum Squared Error (MSE) Procedures：J_s(a)=e^2 =∥Ya−b∥^2</li>
+</ol>
+</li>
+<li>Widrow-Hoff (or LMS) Learning Algorithm：a←a+η(b_k−a^t y_k) y_k, Iterate until ∑|(b_k−a^t y_k) y_k|&lt;θ</li>
+<li>Batch or Sequential Gradient Descent: mini-batch</li>
+<li>kNN classifier</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>artificial neural networks：ANN，3层--2层，分为传递函数 transfer function和激活函数activation function</li>
+<li>Linear Threshold Unit（Perceptron）：线性阈值单位：y=H(∑w_i*x_i−θ)，等价于generalised linear discriminant functions</li>
+<li>Delta Learning Rule：监督学习。Sequential Delta Learning Algorithm：顺序增量学习算法</li>
+<li>Hebbian Learning Rule：无监督学习。</li>
+<li>Competitive Learning Networks：竞争学习网络
+<ol>
+<li>inhibitory lateral weights</li>
+<li>selection process：winner-takes-all (WTA)：赢者通吃</li>
+</ol>
+</li>
+<li>Negative Feedback Networks：负反馈网络：inhibitory feedback：抑制反馈：为了接收输入而竞争：minimising the reconstruction error减小重建误差</li>
+<li>Autoencoder Networks：自编码网络：不需要迭代运算，仍然可以学习权重，减小误差。3层网络，重构输入层。de-noising autoencoders：去噪，在输入层。
+<ol>
+<li>Stacked Restricted Boltzmann Machines (RBMs – a particular type of autoencoder) are called Deep Belief Networks</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Feedforward Neural Networks：前向神经网络：三层：输入层，隐藏层，输出层，2层和3层都有函数f。</li>
+<li>XOR problem：input: X, T; Hidden: Y, Output: Z。目的：将非线性问题X转化为线性问题Y</li>
+<li>任何结构都可以使用三层结构解决      为线性问题</li>
+<li>Backpropagation Algorithm（BP算法，反向传输算法）：神经网络结构的w迭代算法，与线性回归相似，不过更更复杂。根据已知结果，从后往前更新w</li>
+<li>Learning Curves：学习曲线：training, validation and test sets：验证集防止过度拟合</li>
+<li>Radial Basis Function Neural Networks：(RBF Network Learning)径向基函数神经网络：
+<ol>
+<li>1层和2层之间的w（输入wx）变为，x与c的距离（输入dj=||x-c||），即y=h(wx) -&gt; y=h(||x-c||)</li>
+<li>没有输入层的bias=1，h的形式偏向固定比如高斯函数</li>
+<li>参数：w, σ, c</li>
+</ol>
+</li>
+<li>fully connected network：输入对应所有输出都有w</li>
+<li>Multilayer perceptron (MLP)：多层感知器</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Deep Neural Network：深度神经网络=deep learning，&gt;&gt;3层</li>
+<li>recurrent neural networks：(RNN)循环神经网络：隐藏层多次循环</li>
+<li>problem:
+<ol>
+<li>Vanishing gradient problem：若w&lt;1，多次循环w逐渐增大，故循环前期对学习无贡献</li>
+<li>Exploding gradient problem：若w&gt;1，多次循环w逐渐减小，故循环后期对学习无贡献</li>
+</ol>
+</li>
+<li>解决问题方式
+<ol>
+<li>Activation Functions with Non-Vanishing Derivatives：解决上述问题的激活函数：ReLU, LReLU, PReLU</li>
+<li>Better Ways to Initialise Weights</li>
+<li>adaptive variations on standard backpropagation：adaptive learning rate：增加动量momentum概念，将梯度下降与之前的下降平均值相加，从而构成新的下降率</li>
+<li>batch normalisation：根据数据的均值和标准差，对数据归一化</li>
+</ol>
+</li>
+<li>Convolutional Neural Networks (CNNs)：卷积神经网络：
+<ol>
+<li>使用矩阵w，与输入x进行卷积（以前是相乘），保证相似的x具备相似的输出。修改的是transfer function。called a “mask”, or “filter”, or “kernel”。输出的矩阵可以经过门限函数得到最终的y。</li>
+<li>尽管叫Convolution， 实际是cross-correlation。因为不是矩阵卷积运算，是简单的乘法运算</li>
+<li>Convolutional Layers
+<ol>
+<li>Padding：输入层扩展0。Stride：输入层跳跃计算。Dilation：输入层散状跳跃计算</li>
+<li>multi-channel：单输入多输出--由于多个矩阵w，多输入单输出--求和</li>
+<li>1x1 convolution：w为多组一个数字，多输入x多组数字-&gt;一个矩阵</li>
+</ol>
+</li>
+<li>Pooling Layers：缩小矩阵，也叫降采样</li>
+<li>Fully Connected Layers：矩阵变向量</li>
+<li>CNN的问题：
+<ol>
+<li>需要大量训练数据--将图像多次旋转放大</li>
+<li>训练计算密集--使用网络已知数据库</li>
+<li>过度拟合--正则化regularization，中途退出dropout，将其中一个神经元=0</li>
+<li>依旧有可能通过相机是否有污渍来区分图片</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Generative Adversarial Networks (GANs)：生成对抗网络：非监督式学习，两个神经网络的对抗学习
+<ol>
+<li>Explicit Model: Trackable Density：概率链式法则</li>
+<li>Explicit Model: Approximate Density：积分法</li>
+<li>Autoencoder：自动编码：半监督学习，encoder和decoder是两个网络，重叠处是latent z，目的是使输入和输出相同（蘑菇）。然后，删除encoder，随机生成z，使得输出依旧相似（蘑菇）</li>
+<li>代价函数：V(D,G) = E[ logD(x) ] + E[ log( 1-D(G(z)) ) ]</li>
+<li>当G固定，训练D：希望maxV，即V最大，即希望D(x)-&gt;1, D(G(z))-&gt;1</li>
+<li>当D固定，训练G：希望minV，即V最小，即log( 1-D(G(z)) )-&gt;log(1-1)-&gt;负无穷</li>
+</ol>
+</li>
+<li>Minibatch stochastic gradient training 计算θ的方法：
+<ol>
+<li>对于每次迭代，先进行k次循环（k是超参数，即外部参数），循环内每次取m个点进行计算θd，θd = θd + Δd，ascending！！</li>
+<li>k次循环外，取m个点计算θg，θg = θg - Δg，descending！！</li>
+</ol>
+</li>
+<li>DCGAN (Deep convolutional generative adversarial networks)：深度卷积生成对抗网络</li>
+<li>Optimization：深度学习的优化算法（说白了就是梯度下降）
+<ol>
+<li>Experience replay：deep Q learning (DQN)：属于强化学习，存储之前的创建点generated samples（过去的经验点），与新的创建点一并送入training</li>
+<li>Training with Labels：Conditional GAN (CGAN)：条件GAN，输入时增加额外信息，如标签y，代价函数为x|y, z|y</li>
+<li>Adding noise (when training the Discriminator)：Jensen Shannon Divergence (JSD)：在信号送入Discriminator之前添加噪声</li>
+<li>Unrolling GAN：Predict the move of Discriminator by unrolling：θd计算方式不变，θg选取k次循环后的θd作为D来计算。{original GAN中，θg选取k次循环前的初始θd作为D来计算}<br>
+θd = θd + ηΔd|θg=θg, θd=θd。 θg = θg -ηΔg|θg=θg, θd=αdN</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>特征选择，特征提取：将需要分析的特征提取出来，不分析不用的特征</li>
+<li>Principal Components Analysis（PCA）：主成分分析：无监督学习，N维数据圈起来，找到M个正交方向，方向方差最大方向为第一主成分，方差次大的为第二主成分（数据降维分析，投影到主成分平面）</li>
+<li>Karhunen-Loève Transform (KLT)：应用PCA的一种方法：数据方差=VEV^T，eigenvalues (E) &amp; eigenvectors (V)， 删除小的特征值，剩下的对应特征向量作为投影方向 y = V (x - μ)</li>
+<li>Neural Networks for PCA：PCA神经网络：均值为0的数据
+<ol>
+<li>Hebbian Learning：赫布理论：Δ w=η y xt，w与第一主成分一致，无边界增长</li>
+<li>Oja’s rule：Δ w=η y( x t− y w)， w与第一主成分权重一致，单位增长</li>
+<li>Sanger’s rule：Δ wji=η y j(xi−∑y k w ki)，x2的数据 - y1的结果 x 权重，然后应用oja</li>
+<li>Oja’s subspace rule：ΔW =η y( x−W t y)t，m个数据同时使用n个第一主成分分析</li>
+<li>Whitening Transform：白化转换：由于每维度数据正交歪歪扭扭，所以统一成每个方向具有相同方差。-----不像PCA，WT不会降维</li>
+</ol>
+</li>
+<li>Linear Discriminant Analysis (LDA)：线性判别分析：监督学习，用label将降维的数据依旧分得开。方式：二维数据的各lebel的均值(乘权重)差(sb)，比上 一维均值的每个label内的方差(乘权重)之和(sw)，寻找w使得J = sb/sw最大</li>
+<li>Independent Component Analysis (ICA)：独立成分分析：PCA是发现数据y的不相关性，ICA是发现数据的统计独立g(y)，g是个函数。即：各个y概率独立互不相关。对于高斯分布，PCA=ICA。即：PCA是方差方向正交向量，ICA是不同类的数据最大方向的向量（依旧是无监督类）
+<ol>
+<li>Oja’s subspace rule：g(y)是个非线性函数(如sigmoid)</li>
+</ol>
+</li>
+<li>Random Projections：随机投影：PCA, LDA, and ICA都是降维，防止数据过拟合，其他方式是升维。y=g (Vx )
+<ol>
+<li>Extreme Learning Machine：极限机器学习：与RBF network网络类似，就是隐藏层没有与c的距离（应该就是没有初值）</li>
+</ol>
+</li>
+<li>Sparse Coding：稀疏编码：只使用数据的少数几个维度来代表数据，然后升维，投影不随机
+<ol>
+<li>y=g (Vx )中，y是一些非0元素</li>
+<li>找到非零元素方式：y之间进行竞争，∥x−V t y∥2</li>
+<li>不用神经网络，在这里面使用最小化函数，从而找到非零的y，然后根据x≈V t y，就找到了少数维度的x</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>Support Vector Machines (SVMs)：支持向量机：基于线性判别函数，使用核函数（kernel function）升维，将数据分成两类</li>
+<li>Linear SVMs: Linearly Separable Case：线性可分的情况下
+<ol>
+<li>这个函数真的是太美了！！！！！！比机器学习第五节讲的好太多</li>
+<li>首先根据线性回归函数，假设（约束条件）数据能够分两类y=wx+w0≥1和y≤-1  （即y * wx+w0 ≥1）【通过使用拉格朗日构建代价函数的方式，该约束条件可以不被满足，取决于λ】</li>
+<li>根据两点间距d=y/w，得出边缘点（separators）间距为2/w</li>
+<li>因此要使得边缘点间距最大，则w越小越好，即min J = 1/2 w^2</li>
+<li>根据拉格朗日乘法器（Lagrange multipliers），与约束条件结合，得出代价函数（primal problem）：L(w,w0,λ) = 1/2 w^2  +  Σλ( y(wx+w0)-1 )</li>
+<li>也可转换为（Dual problem）：min(w)max(λ) L，即使代价函数λ最大w最小</li>
+<li>根据dL/dw = 0，得出公式带入L(w,λ)，此时计算的就是L(λ)，根据式子能够得出另一个约束条件。</li>
+<li>总结：线性可分的情况下，代价函数的求解可转化为下述4个条件：dL/dw=0, dL/dw0=0, λ≥0, λ(y(wx+w0)-1)=0【个人认为必要不充分，比如maxλ】</li>
+<li>求解后的分类：Hard classifier：分类分为+1， -1。  Soft classifier：分类为+1，z， -1</li>
+</ol>
+</li>
+<li>Linear SVMs: Non-separable Case：线性不可分的情况下（你中有我我中有你，或者非线性可分--我包围着你）
+<ol>
+<li>增加松弛变量(slack variable) ξ≥0，y * (wx+w0) ≥1 - ξ</li>
+<li>修改J函数，J = 1/2 w^2 + CΣξ，C≥0常数，C越小边缘影响越大(大边缘大误差)，C越大分类影响越大(小边缘小误差)</li>
+<li>代价函数L(w,w0,ξ, λ, μ)，其中 λ, μ是拉格朗日系数，λ是限制y≥1的，μ是限制ξ≥0的</li>
+<li>代价函数的求解可转化为下述6个条件：dL/dw=0, dL/dw0=0, dL/dξ=C-μ-λ=0,  μ,λ≥0,  μξ=0,  λ(y(wx+w0)-1)=0</li>
+</ol>
+</li>
+<li>Nonlinear SVMs：非线性SVMs，将所有非线性可分的情况，利用Φ(x)函数，将数据变为线性可分
+<ol>
+<li>将前者线性可分的所有函数中的x，替换成Φ(x)，feature mapping function</li>
+<li>核函数（Kernel function）：K(xi, x) = Φ^T(xi) * Φ(x)。其中，xi是边缘点separators
+<ol>
+<li>为什么引入核函数：如果直接对x进行函数变换，比如logx1x2，那么有限定域的x将变为无限定域的log函数。核函数能将其依旧变为存在限定域</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Multi-class SVMs：多分类SVMs
+<ol>
+<li>One against one：每两个类两两一组进行分类，存在无法分类的位置</li>
+<li>One against all：将每一类都分为A和非A两类，存在无法分类的位置，可用星型结构修正</li>
+<li>Binary decision tree：将所有数据按树的形式依次分两类</li>
+<li>Binary coded：将类进行编码，几个bit就是几个SVM，存在无法分类的编码组合</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>ENSEMBLE METHODS：集成方法</li>
+<li>Bagging：每次取数据的子集，放回取样。对子集分类（弱分类，weak clasifer）。对所有分类投票</li>
+<li>Boosting：训练D1并分类为C1，准确率要大于50%。创建D2并用C1分类，准确率大于50%，余下的用D2训练分类为C2。对于相同点C1和C2分类相同，则无需更改；若分类不同，引入C3。创建D3并分类，由C3确定误分类的部分。（二者貌似没差别，因为）</li>
+<li>Adaboost - Adaptive Boost：自适应：根本思想，将误分类的权重分配更高，以此将误分类的点在下次分类时让其更好的分类。
+<ol>
+<li>确定我们需要多少个classifier：Kmax。然后循环这些次</li>
+<li>计算每个分类器h的误分类权重和，取最小的h^作为ε。若ε大于0.5则放弃此次循环</li>
+<li>确定分类器h^在整体数据分类中所占的比例α</li>
+<li>将所有的α h^求和即为最终分类结果</li>
+</ol>
+</li>
+<li>Stacked generalization：堆叠泛化</li>
+<li>Decision Trees：决策树</li>
+<li>Random Forests：随机森林：Randomised Decision Forest或Randomised Forests
+<ol>
+<li>对x数据集，取k个数据d个特征进行提取，作为xk。</li>
+<li>循环r次，每次从d中取 r个 * (一个特征j，这样就获取了特征为j的k个数据)</li>
+<li>随机取特征j的门限t，进行决策树决策</li>
+<li>使用PlogP对该决策树进行评估，构建这r个小小树谁在上谁在下</li>
+<li>因此每个xk就含有一个决策树了</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>clustering: 聚类算法：Partitional分割式和Hierarchical层次式</li>
+<li>k-means clustering: 略</li>
+<li>Fuzzy K-means Clustering：模糊k-means聚类：fuzzy=grade=每个采样点的权重μ
+<ol>
+<li>μij：每个采样点在每个类的归一化权重，初始化随机生成。i：cluster，j：采样点</li>
+<li>中心点mi = Σμx / Σμ</li>
+</ol>
+</li>
+<li>Iterative Clustering：还是判断距离，换了个公式</li>
+<li>Hierarchical clustering：层次聚类：Agglomerative自下而上，Divisive自上而下</li>
+<li>Competitive Learning：竞争学习：与k-means类似，遍历采样点，sample离谁近，这个聚类中心点就往这个采样点凑凑
+<ol>
+<li>without normalisation：寻找最小x-wj，然后wj ← wj + η(x-wj)</li>
+<li>with normalisation：x首先augment [1 x]和normalise x/||x||，然后寻找最大W^T X，然后w权重更新 wj ← wj + ηx，w归一化wj ← wj / ||wj||</li>
+</ol>
+</li>
+<li>Clustering for Unknown Number of Clusters：未知有多少类的聚类：欧式距离小于θ。leader-follower clustering：领导者-追随者聚类
+<ol>
+<li>随机选一个x作为聚类中心，然后判断是否属于现有类（欧式距离小于θ）</li>
+<li>如果都属于现有类，进行聚类中心点更新wj ← wj + η(x-wj)</li>
+<li>如果都不属于现有类，新建聚类中心点</li>
+</ol>
+</li>
+<li>Dimension Reduction：维度缩减：线性PCA和非线性autoencoder</li>
+</ol>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/7ccsmbim-nature-inspired-learning-algorithms/">
+                    7CCSMBIM 生物启发算法
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmdm1-data-mining/">
+                    7CCSMDM1 数据挖掘
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>

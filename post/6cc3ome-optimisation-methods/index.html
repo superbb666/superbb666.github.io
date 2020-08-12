@@ -1,0 +1,1051 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="lecture 1
+
+Single-source shortest-paths problem
+concepts: Negative weights, exchange-rates, negative cycles, A shortest-..." />
+    <meta name="keywords" content="semester2" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-17</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 12 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>6CCS3OME 最优算法</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>Single-source shortest-paths problem</li>
+<li>concepts: Negative weights, exchange-rates, negative cycles, A shortest-paths tree</li>
+<li>Relaxation technique：松弛操作（所有算法都可归结为松弛操作）：初始化所有节点的d，然后不断更新更小的d，直到不能再更新，就能获得最优路径δ</li>
+<li>Effective relax operations：若d&gt;δ，那么里面一定有可以松弛的节点</li>
+<li>Bellman-Ford algorithm：最基本的寻路算法，先设置s到所有节点距离为∞，然后从s开始每个点都计算一遍全部路径（逐点最优），时间复杂度是最高的：θ(mn)，n为节点数m为边数</li>
+<li>Bellman-Ford algorithm FIFO：队列Q里先放个s，while Q不为空，从Q中提取u，遍历邻居v，将v放入Q。时间复杂度O(mn)</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Dijkstra’s shortest-paths algorithm：条件：所有边都是非负的。闭列表S和开列表Q，每次提取Q中最小d的节点，然后遍历该节点的所有边，并更新所有节点的d。</li>
+<li>算法复杂度：初始化θ(n) + 提取最小边O(n<sup>2</sup>) + 松弛操作O(m) = O(n<sup>2</sup>)
+<ol>
+<li>提取最小边：O(n)，全部：O(n<sup>2</sup>)</li>
+<li>松弛Relax操作：O(1)，全部：O(m)</li>
+</ol>
+</li>
+<li>Dijkstra’s algorithm with Heap：降低Dijkstra在搜索Q中最小路径中的复杂度，算法中每次寻找Q集中dis值最小的点的复杂度为O(n)，我们可以用堆（heap）来优化这一过程，使其复杂度降到O(logn)，这样总体复杂度降到O(mlogn)</li>
+<li>Single-source shortest paths in DAG’s：有向无环图的最短路径算法， directed acyclic graph (DAG)
+<ol>
+<li>Bellman-Ford: 贝尔曼-福特算法：O(mn)</li>
+<li>Topological Sorting：拓扑排序：O(n + m)</li>
+<li>Breadth-First Search (BFS)：广度优先搜索，Depth-First Search (DFS)：深度优先搜索。O(n + m)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Johnson’s algorithm： All-pairs shortest-paths problem。边可以是负数。
+<ol>
+<li>w^ = w + h(u) - h(v), 对每个节点增加一个数字，使新的w^ &gt; 0</li>
+<li>计算h(u): 增加节点s，边缘=0，计算到每个节点的最小负值，该值就是h</li>
+</ol>
+</li>
+<li>Dijkstra’s shortest-paths algorithm：Single-source single-destination shortest-path problem。O(n^2)
+<ol>
+<li>起点s和终点d，同时开始搜索</li>
+<li>Dijkstra’s algorithm for “geographical” networks：与Johnson’s algorithm类似，增加新节点d，该节点使距离各个城镇的直线距离，wˆ(u, v) = w(u, v) − dist(u, d) + dist(v, d)。{w(u, v) + dist(v, d) &gt; dist(u, d)}</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Maximum network-flow problem：就像河流流量，边缘=1，3，4，则河水经过这些河流的流量最大只能是1。但是每个节点可以由多个河流汇入</li>
+<li>Flow-Feasibility problem (Transshipment problem)：流动可行性问题（转运问题）：
+<ol>
+<li>Flows – formal definition: 相关定义：flow, Capacity constraints, Flow conservation</li>
+<li>Maximum flow problem：对于起始点s，f = Σ从s的输出流 - Σ到s的输入流  == 对于到达点t，f =  Σ到t的输入流 -  Σ从t的输出流</li>
+<li>saturated edge：饱和边：f(v, u) = c(v, u)</li>
+</ol>
+</li>
+<li>Reduction from flow-feasibility to maximum-flow
+<ol>
+<li>将流量可行性问题转换为最大流量问题：增加supply node s和demand node t</li>
+<li>根据守恒定律重置每个edge的流速</li>
+<li>删去s和t，就变成了守恒的flow-feasibility</li>
+</ol>
+</li>
+<li>Ford-Fulkerson method：Increase the flow using the residual network
+<ol>
+<li>residual network：根据容量确定</li>
+<li>根据现有的flow，画出residual network，然后寻找s-&gt;t的路径，如果找到了，则具有更优的flow。value flow 8 = current flow 7 + value in residual network 1</li>
+<li>时间复杂度：视情况而定</li>
+</ol>
+</li>
+<li>Cuts：将所有节点分成两类，一类包含起点source s，另一类包含终点t
+<ol>
+<li>cut = 在原始图（非residual图）中，起点类的所有输出capacity，not flow</li>
+<li>f = 在原始图（非residual图）中，起点类的所有输出flow - 所有输入flow = |f|</li>
+<li>f≤c，因此f最大值小于等于c的最小值</li>
+<li>找cut必须在residual里看，计算cut在原始图看更方便</li>
+</ol>
+</li>
+<li>The Max-flow Min-cut theorem：
+<ol>
+<li>max f = min c</li>
+<li>f 为max = no augmenting path Gf = 存在cut，使c=f</li>
+<li>查找Minimun cut的方法：
+<ol>
+<li>将图根据residual方式得到最优解</li>
+<li>画出residual network</li>
+<li>在该图上从起点s开始，如果有从s到其他节点的箭头，则cut集包含该节点。直到该cut集没有向外输出的箭头。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>The Edmonds-Karp algorithm：在Ford-Fulkerson method基础上，每次迭代选择最小augmenting path（这条路线经过的节点数最少）
+<ol>
+<li>running time：O(nm2)</li>
+</ol>
+</li>
+<li>maximum bipartite matching problem：最大二分匹配问题
+<ol>
+<li>增加s和t，变为最大流问题，capacity = 1</li>
+<li>running time：O(mn)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Minimum cost flow problem：最小花费流问题
+<ol>
+<li>G(V, E, u, c, d): vertex, edge, capacity, cost, supply/demand: 点，边，容量，花费，供给</li>
+<li>Application: Production and distribution problems</li>
+</ol>
+</li>
+<li>Successive shortest path algorithm：SUCCESSIVE SP：连续最短路径算法
+<ol>
+<li>选择节点v，计算最短路径 (可以用Dijkstra)</li>
+<li>依旧是找负循环，发送一个flow，cost为负的，则还存在最优</li>
+<li>运行时间：O(m<sup>2</sup> log<sup>2</sup> n)</li>
+<li>具体步骤如下：说的太好了就不翻译了
+<ol>
+<li>The first step of SSP is to select a supply node v.</li>
+<li>The second step is to construct the residual network Gf.</li>
+<li>The third step is to compute the shortest path tree T(v) rooted at node v in the residual network Gf. That is, we have a shortest path from v to every node u reachable from v in Gf.</li>
+<li>The fourth step is to select a demand node w reachable from v (any node will do) in T(v).</li>
+<li>The fifth step is to send q units of flow along the path from v to w.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Multicommodity flow problems：多物网络流问题</li>
+<li>Minimum-cost multicommodity-flow problem：最小花费</li>
+<li>Minimum-congestion multicommodity-flow problem：最小拥挤，=max( flow/capacity )，可能大于100%</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Combinatorial Optimisation Problem：COP组合最优问题：（R, C）问题：给定一个配置R，得到成本C，目标可以是是C最小。前几章所有方法都是COP问题</li>
+<li>Satisfiability Problem - SAT：对于给定的CNF(conjunctive normal form)问题，有一个布尔函数决定该变量是否=1</li>
+<li>NP, NP-Complete, and NP-Hard Problems：略</li>
+<li>MAX-3-SAT：对于给定长度为3的CNF，找到满足情况的最大数量——同理MAX SAT</li>
+<li>Tree Graph：
+<ol>
+<li>无环，两个顶点之间有一个边，打破任何一个边就不能连接到树</li>
+<li>Complete Graph：most connected。Tree Graph：least connected</li>
+<li>Number of Edges in Complete Graphs：n(n-1)/2</li>
+<li>Number of Edges in Tree Graphs：n-1</li>
+<li>Spanning Trees：生成树，就是子树</li>
+<li>Number of Spanning Trees：n^(n-2)</li>
+<li>find Spanning Trees：DFS，BFS</li>
+<li>Minimum Cost Spanning Trees (MST)：生成树的所有边缘权重求和最小</li>
+</ol>
+</li>
+<li>Prim’s Algorithm：用于寻找MST：从顶点开始，按照与点相连的最小edge，逐渐增加顶点，确保无circle。O(n^2)</li>
+<li>Kruskal’s Algorithm：用于寻找MST：将edge从小到大排序，逐渐增加最小edge（顶点对），确保无circle。O(Eln(V)) （E为边数）</li>
+<li>Symmetric TSP：对称行商问题（最短路径问题）（travelling salesman problem, TSP）</li>
+<li>Christofides’ Algorithm：近似算法的一种
+<ol>
+<li>找到MST树；找到具有奇数边缘的节点；找到这些节点的最小匹配edge（可能属于MST树的edge）；Eulerian Walk从1号节点逐步遍历所有节点，依靠MST树的边缘和新建的匹配边缘；Embedded Tour删除重复遍历的节点，不走重复路</li>
+<li>Christofides’ Algorithm is a 1.5-approximation algorithm：costT+costM &lt; OPT+OPT/2  (OPT：最优tour，因为不容易找到，所以才有近似算法)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Combinatorial Optimisation Problems (COP): 组合最优问题，是NP问题</li>
+<li>Polynomial Time: 多项式时间内O(n<sup>3</sup>), O(nlogn)</li>
+<li>Exponential Time: 指数时间O(2<sup>cn</sup>), O(n2<sup>n</sup>)</li>
+<li>P：所有问题都能被解决，具有所有确定的正确解，在规定时间内（多项式时间内）。All problems are NP that can be solved in polynomial time 。举例：MST</li>
+<li>NP：问题正确解不易寻找，但该解决方案能够被验证在规定时间内，一定具有验证算法。All problems that have a verification  polynomial algorithm</li>
+<li>NP-hard：问题正确解不易寻找，且可能maybe没有验证算法。difficult to solve, and maybe difficult to verify 。举例：Chess，规定步数内找到玩家获胜方式</li>
+<li>NPC(NP-complete)：同时是NP和NP-hard，即问题正确解不易寻找，但是容易验证。（如果所有NP问题在规定时间内能够被解决）。difficult to solve, but easy to verify。举例：TSP</li>
+<li>区别：（我的理解）从验证算法的复杂程度（是否在规定时间内验证）进行区分，验证算法速度极快是NP，速度贴近规定时间是NPC，贴近或超过规定时间(没有算法)是NP-hard。所有的非P问题，都不能在多项式时间内解决。<br>
+（网上理解）所有NP问题能在多项式时间内转换为问题A，则A是NPC问题<br>
+所有NPC问题能在多项式时间内转换为问题A，则A是NP-hard问题</li>
+<li>Branch-and-bound ：分支定界法，参见tutorial 第2题</li>
+<li>WGBP ( weighted graph-bisection problem)：加权图平分问题：
+<ol>
+<li>输入：无向图G，假定节点个数是偶数</li>
+<li>输出：将节点分为两类L和R，使得从L到R的总权重最小</li>
+</ol>
+</li>
+<li>bounding procedure for WGBP：分支绑定方法：
+<ol>
+<li>将几个节点绑定在一起，形成新的无向图，被绑定的两类节点分别作为s和t（起始点和终止点）</li>
+<li>计算从s到t的最小权重minimun weight，使用最大流问题maximum flow</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>minimum-congestion multicommodity-flow problem：
+<ol>
+<li>最小化拥挤程度：minimise：λ</li>
+<li>所有边都小于拥挤程度：fuv / c(u,v) ≤ λ</li>
+<li>非起始点和非终止点的其他节点，输入等于输出： Σf<sup>q</sup>vu = Σf<sup>q</sup>uv</li>
+<li>起始点的输出-输入等于库存：Σf<sup>q</sup>sv - Σf<sup>q</sup>vs = dq</li>
+<li>所有流都是正的：fquv ≥ 0</li>
+</ol>
+</li>
+<li>0-1 Knapsack Problem：背包问题
+<ol>
+<li>先序遍历树</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>Simulated Annealing（SA）模拟退火算法：
+<ol>
+<li>将所有节点分为两类（L，R）</li>
+<li>2-change modification：随机从L和R中各取一点，并将这两个节点交换，得到新的路径组合</li>
+<li>计算原有路径长度config和新的路径长度new_config，并迭代寻找最优解</li>
+<li>运行时间：O(d)，d为一个节点需改动连接的最大边数</li>
+</ol>
+</li>
+<li>Greedy constructive heuristics for TSP - Nearest Neighbour：NN启发式算法：
+<ol>
+<li>从起始点开始，逐个把邻居相连，最后回到起始点</li>
+<li>使用 2-change modification逐渐寻找最优解</li>
+<li>运行时间：每个城市都要寻找最近的城市O(n)，共有n个城市。总时间O(n<sup>2</sup>)</li>
+</ol>
+</li>
+<li>Greedy constructive heuristics for TSP - Insertion：
+<ol>
+<li>先由三个城市构造一个环路，然后依次往这个环路里加节点城市</li>
+<li>可以使用 2-change modification但需要系统地检查</li>
+<li>运行时间：O(n<sup>3</sup>)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>Genetic Algorithms：遗传算法：求最大化最优解
+<ol>
+<li>crossover：取两个路径环（abcdefgh, abghcdcd），每个环取一半然后交配：（abcdghcd）。但要满足三角形定理：c(i,j)≤c(i,k)+c(k,j)</li>
+<li>fitness function：适应度函数，将最小化问题转为最大化问题：Fitness(h)=Cmax-C+r，r为恒定的非负数，目的是所有F&gt;0</li>
+<li>mutate：stimulated annealing：突变使用模拟退火法</li>
+<li>流程：fitness得到概率；从中选rk个进行crossover并形成rk个子代；从父代中选(1-r)k个与子代一起形成新的种群；从中选qk个突变。超参数：r,k,q</li>
+<li>selection: 选择策略：roulette wheel selection；rank selection；tournament selection（随机选q个，然后从中挑最好的）</li>
+</ol>
+</li>
+</ol>
+<p>.</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/6ccs3ml1-mache-learning/">
+                    6CCS3ML1 机器学习
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmbim-nature-inspired-learning-algorithms/">
+                    7CCSMBIM 生物启发算法
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#lecture-1">lecture 1</a></li>
+<li><a href="#lecture-2">lecture 2</a></li>
+<li><a href="#lecture-3">lecture 3</a></li>
+<li><a href="#lecture-4">lecture 4</a></li>
+<li><a href="#lecture-5">lecture 5</a></li>
+<li><a href="#lecture-6">lecture 6</a></li>
+<li><a href="#lecture-7">lecture 7</a></li>
+<li><a href="#lecture-8">lecture 8</a></li>
+<li><a href="#lecture-9">lecture 9</a></li>
+<li><a href="#lecture-10">lecture 10</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-01-17</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 12 min read</div>
+                <div class="posttag">
+                    
+                    <a href="https://superbb666.github.io/tag/0OxSRMFMe/" class="postlink">
+                        <i class="fa fa-tag"></i> semester2
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>6CCS3OME 最优算法</h2>
+            </div>
+            <div class="text ">
+                <h2 id="lecture-1">lecture 1</h2>
+<ol>
+<li>Single-source shortest-paths problem</li>
+<li>concepts: Negative weights, exchange-rates, negative cycles, A shortest-paths tree</li>
+<li>Relaxation technique：松弛操作（所有算法都可归结为松弛操作）：初始化所有节点的d，然后不断更新更小的d，直到不能再更新，就能获得最优路径δ</li>
+<li>Effective relax operations：若d&gt;δ，那么里面一定有可以松弛的节点</li>
+<li>Bellman-Ford algorithm：最基本的寻路算法，先设置s到所有节点距离为∞，然后从s开始每个点都计算一遍全部路径（逐点最优），时间复杂度是最高的：θ(mn)，n为节点数m为边数</li>
+<li>Bellman-Ford algorithm FIFO：队列Q里先放个s，while Q不为空，从Q中提取u，遍历邻居v，将v放入Q。时间复杂度O(mn)</li>
+</ol>
+<h2 id="lecture-2">lecture 2</h2>
+<ol>
+<li>Dijkstra’s shortest-paths algorithm：条件：所有边都是非负的。闭列表S和开列表Q，每次提取Q中最小d的节点，然后遍历该节点的所有边，并更新所有节点的d。</li>
+<li>算法复杂度：初始化θ(n) + 提取最小边O(n<sup>2</sup>) + 松弛操作O(m) = O(n<sup>2</sup>)
+<ol>
+<li>提取最小边：O(n)，全部：O(n<sup>2</sup>)</li>
+<li>松弛Relax操作：O(1)，全部：O(m)</li>
+</ol>
+</li>
+<li>Dijkstra’s algorithm with Heap：降低Dijkstra在搜索Q中最小路径中的复杂度，算法中每次寻找Q集中dis值最小的点的复杂度为O(n)，我们可以用堆（heap）来优化这一过程，使其复杂度降到O(logn)，这样总体复杂度降到O(mlogn)</li>
+<li>Single-source shortest paths in DAG’s：有向无环图的最短路径算法， directed acyclic graph (DAG)
+<ol>
+<li>Bellman-Ford: 贝尔曼-福特算法：O(mn)</li>
+<li>Topological Sorting：拓扑排序：O(n + m)</li>
+<li>Breadth-First Search (BFS)：广度优先搜索，Depth-First Search (DFS)：深度优先搜索。O(n + m)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-3">lecture 3</h2>
+<ol>
+<li>Johnson’s algorithm： All-pairs shortest-paths problem。边可以是负数。
+<ol>
+<li>w^ = w + h(u) - h(v), 对每个节点增加一个数字，使新的w^ &gt; 0</li>
+<li>计算h(u): 增加节点s，边缘=0，计算到每个节点的最小负值，该值就是h</li>
+</ol>
+</li>
+<li>Dijkstra’s shortest-paths algorithm：Single-source single-destination shortest-path problem。O(n^2)
+<ol>
+<li>起点s和终点d，同时开始搜索</li>
+<li>Dijkstra’s algorithm for “geographical” networks：与Johnson’s algorithm类似，增加新节点d，该节点使距离各个城镇的直线距离，wˆ(u, v) = w(u, v) − dist(u, d) + dist(v, d)。{w(u, v) + dist(v, d) &gt; dist(u, d)}</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-4">lecture 4</h2>
+<ol>
+<li>Maximum network-flow problem：就像河流流量，边缘=1，3，4，则河水经过这些河流的流量最大只能是1。但是每个节点可以由多个河流汇入</li>
+<li>Flow-Feasibility problem (Transshipment problem)：流动可行性问题（转运问题）：
+<ol>
+<li>Flows – formal definition: 相关定义：flow, Capacity constraints, Flow conservation</li>
+<li>Maximum flow problem：对于起始点s，f = Σ从s的输出流 - Σ到s的输入流  == 对于到达点t，f =  Σ到t的输入流 -  Σ从t的输出流</li>
+<li>saturated edge：饱和边：f(v, u) = c(v, u)</li>
+</ol>
+</li>
+<li>Reduction from flow-feasibility to maximum-flow
+<ol>
+<li>将流量可行性问题转换为最大流量问题：增加supply node s和demand node t</li>
+<li>根据守恒定律重置每个edge的流速</li>
+<li>删去s和t，就变成了守恒的flow-feasibility</li>
+</ol>
+</li>
+<li>Ford-Fulkerson method：Increase the flow using the residual network
+<ol>
+<li>residual network：根据容量确定</li>
+<li>根据现有的flow，画出residual network，然后寻找s-&gt;t的路径，如果找到了，则具有更优的flow。value flow 8 = current flow 7 + value in residual network 1</li>
+<li>时间复杂度：视情况而定</li>
+</ol>
+</li>
+<li>Cuts：将所有节点分成两类，一类包含起点source s，另一类包含终点t
+<ol>
+<li>cut = 在原始图（非residual图）中，起点类的所有输出capacity，not flow</li>
+<li>f = 在原始图（非residual图）中，起点类的所有输出flow - 所有输入flow = |f|</li>
+<li>f≤c，因此f最大值小于等于c的最小值</li>
+<li>找cut必须在residual里看，计算cut在原始图看更方便</li>
+</ol>
+</li>
+<li>The Max-flow Min-cut theorem：
+<ol>
+<li>max f = min c</li>
+<li>f 为max = no augmenting path Gf = 存在cut，使c=f</li>
+<li>查找Minimun cut的方法：
+<ol>
+<li>将图根据residual方式得到最优解</li>
+<li>画出residual network</li>
+<li>在该图上从起点s开始，如果有从s到其他节点的箭头，则cut集包含该节点。直到该cut集没有向外输出的箭头。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>The Edmonds-Karp algorithm：在Ford-Fulkerson method基础上，每次迭代选择最小augmenting path（这条路线经过的节点数最少）
+<ol>
+<li>running time：O(nm2)</li>
+</ol>
+</li>
+<li>maximum bipartite matching problem：最大二分匹配问题
+<ol>
+<li>增加s和t，变为最大流问题，capacity = 1</li>
+<li>running time：O(mn)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-5">lecture 5</h2>
+<ol>
+<li>Minimum cost flow problem：最小花费流问题
+<ol>
+<li>G(V, E, u, c, d): vertex, edge, capacity, cost, supply/demand: 点，边，容量，花费，供给</li>
+<li>Application: Production and distribution problems</li>
+</ol>
+</li>
+<li>Successive shortest path algorithm：SUCCESSIVE SP：连续最短路径算法
+<ol>
+<li>选择节点v，计算最短路径 (可以用Dijkstra)</li>
+<li>依旧是找负循环，发送一个flow，cost为负的，则还存在最优</li>
+<li>运行时间：O(m<sup>2</sup> log<sup>2</sup> n)</li>
+<li>具体步骤如下：说的太好了就不翻译了
+<ol>
+<li>The first step of SSP is to select a supply node v.</li>
+<li>The second step is to construct the residual network Gf.</li>
+<li>The third step is to compute the shortest path tree T(v) rooted at node v in the residual network Gf. That is, we have a shortest path from v to every node u reachable from v in Gf.</li>
+<li>The fourth step is to select a demand node w reachable from v (any node will do) in T(v).</li>
+<li>The fifth step is to send q units of flow along the path from v to w.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Multicommodity flow problems：多物网络流问题</li>
+<li>Minimum-cost multicommodity-flow problem：最小花费</li>
+<li>Minimum-congestion multicommodity-flow problem：最小拥挤，=max( flow/capacity )，可能大于100%</li>
+</ol>
+<h2 id="lecture-6">lecture 6</h2>
+<ol>
+<li>Combinatorial Optimisation Problem：COP组合最优问题：（R, C）问题：给定一个配置R，得到成本C，目标可以是是C最小。前几章所有方法都是COP问题</li>
+<li>Satisfiability Problem - SAT：对于给定的CNF(conjunctive normal form)问题，有一个布尔函数决定该变量是否=1</li>
+<li>NP, NP-Complete, and NP-Hard Problems：略</li>
+<li>MAX-3-SAT：对于给定长度为3的CNF，找到满足情况的最大数量——同理MAX SAT</li>
+<li>Tree Graph：
+<ol>
+<li>无环，两个顶点之间有一个边，打破任何一个边就不能连接到树</li>
+<li>Complete Graph：most connected。Tree Graph：least connected</li>
+<li>Number of Edges in Complete Graphs：n(n-1)/2</li>
+<li>Number of Edges in Tree Graphs：n-1</li>
+<li>Spanning Trees：生成树，就是子树</li>
+<li>Number of Spanning Trees：n^(n-2)</li>
+<li>find Spanning Trees：DFS，BFS</li>
+<li>Minimum Cost Spanning Trees (MST)：生成树的所有边缘权重求和最小</li>
+</ol>
+</li>
+<li>Prim’s Algorithm：用于寻找MST：从顶点开始，按照与点相连的最小edge，逐渐增加顶点，确保无circle。O(n^2)</li>
+<li>Kruskal’s Algorithm：用于寻找MST：将edge从小到大排序，逐渐增加最小edge（顶点对），确保无circle。O(Eln(V)) （E为边数）</li>
+<li>Symmetric TSP：对称行商问题（最短路径问题）（travelling salesman problem, TSP）</li>
+<li>Christofides’ Algorithm：近似算法的一种
+<ol>
+<li>找到MST树；找到具有奇数边缘的节点；找到这些节点的最小匹配edge（可能属于MST树的edge）；Eulerian Walk从1号节点逐步遍历所有节点，依靠MST树的边缘和新建的匹配边缘；Embedded Tour删除重复遍历的节点，不走重复路</li>
+<li>Christofides’ Algorithm is a 1.5-approximation algorithm：costT+costM &lt; OPT+OPT/2  (OPT：最优tour，因为不容易找到，所以才有近似算法)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-7">lecture 7</h2>
+<ol>
+<li>Combinatorial Optimisation Problems (COP): 组合最优问题，是NP问题</li>
+<li>Polynomial Time: 多项式时间内O(n<sup>3</sup>), O(nlogn)</li>
+<li>Exponential Time: 指数时间O(2<sup>cn</sup>), O(n2<sup>n</sup>)</li>
+<li>P：所有问题都能被解决，具有所有确定的正确解，在规定时间内（多项式时间内）。All problems are NP that can be solved in polynomial time 。举例：MST</li>
+<li>NP：问题正确解不易寻找，但该解决方案能够被验证在规定时间内，一定具有验证算法。All problems that have a verification  polynomial algorithm</li>
+<li>NP-hard：问题正确解不易寻找，且可能maybe没有验证算法。difficult to solve, and maybe difficult to verify 。举例：Chess，规定步数内找到玩家获胜方式</li>
+<li>NPC(NP-complete)：同时是NP和NP-hard，即问题正确解不易寻找，但是容易验证。（如果所有NP问题在规定时间内能够被解决）。difficult to solve, but easy to verify。举例：TSP</li>
+<li>区别：（我的理解）从验证算法的复杂程度（是否在规定时间内验证）进行区分，验证算法速度极快是NP，速度贴近规定时间是NPC，贴近或超过规定时间(没有算法)是NP-hard。所有的非P问题，都不能在多项式时间内解决。<br>
+（网上理解）所有NP问题能在多项式时间内转换为问题A，则A是NPC问题<br>
+所有NPC问题能在多项式时间内转换为问题A，则A是NP-hard问题</li>
+<li>Branch-and-bound ：分支定界法，参见tutorial 第2题</li>
+<li>WGBP ( weighted graph-bisection problem)：加权图平分问题：
+<ol>
+<li>输入：无向图G，假定节点个数是偶数</li>
+<li>输出：将节点分为两类L和R，使得从L到R的总权重最小</li>
+</ol>
+</li>
+<li>bounding procedure for WGBP：分支绑定方法：
+<ol>
+<li>将几个节点绑定在一起，形成新的无向图，被绑定的两类节点分别作为s和t（起始点和终止点）</li>
+<li>计算从s到t的最小权重minimun weight，使用最大流问题maximum flow</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-8">lecture 8</h2>
+<ol>
+<li>minimum-congestion multicommodity-flow problem：
+<ol>
+<li>最小化拥挤程度：minimise：λ</li>
+<li>所有边都小于拥挤程度：fuv / c(u,v) ≤ λ</li>
+<li>非起始点和非终止点的其他节点，输入等于输出： Σf<sup>q</sup>vu = Σf<sup>q</sup>uv</li>
+<li>起始点的输出-输入等于库存：Σf<sup>q</sup>sv - Σf<sup>q</sup>vs = dq</li>
+<li>所有流都是正的：fquv ≥ 0</li>
+</ol>
+</li>
+<li>0-1 Knapsack Problem：背包问题
+<ol>
+<li>先序遍历树</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-9">lecture 9</h2>
+<ol>
+<li>Simulated Annealing（SA）模拟退火算法：
+<ol>
+<li>将所有节点分为两类（L，R）</li>
+<li>2-change modification：随机从L和R中各取一点，并将这两个节点交换，得到新的路径组合</li>
+<li>计算原有路径长度config和新的路径长度new_config，并迭代寻找最优解</li>
+<li>运行时间：O(d)，d为一个节点需改动连接的最大边数</li>
+</ol>
+</li>
+<li>Greedy constructive heuristics for TSP - Nearest Neighbour：NN启发式算法：
+<ol>
+<li>从起始点开始，逐个把邻居相连，最后回到起始点</li>
+<li>使用 2-change modification逐渐寻找最优解</li>
+<li>运行时间：每个城市都要寻找最近的城市O(n)，共有n个城市。总时间O(n<sup>2</sup>)</li>
+</ol>
+</li>
+<li>Greedy constructive heuristics for TSP - Insertion：
+<ol>
+<li>先由三个城市构造一个环路，然后依次往这个环路里加节点城市</li>
+<li>可以使用 2-change modification但需要系统地检查</li>
+<li>运行时间：O(n<sup>3</sup>)</li>
+</ol>
+</li>
+</ol>
+<h2 id="lecture-10">lecture 10</h2>
+<ol>
+<li>Genetic Algorithms：遗传算法：求最大化最优解
+<ol>
+<li>crossover：取两个路径环（abcdefgh, abghcdcd），每个环取一半然后交配：（abcdghcd）。但要满足三角形定理：c(i,j)≤c(i,k)+c(k,j)</li>
+<li>fitness function：适应度函数，将最小化问题转为最大化问题：Fitness(h)=Cmax-C+r，r为恒定的非负数，目的是所有F&gt;0</li>
+<li>mutate：stimulated annealing：突变使用模拟退火法</li>
+<li>流程：fitness得到概率；从中选rk个进行crossover并形成rk个子代；从父代中选(1-r)k个与子代一起形成新的种群；从中选qk个突变。超参数：r,k,q</li>
+<li>selection: 选择策略：roulette wheel selection；rank selection；tournament selection（随机选q个，然后从中挑最好的）</li>
+</ol>
+</li>
+</ol>
+<p>.</p>
+
+            </div>
+            
+            <div class="prev-post">
+                上一篇
+                <a href="https://superbb666.github.io/post/6ccs3ml1-mache-learning/">
+                    6CCS3ML1 机器学习
+                </a>
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmbim-nature-inspired-learning-algorithms/">
+                    7CCSMBIM 生物启发算法
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>

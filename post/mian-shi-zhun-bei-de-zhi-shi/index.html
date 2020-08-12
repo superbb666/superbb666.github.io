@@ -1,0 +1,1373 @@
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="chAY5G57j_t2ol9lYd44pdcjgWvRbICTcf3qjXgvMsA" />
+    <meta name="description" content="线性回归
+引用：https://zhuanlan.zhihu.com/p/66519299，https://blog.csdn.net/Noob_daniel/article/details/76087829
+
+线性回归的原理
+损失函数
+为..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/styles/default.min.css">
+              
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+    <title>superbb666的个人博客</title>
+</head>
+
+<body>
+    <!-- 响应式布局，针对PC端内容显示 -->
+    <div id="content">
+        <div class="nav-large">
+            <div class="row">
+                <div class="side"><html>
+
+<head>
+    <link rel="stylesheet" href="https://superbb666.github.io/styles/main.css">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta name="description" content="将学到的知识点进行汇总" />
+    <title>Document</title>
+</head>
+<style>
+</style>
+
+<body>
+    <div id=side>
+        <div class="avatar-border">
+            <img src="https://superbb666.github.io/images/avatar.png?v=1597240181315" class="avatar">
+        </div>
+        <div class="sitename">superbb666的个人博客</div>
+        <span class="describtion" data-text='["将学到的知识点进行汇总"]'>&nbsp;</span>
+        
+        <div class="search">
+            <!-- <input type="text" class="search-input" placeholder="全文搜索(●'◡'●)" /> -->
+            <input type="text" class="search-input" placeholder="全文搜索 ⚆_⚆ つ♡">
+            <div class="search-results"></div>
+        </div>
+        
+    <div class="share-button">
+        <span>Contact</span>
+        
+        <a href="https://github.com/superbb666?tab=repositories" target="_blank"><i><img class="icon"
+                    src="https://superbb666.github.io/media/images/github.png" alt=""></i></a>
+        
+        
+        <a onclick="showqq()"><i><img class="icon" src="https://superbb666.github.io/media/images/QQ.png" alt=""></i></a>
+        
+        
+        
+        
+        
+    </div>
+    <div id="qq" style="display:none">nicaiya</div>
+    
+    
+    <div class="mchocie describtion">
+        <a href="/" class="menubutton">
+            首页
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/archives" class="menubutton">
+            归档
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/tags" class="menubutton">
+            标签
+        </a>
+    </div>
+    
+    
+    
+    <div class="mchocie describtion">
+        <a href="/post/about" class="menubutton">
+            关于
+        </a>
+    </div>
+    
+    
+    
+    <hr>
+    <div id="footinfo">Powered by <a href="https://github.com" target="_blank">github</a> | Theme: Fog</div>
+    <div id="footinfo">
+        <div id="busuanzi_container_site_uv" style='display:none'>
+            欢迎第<span id="busuanzi_value_site_uv"></span>位游客
+        </div>
+    </div>
+    <div id="sitegotimeDate">载入天数...</div>
+    <div id="sitegotimes">载入时分秒...</div>
+    <div id="cussitetime" style="display:none">09/02/2019</div>
+    <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=55mm4laq3sg&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+    </div>
+</body>
+
+</html>
+<script src="https://superbb666.github.io/media/js/wordshow.js"></script>
+<script>
+    //----------------------站点运行时间
+    var now = new Date();
+
+    function createtime() {
+        var sitegotime = document.getElementById("cussitetime").innerHTML + " 00:00:00";
+        var grt = new Date(sitegotime); //此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime() + 250);
+        days = (now - grt) / 1000 / 60 / 60 / 24;
+        dnum = Math.floor(days);
+        hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+        hnum = Math.floor(hours);
+        if (String(hnum).length == 1) {
+            hnum = "0" + hnum;
+        }
+        minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes);
+        if (String(mnum).length == 1) {
+            mnum = "0" + mnum;
+        }
+        seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds);
+        if (String(snum).length == 1) {
+            snum = "0" + snum;
+        }
+        document.getElementById("sitegotimeDate").innerHTML = "本站已安全运行 " + dnum + " 天 ";
+        document.getElementById("sitegotimes").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+    setInterval("createtime()", 250);
+
+    //-------------------------------------------------搜索
+    // 获取搜索框、搜索按钮、清空搜索、结果输出对应的元素
+    var searchInput = document.querySelector('.search-input');
+    var searchResults = document.querySelector('.search-results');
+
+    // 申明保存文章的标题、链接、内容的数组变量
+    var searchValue = '',
+        arrItems = [],
+        arrLinks = [],
+        arrTitles = [],
+        arrContents = [],
+        arrResults = [],
+        indexItem = [],
+        itemLength = 0;
+    var tmpDiv = document.createElement('div');
+    tmpDiv.className = 'result-item';
+
+    // ajax 的兼容写法
+    var xhr = new XMLHttpRequest() || new ActiveXObject('Microsoft.XMLHTTP');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            xml = xhr.responseXML;
+            // 由于FF不直接支持 responseXML,需要将responseText转换成XML对象,才能用XMLDOM处理
+            if(xml==null){
+                var parser=new DOMParser();
+                xml=parser.parseFromString(xhr.responseText,"text/xml");
+            }
+            arrItems = xml.getElementsByTagName('entry');
+            itemLength = arrItems.length;
+            // alert(xhr.responseText); // .getElementsByTagName('content')[0]
+            console.log(arrItems);
+            // 遍历并保存所有文章对应的标题、链接、内容到对应的数组中
+            // 同时过滤掉 HTML 标签
+            for (i = 0; i < itemLength; i++) {
+                var link = arrItems[i].getElementsByTagName('link')[0];
+                arrLinks[i] = link.getAttribute("href");
+                arrTitles[i] = arrItems[i].getElementsByTagName('title')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+                arrContents[i] = arrItems[i].getElementsByTagName('content')[0].
+                childNodes[0].nodeValue.replace(/<.*?>/g, '');
+            }
+        }
+
+    }
+
+    // 开始获取根目录下 feed.xml 文件内的数据
+    xhr.open('get', '/atom.xml', true);
+    xhr.send();
+
+
+
+    // 输入框内容变化后就开始匹配，可以不用点按钮
+    // 经测试，onkeydown, onchange 等方法效果不太理想，
+    // 存在输入延迟等问题，最后发现触发 input 事件最理想，
+    // 并且可以处理中文输入法拼写的变化
+    searchInput.oninput = function () {
+        setTimeout(searchConfirm, 0);
+    }
+    searchInput.onfocus = function () {
+        searchResults.style.display = 'block';
+    }
+
+    function searchConfirm() {
+        if (searchInput.value == '') {
+            searchResults.style.display = 'none';
+        } else if (searchInput.value.search(/^\s+$/) >= 0) {
+            // 检测输入值全是空白的情况
+            searchInit();
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '请输入有效内容...';
+            searchResults.appendChild(itemDiv);
+        } else {
+            // 合法输入值的情况
+            searchInit();
+            searchValue = searchInput.value;
+            // 在标题、内容中查找
+            // searchMatching(arrTitles, searchValue);
+            searchMatching(arrContents, searchValue);
+        }
+    }
+
+    // 每次搜索完成后的初始化
+    function searchInit() {
+        arrResults = [];
+        indexItem = [];
+        searchResults.innerHTML = '';
+        searchResults.style.display = 'block';
+    }
+
+    function searchMatching(arr1, input) {
+        // 忽略输入大小写
+        input = new RegExp(input, 'i');
+        // 在所有文章标题、内容中匹配查询值
+        for (i = 0; i < itemLength; i++) {
+            // alert(arr1[i].search(input));
+            if (arr1[i].search(input) !== -1) {
+                var arr = arr1;
+                indexItem.push(i); // 保存匹配值的索引
+                var indexContent = arr[i].search(input);
+                // 此时 input 为 RegExp 格式 /input/i，转换为原 input 字符串长度
+                var l = input.toString().length - 3;
+                var step = 10;
+                // 将匹配到内容的地方进行黄色标记，并包括周围一定数量的文本
+                arrResults.push(arr[i].slice(indexContent - step, indexContent) +
+                    '<mark>' + arr[i].slice(indexContent, indexContent + l) + '</mark>' +
+                    arr[i].slice(indexContent + l, indexContent + l + step));
+            }
+        }
+        // 输出总共匹配到的数目
+        var totalDiv = tmpDiv.cloneNode(true);
+        totalDiv.innerHTML = '<b>总匹配：' + indexItem.length + ' 项<hr></b>';
+        searchResults.appendChild(totalDiv);
+
+        // 未匹配到内容的情况
+        if (indexItem.length == 0) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerText = '未匹配到内容...';
+            searchResults.appendChild(itemDiv);
+        }
+
+        // 将所有匹配内容进行组合
+        for (i = 0; i < arrResults.length; i++) {
+            var itemDiv = tmpDiv.cloneNode(true);
+            itemDiv.innerHTML = '<b>[' + arrTitles[indexItem[i]] +
+                ']</b><p>' + arrResults[i] + "</p><hr />";
+            itemDiv.setAttribute('onclick', 'changeHref(arrLinks[indexItem[' + i + ']])');
+            searchResults.appendChild(itemDiv);
+        }
+    }
+
+    function changeHref(href) {
+        location.href = href;
+    }
+
+    function showqq() {
+        var qq = document.getElementById("qq").innerHTML;
+        if (qq != '')
+            alert("博主的QQ联系方式为：" + qq);
+        else
+            alert("博主暂未设置QQ联系方式");
+    }
+</script></div>
+                <div id="tab1" class="tab">
+                    <div class="bars">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="close"></div>
+                </div>
+                <div id="main" class="col-xs-12 col-sm-7">
+                    <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-07-05</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 32 min read</div>
+                <div class="posttag">
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>面试准备的知识</h2>
+            </div>
+            <div class="text ">
+                <h2 id="线性回归">线性回归</h2>
+<p>引用：https://zhuanlan.zhihu.com/p/66519299，https://blog.csdn.net/Noob_daniel/article/details/76087829</p>
+<ol>
+<li>线性回归的原理</li>
+<li>损失函数</li>
+<li>为什么线性回归使用的是平方差形式的损失函数？（线性回归问什么要用最小二乘法计算？)：假设误差服从独立正态分布，使用极大似然法（最大化误差项目为εi的样本总体出现的概率最大）来求解参数，进一步经过推导之后得到的mse的公式而已。</li>
+<li>什么是决定系数 (R-squared)：来测量拟合优度，R<sup>2</sup>=SSR/SST=1-SSE/SST，SST是总平方和，SSR是回归平方和，SSE是残差平方和。表示的是自变量引起的变动占总变动的百分比，值越大，说明残差的影响越不明显，则权重部分的预测效果越好。</li>
+<li>回归分析的五个基本假设：
+<ol>
+<li>线性性 &amp; 可加性：公式</li>
+<li>误差项（ε）之间应相互独立</li>
+<li>自变量（X1，X2）之间应相互独立：若不满足，则称模型具有多重共线性性</li>
+<li>误差项（ε）的方差应为常数：满足则称模型具有同方差性（Homoskedasticity），若不满足，则为异方差性（Heteroskedasticity）。</li>
+<li>误差项（ε）应呈正态分布。</li>
+</ol>
+</li>
+<li>基本假设失效的影响：
+<ol>
+<li>线性性 &amp; 可加性：模型将无法很好的描述变量之间的关系，极有可能导致很大的泛化误差（generalization error）————自变量做非线性变换log(X)</li>
+<li>自相关性（Autocorrelation）：经常发生于时间序列数据集上，标准差往往会偏小，进而会导致置信区间变窄。————用DW观察</li>
+<li>多重共线性性（Multicollinearity）：导致我们测得的标准差偏大，置信区间变宽。采用添加正则项、增加数据量、减小特征或降维、数据归一化可以一定程度上减少方差，解决多重共线性性问题。————</li>
+<li>异方差性（Heteroskedasticity）：常常出现在有异常值（Outlier）的数据集上。标准差和置信区间不一定会变大还是变小。————因变量做非线性变换log(Y)</li>
+<li>误差项（ε）不呈正态分布：置信区间会变得很不稳定，我们往往需要重点关注一些异常的点（误差较大但出现频率较高），来得到更好的模型。</li>
+</ol>
+</li>
+<li>线性回归（包括逻辑回归）模型如何增强模型的表达能力？（就是说遇到非线性的问题咋整）：连续特征的离散化，特征交叉，gbdt交叉特征提取等；？？？</li>
+<li>为什么线性回归和逻辑回归要用对特征进行离散化？：离散特征的增加和减少，模型也不需要调整；稀疏向量内积乘法运算速度快；对异常数据有很强的鲁棒性(年龄[0-300]分割成年龄10，年龄20，年龄30...)；单变量离散化为N个后，每个变量有单独的权重，相当于为模型引入了非线性；离散化后可以进行特征交叉；模型会更稳定(异常值)；简化了逻辑回归模型的作用，降低了模型过拟合的风险(单一连续特征如果不离散，该变量权重太大的话会过拟合，因此将特征变为多个特征分散权重)。</li>
+<li>线性回归效果不好的原因？：很难拟合复杂的非线性关系，实际情况中基础假设难以得到满足（比如残差符合正态分布）</li>
+<li>逻辑回归 和 线性回归的区别？：两者都属于广义线性模型。；线性回归优化目标函数用的最小二乘法，而逻辑回归用的是最大似然估计。；逻辑回归就是一种减小预测范围，将预测值限定为 [0,1] 间的一种回归模型。逻辑回归的鲁棒性比线性回归要好。</li>
+</ol>
+<h2 id="逻辑回归">逻辑回归</h2>
+<p>引用：https://blog.csdn.net/weixin_42933718/article/details/88874376</p>
+<ol>
+<li>逻辑回归模型介绍：逻辑回归假设数据服从伯努利分布,通过极大化似然函数的方法，运用梯度下降来求解参数，来达到将数据二分类的目的。</li>
+<li>逻辑回归的基本假设：假设数据服从伯努利分布；第二个假设是假设样本为正的概率是p=1/(1+e<sup>-θTx</sup>)</li>
+<li>逻辑回归的损失函数：并非平方差！！是极大似然函数的对数：J=-log(L), L=∏p<sup>y</sup> (1-p)<sup>1-y</sup>, p(y=1|x,θ)=h(x)</li>
+<li>损失函数一般有四种：平方损失函数，对数损失函数，HingeLoss0-1损失函数，绝对值损失函数。</li>
+<li>逻辑回归的损失函数为什么要使用极大似然函数作为损失函数？：逻辑回归这个模型下，对数损失函数的训练求解参数的速度是比较快的，和sigmod函数本身的梯度是无关的。不选平方损失函数原因？其一是因为平方损失函数，梯度更新的速度和sigmod函数本身的梯度是很相关的。sigmod函数在它在定义域内的梯度都不大于0.25。这样训练会非常的慢。</li>
+<li>逻辑回归的优缺点：
+<ol>
+<li>优点：形式简单，可解释性非常好；训练速度较快；内存占用小；方便输出结果调整。</li>
+<li>缺点：准确率不高；很难处理正负样本不平衡的问题；处理非线性数据较麻烦；本身无法筛选特征。有时候，我们会用gbdt来筛选特征，然后再上逻辑回归。</li>
+</ol>
+</li>
+<li>如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？：不会影响分类器的效果。每一个特征都是原来特征权重值的百分之一。</li>
+<li>为什么我们还是会在训练的过程当中将高度相关的特征去掉？：可解释性更好；提高训练的速度。</li>
+<li>为什么常常要做特征组合（特征交叉）？：特征组合可以引入非线性特征，提升模型的表达能力</li>
+<li>逻辑回归是线性模型吗？：广义线性模型，虽然引入了Sigmod函数是非线性模型，但本质上还是一个线性回归模型，因为除去Sigmod函数映射关系，其他的算法原理，步骤都是线性回归的。</li>
+<li>逻辑回归输出的值[0,1]，这个值是真实的概率吗？如果你的情况满足两个假设，那么你训练模型的过程，就确实是在对概率进行建模。但这两个假设并不是那么容易满足的。所以，很多情况下无法当作真实的概率，只能作为置信度来使用。</li>
+<li>防止欠拟合：从数据层面上考虑——可以增加新特征，例如，组合、泛化、相关性、高次特征，来增大假设空间等。从模型层面上考虑——增加模型的复杂度，例如SVM的核函数，决策树不进行剪枝、DNN等更复杂的模型，去掉正则化项或者减小正则化参数，加深训练轮数等。</li>
+<li>防止过拟合：增加样本量，减少模型复杂度；减少特征数量；正则化</li>
+<li>多分类方式：one vs rest——一个为正样本p1，剩下为负样本；剩下的继续分为正p2负...。softmax函数——sigmoid函数是softmax函数的二元特例。</li>
+<li>逻辑回归可以用在线性不可分吗？那怎么才能让逻辑回归能用？：不能，因为逻辑回归决策边界为超平面，不能用于非线性。提高特征维度(特征交叉)；核函数</li>
+<li>与线性回归的对比：目标函数不同；输出范围不同</li>
+<li>与最大熵的对比：？？？</li>
+<li>与SVM的对比：
+<ol>
+<li>相同点：分类算法；监督学习；判别模型；都能通过核函数方法针对非线性情况分类；目标都是找一个分类超平面；都能减少离群点的影响</li>
+<li>不同点：损失函数不同；逻辑回归使用所有样本点，svm则只取支持向量；逻辑回归对概率建模，svm对分类超平面建模；逻辑回归是处理经验风险最小化，svm是结构风险最小化。这点体现在svm自带L2正则化项，逻辑回归并没有；逻辑回归通过非线性变换减弱分离平面较远的点的影响，svm则只取支持向量从而消去较远点的影响；逻辑回归是统计方法，svm是几何方法</li>
+</ol>
+</li>
+<li>与贝叶斯的对比：
+<ol>
+<li>相同点：分类问题和监督学习；当假设朴素贝叶斯的条件概率P(X|Y=ck)服从高斯分布时，它计算出来的P(Y=1|X)形式跟逻辑回归是一样的</li>
+<li>不同点：逻辑回归为判别模型求的是p(y|x)，朴素贝叶斯为生成模型求的是p(x,y)。逻辑回归需要迭代优化，后者不需要。在数据量少的情况下贝叶斯好，数据量足够的情况下逻辑回归好。由于朴素贝叶斯假设了条件概率P(X|Y=ck)是条件独立的，也就是每个特征权重是独立的，如果数据不符合这个情况，朴素贝叶斯的分类表现就没有逻辑回归好。</li>
+</ol>
+</li>
+</ol>
+<h2 id="梯度下降算法-梯度消失和梯度爆炸">梯度下降算法、梯度消失和梯度爆炸</h2>
+<p>引用：https://blog.csdn.net/Heitao5200/article/details/103846059，https://zhuanlan.zhihu.com/p/51490163</p>
+<ol>
+<li>机器学习中为什么需要梯度下降？：是迭代法的一种，可以用于求解最小二乘问题。</li>
+<li>梯度下降法缺点：靠近极小值时收敛速度减慢；直线搜索时可能会产生一些问题；可能会“之字形”地下降。</li>
+<li>如何对梯度下降法进行调优？：学习率；参数初始值；数据标准化处理</li>
+<li>随机梯度和批量梯度区别：
+<ol>
+<li>批量梯度下降：样本量很大的时候，训练速度慢。</li>
+<li>随机梯度下降：训练速度很快。解有可能不是全局最优。迭代方向变化很大，不能很快的收敛到局部最优解。</li>
+</ol>
+</li>
+<li>各种梯度下降法性能比较：<br>
+<img src="https://superbb666.github.io/post-images/1595206297049.PNG" alt="" loading="lazy"></li>
+<li>推导多元函数牛顿法的迭代公式：将不方便表示的f(x)转化为泰勒公式展开</li>
+<li>什么是梯度消失：w都是小数，导数小于1（sigmoid导数范围[0,0.25]），对w1求梯度会越乘越小</li>
+<li>什么是梯度爆炸：w大于1，导数大于1，层数增多越乘越大</li>
+<li>梯度消失、爆炸的解决方案：
+<ol>
+<li>预训练加微调：DBN+BP</li>
+<li>梯度剪切、正则化：用于解决梯度爆炸，设置梯度阈值</li>
+<li>改为relu等激活函数：求导等于1</li>
+<li>batch normalization：将输出变为均值和方差一致，消除w的放大或缩小</li>
+<li>使用残差网络</li>
+<li>使用LSTM</li>
+</ol>
+</li>
+<li>什么是梯度提升？：对预测值和真实值的残差进行梯度调优。</li>
+<li>梯度下降和梯度提升的区别：
+<ol>
+<li>更新对象：梯度下降是模型参数，梯度提升是模型预测值</li>
+<li>更新方法：梯度下降是损失函数对参数的真实梯度值，梯度提升是模型梯度的预测值</li>
+<li>理论基础：梯度下降是以损失函数下降速度最快方向，梯度提升残差减少（模型效果上升）速度最快的方向</li>
+</ol>
+</li>
+<li>面试题目：给定优化问题，假设已经用代码实现了求函数值和函数梯度的功能,请问,如何验证这两个功能的代码实现没有问题?？？？？？</li>
+</ol>
+<h2 id="k-means-knn">k-means、KNN</h2>
+<p>引用：https://blog.csdn.net/hua111hua/article/details/86556322</p>
+<ol>
+<li>K-means算法的原理和工作流程</li>
+<li>KNN算法的原理：K值的选择，过小则容易过拟合，过大则容易欠拟合，可以使用交叉验证法选取K值。</li>
+<li>KNN算法有哪些优点和缺点？
+<ol>
+<li>优点：可以用来做分类和回归；可用于非线性分类；训练时间复杂度为O(n)；准确度高，对数据没有假设，对离群值不敏感；</li>
+<li>缺点：计算量大；样本不平衡问题（即有些类别的样本数量很多，而其他样本的数量很少）；需要大量的内存；</li>
+</ol>
+</li>
+<li>不平衡的样本可以给KNN的预测结果造成哪些问题，有没有什么好的解决方式？距离小的权值大</li>
+<li>为了解决KNN算法计算量过大的问题，可以使用分组的方式进行计算，简述一下该方式的原理。：将样本集按近邻关系分解成组，给出每组质心的位置，以质心作为代表点，和未知样本计算距离，选出距离最近的一个或者若干个组，再在组的范围内应用一般的KNN算法。</li>
+<li>什么是欧氏距离和曼哈顿距离？l2和l1</li>
+<li>KNN中的K如何选取的？:K值一般取一个较小的数值，例如采用交叉验证法（简单来说，就是一部分样本做训练集，一部分做测试集）来选择最优的K值。</li>
+<li>K-means中常用的到中心距离的度量有哪些？欧几里得距离和余弦相似度。</li>
+<li>K-means中的k值如何选取? 场景选定法；随机法；手肘法（手肘法的核心指标是SSE误差平方和）；轮廓系数法？？？；稳定性方法（数据采样分为两组，尝试不同的k观察两组聚类的相似度）；与层次聚类结合；Canopy Method？？？</li>
+<li>K-means算法中初始点的选择对最终结果有影响吗？陷入局部最优解</li>
+<li>K-means聚类中每个类别中心的初始点如何选择？随机法；选择各批次距离尽可能远的k个点；层次聚类或者Canopy预处理</li>
+<li>K-means中空聚类的处理：一种方法是选择一个距离当前任何质心最远的点。这将消除当前对总平方误差影响最大的点。另一种方法是从具有最大SEE的簇中选择一个替补的质心。这将分裂簇并降低聚类的总SEE。</li>
+<li>K-means是否会一直陷入选择质心的循环停不下来？不会，SSE是凸函数</li>
+<li>如何快速收敛数据量超大的K-means？：Mini Batch（分批处理）</li>
+<li>K-means算法的优点和缺点是什么？：
+<ol>
+<li>优点：当潜在的簇形状是凸面（即球形）的，簇与簇之间区别较明显，且簇大小相近时，其聚类结果较理想。处理大数据集合，该算法非常高效，且伸缩性较好。</li>
+<li>缺点：要事先确定簇数K和对初始聚类中心敏感外，经常以局部最优结束，同时对“噪声”和孤立点敏感，并且该方法不适于发现非凸面形状的簇或者大小差别很大的簇。</li>
+</ol>
+</li>
+<li>如何对K-means聚类效果进行评估？：轮廓系数（点到簇内距离a，点到簇间距离b，(b-a)/max，越大越好，值为负则分类错误）</li>
+<li>K-Means与KNN有什么区别：
+<ol>
+<li>KNN是分类算法，K-means是聚类算法；</li>
+<li>KNN是监督学习，K-means是非监督学习</li>
+<li>KNN没有明显的前期训练过程，K-means有明显的前期训练过程</li>
+<li>k的区别</li>
+</ol>
+</li>
+</ol>
+<h2 id="混淆矩阵">混淆矩阵</h2>
+<ol>
+<li>查准率（precision）：= TP/(TP+FP)，= P(y=1|y^=1)，在预测结果为1时，真实值为1的概率</li>
+<li>查全率（recall）：= TP/(TP+FN)，= P(y^=1|y=1)，在真实值为1时，预测结果为1的概率</li>
+<li>F1-score = 2 P*R/(P+R)，Fbeta-score对查准率设置权重β</li>
+<li>真阳性率：TPR= TP/(TP+FN)，在真实值为1时，预测结果为1的概率。越大越好——预测的收益</li>
+<li>伪阳性率：FPR= FP/(FP+TN)，在真实值为0时，预测结果为1的概率。越小越好——预测的代价</li>
+<li>ROC曲线：横轴FPR纵轴TPR。最优点左上角(0, 1)，最差位置对角线。画图方式：在01分类中，对不同阈值α进行ROC获取。比如α&lt;0.4则分类为0，此时获得TPR/FPR；然后α&lt;0.6，以此类推。</li>
+<li>AUC：ROC曲线包含的面积。概率表示：=P(P(yk=1) &gt; P(yl=1))，某一点大于另一点对于预测=1而言的概率</li>
+</ol>
+<h2 id="svm">SVM</h2>
+<p>引用：https://blog.csdn.net/szlcw1/article/details/52259668</p>
+<ol>
+<li>SVM 原理
+<ol>
+<li>数学推导，硬间隔最大化（几何间隔）、学习的对偶问题、软间隔最大化（引入松弛变量）、非线性支持向量机（核技巧）、二次规划问题的解决方法是SMO算法，sklearn调用的是SVC<br>
+<img src="https://superbb666.github.io/post-images/1595797380637.PNG" alt="" height="450" loading="lazy"></li>
+</ol>
+</li>
+<li>为什么要将求解 SVM 的原始问题转换为其对偶问题？：便于计算；便于引入核函数处理非线性问题</li>
+<li>为什么 SVM 要引入核函数？：非线性变为线性可分</li>
+<li>为什么SVM对缺失数据敏感？：SVM 没有处理缺失值的策略。特征空间的好坏对SVM的性能很重要。</li>
+<li>SVM 核函数的种类及区别：
+<ol>
+<li>线性核：主要用于线性可分的情形，参数少，速度快，对于一般数据，分类效果已经很理想了。</li>
+<li>RBF 核（高斯核）：主要用于线性不可分的情形，参数多，分类结果非常依赖于参数。有很多人是通过训练数据的交叉验证来寻找合适的参数，不过这个过程比较耗时。</li>
+<li>如果 Feature 的数量很大，跟样本数量差不多，这时候选用线性核的 SVM。 如果 Feature 的数量比较小，样本数量一般，不算大也不算小，选用高斯核的 SVM。</li>
+</ol>
+</li>
+</ol>
+<h2 id="正则项和范数-损失值处理">正则项和范数、损失值处理</h2>
+<ol>
+<li>为什么l1和l2正则化可以降低过拟合，本质原因是？：“正则化能够增大偏差但是降低方差”；PAC-learning泛化界解释，正则化降低了模型的拟合能力，使得模型结构变得更加简单；Bayes先验解释，把正则变成先验，L1正则化是给参数引入了标准拉普拉斯先验，L2正则化是给参数引入了标准高斯分布的先验，通过贝叶斯后验概率最大化（这个时候不是用极大似然估计来求解了）可以推导出带L1或L2正则项的损失函数的表达式，引入先验相当于对参数进行了约束，使得参数必须落在标准拉普拉斯分布或者标准高斯分布的范围中；奥卡姆剃刀原则，“保证性能差别不大的情况下，越是简单的模型泛化性能越好”。</li>
+</ol>
+<h2 id="kd树">KD树</h2>
+<ol>
+<li>什么是KD树？：KD树（K-dimension tree)</li>
+<li>KD树建立过程中切分维度的顺序是否可以优化？：找方差大的维度</li>
+<li>KD树每一次继续切分都要计算该子区间在需切分维度上的中值，计算量很大,有什么方法可以对其进行优化？：空间换时间，先排序后取值，也可采样取部分数据点排序</li>
+</ol>
+<h2 id="决策树">决策树</h2>
+<p>引用：https://blog.csdn.net/manduner/article/details/90516561</p>
+<ol>
+<li>对决策树的理解？：决策树算法，无论是哪种，其目的都是为了让模型的不确定性降低的越快越好，基于其评价指标的不同，主要是ID3算法，C4.5算法和CART算法，其中ID3算法的评价指标是信息增益，C4.5算法的评价指标是信息增益率，CART算法的评价指标是基尼系数。</li>
+<li>对信息增益和信息增益率的理解？
+<ol>
+<li>熵：对随机变量不确定性的度量，也可以说是对随机变量的概率分布的一个衡量。熵越大，随机变量的不确定性就越大。随机变量为均匀分布时，熵最大（限定均值和标准差时，正态分布最大）。</li>
+<li>条件熵：是指X|Y的不确定性。</li>
+<li>熵和条件熵中概率由数据估计（特别是极大似然估计）得到时，所对应的熵与条件熵分别为经验熵与经验条件熵。</li>
+<li>信息增益：熵 - Σ条件熵。</li>
+</ol>
+</li>
+<li>信息增益准则的问题（ID3算法存在的问题）？：选择信息增益大的作为分类方法，倾向于去选择特征取值比较多的特征作为最优特征。比如每家饭店的店名唯一，按店名分类信息增益最大，但无效。</li>
+<li>采用信息增益率的算法C4.5为什么可以解决ID3算法中存在的问题呢？：实际C4.5先剔除低于平均信息增益的，然后在剩下的取增益率最大的。</li>
+<li>决策树出现过拟合的原因及其解决办法？：训练的好测试的差。
+<ol>
+<li>原因：没有剪枝；噪声数据未剔除；使用了较多的输出变量，变量较多</li>
+<li>解决办法：剪枝，可以分为预剪枝和后剪枝，我们一般采用后剪枝的方法；K−folds交叉验证；减少特征，用皮尔逊相关系数计算每一个特征和响应变量的相关性，将相关性较小的变量剔除；也可用其他的方法来进行特征筛选，比如基于决策树的特征筛选，通过正则化的方式来进行特征选取等</li>
+</ol>
+</li>
+<li>简单解释一下预剪枝和后剪枝，以及剪枝过程中可以参考的参数有哪些？
+<ol>
+<li>预剪枝：在决策树生成初期就已经设置了决策树的参数，决策树构建过程中，满足参数条件就提前停止决策树的生成。</li>
+<li>后剪枝：后剪枝是一种全局的优化方法，它是在决策树完全建立之后再返回去对决策树进行剪枝。REP算法，父节点比子节点准确率高，就把孩子剪了。</li>
+<li>参数：树的高度、叶子节点的数目、最大叶子节点数、限制不纯度。</li>
+</ol>
+</li>
+<li>决策树的优缺点？
+<ol>
+<li>优点：计算简单、速度快；可解释性强；比较适合处理有缺失属性的样本。</li>
+<li>缺点：容易发生过拟合（随机森林可以很大程度上减少过拟合）；忽略了数据之间的相关性；信息增益的结果偏向于那些具有更多数值的特征</li>
+</ol>
+</li>
+<li>决策树是如何处理缺失值的？
+<ol>
+<li>如何在训练样本属性缺失的情况下进行划分属性的选择？：对每个样本设置权重，从而计算概率</li>
+<li>如何解决测试样本中属性有缺失值的情况？：子树最大概率</li>
+</ol>
+</li>
+<li>决策树与逻辑回归的区别？：决策树可直接处理缺失值；逻辑回归擅长整体结构，决策树擅长局部结构；逻辑回归擅长线性关系；逻辑回归对极值噪声值特别敏感；决策树结果较粗糙（结果只有子节点那么几个）；决策树速度快</li>
+<li>树模型的优缺点：
+<ol>
+<li>优点：可解释性强；可处理混合类型特征；具体伸缩不变性（不用归一化特征）；有特征组合的作用；可自然地处理缺失值；对异常点鲁棒；有特征选择作用；可扩展性强， 容易并行</li>
+<li>缺点：缺乏平滑性（回归预测时输出值只能输出有限的若干种数值）；不适合处理高维稀疏数据</li>
+</ol>
+</li>
+</ol>
+<h2 id="随机森林rf">随机森林RF</h2>
+<p>引用：https://blog.csdn.net/jaffe507/article/details/105088940</p>
+<ol>
+<li>随机森林建立过程：
+<ol>
+<li>对数据集进行有放回抽样。构建多个子集。</li>
+<li>每个子集，从所有特征中随机选部分特征，按照交叉熵（plnp）进行分裂，从而构建单个决策树。</li>
+<li>生成多个决策树，像bagging一样进行使用。</li>
+</ol>
+</li>
+<li>随机森林算法优缺点：
+<ol>
+<li>优点：并行训练！对于大数据时代的大样本训练速度有优势；随机选择决策树节点划分特征，这样在样本特征维度很高的时候，仍然能高效的训练模型；在训练后，可以给出各个特征对于输出的重要性；随机采样，模型的方差小，泛化能力强；RF实现比其他树简单；对部分特征缺失不敏感。</li>
+<li>缺点：噪音大的样本集，容易过拟合；取值划分比较多的特征容易对RF的决策产生更大的影响，从而影响拟合的模型的效果。</li>
+</ol>
+</li>
+<li>为什么要有放回的抽样？：保证样本集间有重叠，若不放回，每个训练样本集及其分布都不一样。</li>
+<li>为什么RF的训练效率优于bagging？：在个体决策树的构建中，随机森林仅仅考虑一个特征子集。</li>
+<li>随机森林如何处理缺失值：
+<ol>
+<li>对缺失值进行预设置，然后构建随机森林，并记录每组数据的决策分类路径</li>
+<li>判断哪组数据和缺失数据路径最相似，引入一个相似度矩阵，来记录数据之间的相似度，比如有N组数据，相似度矩阵大小就是N*N。</li>
+<li>如果是数值型变量，通过加权平均得到新的估计值。迭代重做森林，直到估计值稳定。</li>
+</ol>
+</li>
+<li>需要剪枝吗？：不需要</li>
+<li>随机森林的过拟合问题：交叉验证</li>
+</ol>
+<h2 id="gbdt">GBDT</h2>
+<p>引用：https://zhuanlan.zhihu.com/p/148050748， https://www.cnblogs.com/modifyrong/p/7744987.html</p>
+<ol>
+<li>gbdt 的算法的流程？<br>
+<img src="https://superbb666.github.io/post-images/1596227390581.PNG" alt="" loading="lazy"></li>
+<li>gbdt 如何选择特征 ？=CART Tree生成的过程：
+<ol>
+<li>原始的gbdt的做法非常的暴力，遍历每个特征。若4个特征6个样本，则遍历24颗单层树，取最小损失值。</li>
+</ol>
+</li>
+<li>gbdt 如何构建特征 ？：将原始特征变为新的0101特征，看落在不同树的哪个节点，然后组合。</li>
+<li>gbdt 如何分类？
+<ol>
+<li>gbdt 无论用于分类还是回归一直都是使用的CART 回归树。</li>
+<li>多分类问题，若分3类，则同时训练三棵树</li>
+</ol>
+</li>
+<li>gbdt的优缺点 ？
+<ol>
+<li>优点：数据可以是连续值和离散值；相对SVM来说，调参少准确率高；使用一些健壮的损失函数，对异常值的鲁棒性非常强，比如 Huber损失函数和Quantile损失函数；不需要做特殊预处理（比如归一化）。</li>
+<li>缺点：弱学习器之间存在依赖关系，难以并行训练数据。不过可以通过自采样的SGBT来达到部分并行；在高维稀疏数据上，表现不如SVM或神经网络；在处理文本分类特征问题上，优势不明显；训练过程需要串行，只能在决策树内部采用一些局部并行手段提高训练速度。</li>
+</ol>
+</li>
+<li>gbdt 通过什么方式减少误差 ？</li>
+<li>gbdt的效果相比于传统的LR，SVM效果为什么好一些 ？</li>
+<li>gbdt 如何加速训练？</li>
+<li>gbdt的参数有哪些，如何调参 ？</li>
+<li>gbdt 实战当中遇到的一些问题 ？</li>
+<li></li>
+</ol>
+<h2 id="xgboost">XGBOOST</h2>
+<ol>
+<li>简单介绍一下XGBoost:
+<ol>
+<li>首先需要说一说GBDT，它是一种基于boosting增强策略的加法模型，训练的时候采用前向分布算法进行贪婪的学习，每次迭代都学习一棵CART树来拟合之前 t-1 棵树的预测结果与训练样本真实值的残差。</li>
+<li>XGBoost对GBDT进行了一系列优化，比如损失函数进行了二阶泰勒展开、目标函数加入正则项、支持并行和默认缺失值处理等，在可扩展性和训练速度上有了巨大的提升，但其核心思想没有大的变化。</li>
+</ol>
+</li>
+<li>xgboost对特征缺失敏感吗，对缺失值做了什么操作，存在什么问题？
+<ol>
+<li>不敏感，可以自动处理，处理方式是将missing值分别加入左节点 右节点取分裂增益最大的节点将missing样本分裂进这个节点 。这种处理方式的问题在xgboost仅仅在特征的非缺失的值上进行分裂然后missing值直接放入其中一个节点，显然当缺失值很多的情况下，比如缺失80%，那么xgb分裂的时候仅仅在20%的特征值上分裂，这是非常容易过拟合的。</li>
+</ol>
+</li>
+<li>我们可以将xgboost的中众多参数分类为哪三类？请分别写出哪些参数可以用什么方式用来控制过拟合？
+<ol>
+<li>xgboost主要有3类参数:
+<ol>
+<li>通用参数：主要对当前任务的一些基本参数的设置。常用的参数有:
+<ol>
+<li>booster:base learn是采用树模型还是线性模型。一般来讲采用gbtree的模型效果会比较好一些</li>
+<li>silent:任务运行过程中是否输出信息</li>
+</ol>
+</li>
+<li>集成参数：针对base learner生长过程中需要设定的参数
+<ol>
+<li>eta：更新过程中的收缩步长，类似于learning rate</li>
+<li>gamma:为了对叶子节点做进一步分割而必须设置的损失减小的最小值，该值越大算法越保守</li>
+<li>max_depth:用来设置最大树深，该值越小算法越保守</li>
+<li>min_child_weight:表示子树观测权重之和的最小值。如果树的生长时的某一步所生成的叶子结点，其观测权重之和小于min_child_weight，那么可以放弃该步生长。该值越小算法越保守</li>
+<li>subsample和colsample_bytree:分别控制样本的采样比例和分裂时特征个数的采样比例，可在一定程度上防止过拟合</li>
+<li>lambda和alpha:分别是L2和L1的权重，用于控制正则化的强度，该值会对模型的复杂度进行限制</li>
+</ol>
+</li>
+<li>任务参数：
+<ol>
+<li>objective：称为目标函数或者需要被最小化的损失函数，目标函数的选择跟实际的任务有很大的关系</li>
+<li>eval_metric：评估函数。该参数用于定义评价模型性能好坏的指标</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>XGBoost和GBDT的区别有哪些？
+<ol>
+<li>算法层面:
+<ol>
+<li>（1）损失函数的二阶泰勒展开；</li>
+<li>（2）树的正则化概念的引入，对叶节点数量和叶子节点输出进行了约束，方式是将二者形成的约束项加入损失函数中；</li>
+<li>（3）二阶泰勒展开与树正则化推出了新的叶子节点输出的计算公式而不是原始gbdt那样的简单平均；</li>
+<li>（4）a、对于基础学习器的改进，分裂的时候自动根据是否产生正增益指导是否进行分裂，因为引入了正则项的概念，分裂的时候这个预剪枝更加严苛；  b、对于缺失值的处理，xgboost根据左右子节点的增益大小将缺失值分到增益大的节点中，而sklearn中的gbdt是无法处理缺失值的，因为sklearn中的gbdt是以sklearn中的cart为基学习器的，而sklearn中的cart也并没有实现对缺失值的处理功能。</li>
+<li>（5）学习率，Shrinkage，对每一颗树都乘以小于1的学习率，来削弱每一颗树的影响，这样的结果就是会引入更多的树来处理使得基学习器得数量变多，从而降低过拟合，不过其实sklearn中的gbdt也实现了。。。不知道为什么这么多人把这一点也列为不同；</li>
+<li>（6）引入了随机森林使用的列采样功能，便于降低过拟合；</li>
+<li>（7）引入了许多近似直方图之类的优化算法来进一步提高树的训练速度与抗过拟合的能力，这个比较复杂，因为实现了很多种算法，后面单独写一篇来总结；</li>
+</ol>
+</li>
+<li>工程层面
+<ol>
+<li>对每个特征进行分块（block）并排序（pre_sort），将排序后的结构保存在内存中，这样后续分裂的时候就不需要重复对特征进行排序然后计算最佳分裂点了，并且能够进行并行化计算.这个结构加速了split finding的过程，只需要在建树前排序一次，后面节点分裂时直接根据索引得到梯度信息。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="马尔可夫策略决策">马尔可夫策略决策</h2>
+<h2 id="朴素贝叶斯">朴素贝叶斯</h2>
+<h2 id="动态贝叶斯网络">动态贝叶斯网络</h2>
+<h2 id="cnn-rnn">CNN、RNN</h2>
+<h2 id="lstm-bi-lstm">LSTM、BI-LSTM</h2>
+<h2 id="gan">GAN</h2>
+<h2 id="mfcc梅尔频率倒谱系数">MFCC梅尔频率倒谱系数</h2>
+<ol>
+<li>语音信号预处理</li>
+<li>FFT变换到频域：目的是得到频谱包络特征和细节特征</li>
+<li>Mel滤波：将频谱转化为低频特征高、高频特征低的适用于人类的频谱</li>
+<li>取对数+DCT(类似IDFT)：将频域变时域（倒谱），使x = h + e，将包络和细节变为加法关系</li>
+</ol>
+<h2 id="gmm-hmm-dbn-hmm">GMM-HMM / DBN-HMM</h2>
+<ol>
+<li>GMM：高斯混合模型. k-means的复杂版，属于无监督聚类算法。使用EM算法迭代：E: 根据概率求期望(根据正态分布的均值标准差参数, 求每个点在这k个分布的概率). M: 根据期望反推概率(根据每个点在不同分布的概率, 求均值标准差参数).</li>
+<li>RBM: 玻尔兹曼机. 两层神经网络, 不分前向和后向, 类似对折了的自动编码器, 前向--&gt;后向为编码, 后向--&gt;前向为解码.</li>
+<li>DBN: 深层置信网络. 多个RBM组成, 但是是逐层训练每个RBM. 首先训练x--h1;  然后固定h1, 训练h1--h2; 然后h2--h3 ... 最后可以再来个BP反向传播变为有监督训练.</li>
+<li>HMM: 隐藏式马尔可夫模型. 可见链和隐含链. 可见链: 骰子掷出1,2,3,4... 隐含链: 每次掷的是骰子D4, D6, D8, D4 ...</li>
+<li>DBN-HMM: 求一串骰子序列，这串骰子序列产生观测结果的概率最大. GMM-HMM: 求每次掷出的骰子分别是某种骰子的概率.</li>
+</ol>
+<h2 id="gbdt-2">GBDT</h2>
+<ol>
+<li>Gradient Boosting Decision Tree: 梯度提升树</li>
+<li>Decision Tree: CART中的回归树, 对数据集像树一样划分为两个区域, 并生成回归树. 像k-means一样每次分两类.</li>
+<li>Gradient Boosting: 梯度提升树.
+<ol>
+<li>Boosting Tree: 提升树. 先来个通俗理解：假如有个人30岁，我们首先用20岁去拟合，发现损失有10岁，这时我们用6岁去拟合剩下的损失，发现差距还有4岁，第三轮我们用3岁拟合剩下的差距，差距就只有一岁了。-----即: 首先构建一个回归树20岁, 获得残差10岁; 再对10岁构建回归树6岁, 获得残差4岁. 最终输出回归树.</li>
+<li>梯度提升树: 利用损失函数的负梯度作为提升树算法中的残差的近似值. 即: 用梯度下降的值来构建回归树.</li>
+</ol>
+</li>
+<li>GBDT: 监督学习树.
+<ol>
+<li>标签使用Gradient Boosting的弱学习器构建初始树f0的初始残差(比如: 身高标签1.7m变为残差0.3, 即树f0为20岁, 残差为10岁).</li>
+<li>attribute使用Decision Tree来进行分类, 分类的好坏用上面计算的残差来判定.</li>
+<li>目前树已建好. 每个树的叶节点都具有残差值. 然后多次迭代生成多棵树, 每棵树的残差是越来越小的.</li>
+<li>对样本进行预测: f(x) = f0 + ηΣf. f0为初始弱学习器, 剩下的f为强学习器, 然后对后面的树求和并乘学习率.</li>
+</ol>
+</li>
+</ol>
+<h2 id="xgboost原理">XGBOOST原理</h2>
+<p>引用：https://homes.cs.washington.edu/~tqchen/pdf/BoostedTree.pdf</p>
+<ol>
+<li>如何构造目标函数</li>
+<li>如何近似目标函数</li>
+<li>如何引入树到目标函数，改造目标函数</li>
+<li>如何使用贪心算法构造树<br>
+<img src="https://superbb666.github.io/post-images/1596412099209.png" alt="" loading="lazy"></li>
+</ol>
+
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmbdt-dig-data-technologies/">
+                    7CCSMBDT 大数据技术
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+                    <div name="comment" style="background: white">
+                        <div class="commentcontainer">
+                            
+                            <p> </p>
+                            <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="toc-container">
+                    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92">线性回归</a></li>
+<li><a href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92">逻辑回归</a></li>
+<li><a href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95-%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8">梯度下降算法、梯度消失和梯度爆炸</a></li>
+<li><a href="#k-means-knn">k-means、KNN</a></li>
+<li><a href="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5">混淆矩阵</a></li>
+<li><a href="#svm">SVM</a></li>
+<li><a href="#%E6%AD%A3%E5%88%99%E9%A1%B9%E5%92%8C%E8%8C%83%E6%95%B0-%E6%8D%9F%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86">正则项和范数、损失值处理</a></li>
+<li><a href="#kd%E6%A0%91">KD树</a></li>
+<li><a href="#%E5%86%B3%E7%AD%96%E6%A0%91">决策树</a></li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97rf">随机森林RF</a></li>
+<li><a href="#gbdt">GBDT</a></li>
+<li><a href="#xgboost">XGBOOST</a></li>
+<li><a href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E7%AD%96%E7%95%A5%E5%86%B3%E7%AD%96">马尔可夫策略决策</a></li>
+<li><a href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF">朴素贝叶斯</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C">动态贝叶斯网络</a></li>
+<li><a href="#cnn-rnn">CNN、RNN</a></li>
+<li><a href="#lstm-bi-lstm">LSTM、BI-LSTM</a></li>
+<li><a href="#gan">GAN</a></li>
+<li><a href="#mfcc%E6%A2%85%E5%B0%94%E9%A2%91%E7%8E%87%E5%80%92%E8%B0%B1%E7%B3%BB%E6%95%B0">MFCC梅尔频率倒谱系数</a></li>
+<li><a href="#gmm-hmm-dbn-hmm">GMM-HMM / DBN-HMM</a></li>
+<li><a href="#gbdt-2">GBDT</a></li>
+<li><a href="#xgboost%E5%8E%9F%E7%90%86">XGBOOST原理</a></li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        <div id="bg">
+        </div>
+        <div id="bgurl" style="display:none">\media\images\custom-bgimage.jpg</div>
+    </div>
+    <!-- 响应式布局，针对手机端内容显示 -->
+    <div class="nav-small">
+        <head>
+
+  <!-- 引入Bootstrap核心样式文件 -->
+  <link rel="stylesheet" href="https://superbb666.github.io/media/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">superbb666的个人博客&nbsp;&nbsp;|</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          
+          <li>
+            <a href="/">
+              首页
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/archives">
+              归档
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/tags">
+              标签
+            </a>
+          </li>
+          
+          
+          
+          <li>
+            <a href="/post/about">
+              关于
+            </a>
+          </li>
+          
+          
+          
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+
+  <!-- 引入jQuery核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- 引入BootStrap核心js文件 -->
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+        <div style="margin-top:30px"></div>
+        <link rel="stylesheet" href="https://superbb666.github.io/media/css/font-awesome.css">
+<style>
+
+</style>
+
+<body>
+    <div class="allcontent">
+        <div class="postshow">
+            
+            <div class="postdetailimg" style="width:100%;overflow: hidden;display: none">
+                <img src="\media\images\custom-postdefaultimage.jpg" class="postimage">
+            </div>
+            <div class="postinfo">
+                <div class="postdate"><i class="fa fa-calendar"></i>2020-07-05</div>
+                <div class="poststatus postdate"><i class="fa fa-clock-o"></i> 32 min read</div>
+                <div class="posttag">
+                    
+                </div>
+            </div>
+            
+            <div id="texttitle" style="text-align: center">
+                <h2>面试准备的知识</h2>
+            </div>
+            <div class="text ">
+                <h2 id="线性回归">线性回归</h2>
+<p>引用：https://zhuanlan.zhihu.com/p/66519299，https://blog.csdn.net/Noob_daniel/article/details/76087829</p>
+<ol>
+<li>线性回归的原理</li>
+<li>损失函数</li>
+<li>为什么线性回归使用的是平方差形式的损失函数？（线性回归问什么要用最小二乘法计算？)：假设误差服从独立正态分布，使用极大似然法（最大化误差项目为εi的样本总体出现的概率最大）来求解参数，进一步经过推导之后得到的mse的公式而已。</li>
+<li>什么是决定系数 (R-squared)：来测量拟合优度，R<sup>2</sup>=SSR/SST=1-SSE/SST，SST是总平方和，SSR是回归平方和，SSE是残差平方和。表示的是自变量引起的变动占总变动的百分比，值越大，说明残差的影响越不明显，则权重部分的预测效果越好。</li>
+<li>回归分析的五个基本假设：
+<ol>
+<li>线性性 &amp; 可加性：公式</li>
+<li>误差项（ε）之间应相互独立</li>
+<li>自变量（X1，X2）之间应相互独立：若不满足，则称模型具有多重共线性性</li>
+<li>误差项（ε）的方差应为常数：满足则称模型具有同方差性（Homoskedasticity），若不满足，则为异方差性（Heteroskedasticity）。</li>
+<li>误差项（ε）应呈正态分布。</li>
+</ol>
+</li>
+<li>基本假设失效的影响：
+<ol>
+<li>线性性 &amp; 可加性：模型将无法很好的描述变量之间的关系，极有可能导致很大的泛化误差（generalization error）————自变量做非线性变换log(X)</li>
+<li>自相关性（Autocorrelation）：经常发生于时间序列数据集上，标准差往往会偏小，进而会导致置信区间变窄。————用DW观察</li>
+<li>多重共线性性（Multicollinearity）：导致我们测得的标准差偏大，置信区间变宽。采用添加正则项、增加数据量、减小特征或降维、数据归一化可以一定程度上减少方差，解决多重共线性性问题。————</li>
+<li>异方差性（Heteroskedasticity）：常常出现在有异常值（Outlier）的数据集上。标准差和置信区间不一定会变大还是变小。————因变量做非线性变换log(Y)</li>
+<li>误差项（ε）不呈正态分布：置信区间会变得很不稳定，我们往往需要重点关注一些异常的点（误差较大但出现频率较高），来得到更好的模型。</li>
+</ol>
+</li>
+<li>线性回归（包括逻辑回归）模型如何增强模型的表达能力？（就是说遇到非线性的问题咋整）：连续特征的离散化，特征交叉，gbdt交叉特征提取等；？？？</li>
+<li>为什么线性回归和逻辑回归要用对特征进行离散化？：离散特征的增加和减少，模型也不需要调整；稀疏向量内积乘法运算速度快；对异常数据有很强的鲁棒性(年龄[0-300]分割成年龄10，年龄20，年龄30...)；单变量离散化为N个后，每个变量有单独的权重，相当于为模型引入了非线性；离散化后可以进行特征交叉；模型会更稳定(异常值)；简化了逻辑回归模型的作用，降低了模型过拟合的风险(单一连续特征如果不离散，该变量权重太大的话会过拟合，因此将特征变为多个特征分散权重)。</li>
+<li>线性回归效果不好的原因？：很难拟合复杂的非线性关系，实际情况中基础假设难以得到满足（比如残差符合正态分布）</li>
+<li>逻辑回归 和 线性回归的区别？：两者都属于广义线性模型。；线性回归优化目标函数用的最小二乘法，而逻辑回归用的是最大似然估计。；逻辑回归就是一种减小预测范围，将预测值限定为 [0,1] 间的一种回归模型。逻辑回归的鲁棒性比线性回归要好。</li>
+</ol>
+<h2 id="逻辑回归">逻辑回归</h2>
+<p>引用：https://blog.csdn.net/weixin_42933718/article/details/88874376</p>
+<ol>
+<li>逻辑回归模型介绍：逻辑回归假设数据服从伯努利分布,通过极大化似然函数的方法，运用梯度下降来求解参数，来达到将数据二分类的目的。</li>
+<li>逻辑回归的基本假设：假设数据服从伯努利分布；第二个假设是假设样本为正的概率是p=1/(1+e<sup>-θTx</sup>)</li>
+<li>逻辑回归的损失函数：并非平方差！！是极大似然函数的对数：J=-log(L), L=∏p<sup>y</sup> (1-p)<sup>1-y</sup>, p(y=1|x,θ)=h(x)</li>
+<li>损失函数一般有四种：平方损失函数，对数损失函数，HingeLoss0-1损失函数，绝对值损失函数。</li>
+<li>逻辑回归的损失函数为什么要使用极大似然函数作为损失函数？：逻辑回归这个模型下，对数损失函数的训练求解参数的速度是比较快的，和sigmod函数本身的梯度是无关的。不选平方损失函数原因？其一是因为平方损失函数，梯度更新的速度和sigmod函数本身的梯度是很相关的。sigmod函数在它在定义域内的梯度都不大于0.25。这样训练会非常的慢。</li>
+<li>逻辑回归的优缺点：
+<ol>
+<li>优点：形式简单，可解释性非常好；训练速度较快；内存占用小；方便输出结果调整。</li>
+<li>缺点：准确率不高；很难处理正负样本不平衡的问题；处理非线性数据较麻烦；本身无法筛选特征。有时候，我们会用gbdt来筛选特征，然后再上逻辑回归。</li>
+</ol>
+</li>
+<li>如果有很多的特征高度相关或者说有一个特征重复了100遍，会造成怎样的影响？：不会影响分类器的效果。每一个特征都是原来特征权重值的百分之一。</li>
+<li>为什么我们还是会在训练的过程当中将高度相关的特征去掉？：可解释性更好；提高训练的速度。</li>
+<li>为什么常常要做特征组合（特征交叉）？：特征组合可以引入非线性特征，提升模型的表达能力</li>
+<li>逻辑回归是线性模型吗？：广义线性模型，虽然引入了Sigmod函数是非线性模型，但本质上还是一个线性回归模型，因为除去Sigmod函数映射关系，其他的算法原理，步骤都是线性回归的。</li>
+<li>逻辑回归输出的值[0,1]，这个值是真实的概率吗？如果你的情况满足两个假设，那么你训练模型的过程，就确实是在对概率进行建模。但这两个假设并不是那么容易满足的。所以，很多情况下无法当作真实的概率，只能作为置信度来使用。</li>
+<li>防止欠拟合：从数据层面上考虑——可以增加新特征，例如，组合、泛化、相关性、高次特征，来增大假设空间等。从模型层面上考虑——增加模型的复杂度，例如SVM的核函数，决策树不进行剪枝、DNN等更复杂的模型，去掉正则化项或者减小正则化参数，加深训练轮数等。</li>
+<li>防止过拟合：增加样本量，减少模型复杂度；减少特征数量；正则化</li>
+<li>多分类方式：one vs rest——一个为正样本p1，剩下为负样本；剩下的继续分为正p2负...。softmax函数——sigmoid函数是softmax函数的二元特例。</li>
+<li>逻辑回归可以用在线性不可分吗？那怎么才能让逻辑回归能用？：不能，因为逻辑回归决策边界为超平面，不能用于非线性。提高特征维度(特征交叉)；核函数</li>
+<li>与线性回归的对比：目标函数不同；输出范围不同</li>
+<li>与最大熵的对比：？？？</li>
+<li>与SVM的对比：
+<ol>
+<li>相同点：分类算法；监督学习；判别模型；都能通过核函数方法针对非线性情况分类；目标都是找一个分类超平面；都能减少离群点的影响</li>
+<li>不同点：损失函数不同；逻辑回归使用所有样本点，svm则只取支持向量；逻辑回归对概率建模，svm对分类超平面建模；逻辑回归是处理经验风险最小化，svm是结构风险最小化。这点体现在svm自带L2正则化项，逻辑回归并没有；逻辑回归通过非线性变换减弱分离平面较远的点的影响，svm则只取支持向量从而消去较远点的影响；逻辑回归是统计方法，svm是几何方法</li>
+</ol>
+</li>
+<li>与贝叶斯的对比：
+<ol>
+<li>相同点：分类问题和监督学习；当假设朴素贝叶斯的条件概率P(X|Y=ck)服从高斯分布时，它计算出来的P(Y=1|X)形式跟逻辑回归是一样的</li>
+<li>不同点：逻辑回归为判别模型求的是p(y|x)，朴素贝叶斯为生成模型求的是p(x,y)。逻辑回归需要迭代优化，后者不需要。在数据量少的情况下贝叶斯好，数据量足够的情况下逻辑回归好。由于朴素贝叶斯假设了条件概率P(X|Y=ck)是条件独立的，也就是每个特征权重是独立的，如果数据不符合这个情况，朴素贝叶斯的分类表现就没有逻辑回归好。</li>
+</ol>
+</li>
+</ol>
+<h2 id="梯度下降算法-梯度消失和梯度爆炸">梯度下降算法、梯度消失和梯度爆炸</h2>
+<p>引用：https://blog.csdn.net/Heitao5200/article/details/103846059，https://zhuanlan.zhihu.com/p/51490163</p>
+<ol>
+<li>机器学习中为什么需要梯度下降？：是迭代法的一种，可以用于求解最小二乘问题。</li>
+<li>梯度下降法缺点：靠近极小值时收敛速度减慢；直线搜索时可能会产生一些问题；可能会“之字形”地下降。</li>
+<li>如何对梯度下降法进行调优？：学习率；参数初始值；数据标准化处理</li>
+<li>随机梯度和批量梯度区别：
+<ol>
+<li>批量梯度下降：样本量很大的时候，训练速度慢。</li>
+<li>随机梯度下降：训练速度很快。解有可能不是全局最优。迭代方向变化很大，不能很快的收敛到局部最优解。</li>
+</ol>
+</li>
+<li>各种梯度下降法性能比较：<br>
+<img src="https://superbb666.github.io/post-images/1595206297049.PNG" alt="" loading="lazy"></li>
+<li>推导多元函数牛顿法的迭代公式：将不方便表示的f(x)转化为泰勒公式展开</li>
+<li>什么是梯度消失：w都是小数，导数小于1（sigmoid导数范围[0,0.25]），对w1求梯度会越乘越小</li>
+<li>什么是梯度爆炸：w大于1，导数大于1，层数增多越乘越大</li>
+<li>梯度消失、爆炸的解决方案：
+<ol>
+<li>预训练加微调：DBN+BP</li>
+<li>梯度剪切、正则化：用于解决梯度爆炸，设置梯度阈值</li>
+<li>改为relu等激活函数：求导等于1</li>
+<li>batch normalization：将输出变为均值和方差一致，消除w的放大或缩小</li>
+<li>使用残差网络</li>
+<li>使用LSTM</li>
+</ol>
+</li>
+<li>什么是梯度提升？：对预测值和真实值的残差进行梯度调优。</li>
+<li>梯度下降和梯度提升的区别：
+<ol>
+<li>更新对象：梯度下降是模型参数，梯度提升是模型预测值</li>
+<li>更新方法：梯度下降是损失函数对参数的真实梯度值，梯度提升是模型梯度的预测值</li>
+<li>理论基础：梯度下降是以损失函数下降速度最快方向，梯度提升残差减少（模型效果上升）速度最快的方向</li>
+</ol>
+</li>
+<li>面试题目：给定优化问题，假设已经用代码实现了求函数值和函数梯度的功能,请问,如何验证这两个功能的代码实现没有问题?？？？？？</li>
+</ol>
+<h2 id="k-means-knn">k-means、KNN</h2>
+<p>引用：https://blog.csdn.net/hua111hua/article/details/86556322</p>
+<ol>
+<li>K-means算法的原理和工作流程</li>
+<li>KNN算法的原理：K值的选择，过小则容易过拟合，过大则容易欠拟合，可以使用交叉验证法选取K值。</li>
+<li>KNN算法有哪些优点和缺点？
+<ol>
+<li>优点：可以用来做分类和回归；可用于非线性分类；训练时间复杂度为O(n)；准确度高，对数据没有假设，对离群值不敏感；</li>
+<li>缺点：计算量大；样本不平衡问题（即有些类别的样本数量很多，而其他样本的数量很少）；需要大量的内存；</li>
+</ol>
+</li>
+<li>不平衡的样本可以给KNN的预测结果造成哪些问题，有没有什么好的解决方式？距离小的权值大</li>
+<li>为了解决KNN算法计算量过大的问题，可以使用分组的方式进行计算，简述一下该方式的原理。：将样本集按近邻关系分解成组，给出每组质心的位置，以质心作为代表点，和未知样本计算距离，选出距离最近的一个或者若干个组，再在组的范围内应用一般的KNN算法。</li>
+<li>什么是欧氏距离和曼哈顿距离？l2和l1</li>
+<li>KNN中的K如何选取的？:K值一般取一个较小的数值，例如采用交叉验证法（简单来说，就是一部分样本做训练集，一部分做测试集）来选择最优的K值。</li>
+<li>K-means中常用的到中心距离的度量有哪些？欧几里得距离和余弦相似度。</li>
+<li>K-means中的k值如何选取? 场景选定法；随机法；手肘法（手肘法的核心指标是SSE误差平方和）；轮廓系数法？？？；稳定性方法（数据采样分为两组，尝试不同的k观察两组聚类的相似度）；与层次聚类结合；Canopy Method？？？</li>
+<li>K-means算法中初始点的选择对最终结果有影响吗？陷入局部最优解</li>
+<li>K-means聚类中每个类别中心的初始点如何选择？随机法；选择各批次距离尽可能远的k个点；层次聚类或者Canopy预处理</li>
+<li>K-means中空聚类的处理：一种方法是选择一个距离当前任何质心最远的点。这将消除当前对总平方误差影响最大的点。另一种方法是从具有最大SEE的簇中选择一个替补的质心。这将分裂簇并降低聚类的总SEE。</li>
+<li>K-means是否会一直陷入选择质心的循环停不下来？不会，SSE是凸函数</li>
+<li>如何快速收敛数据量超大的K-means？：Mini Batch（分批处理）</li>
+<li>K-means算法的优点和缺点是什么？：
+<ol>
+<li>优点：当潜在的簇形状是凸面（即球形）的，簇与簇之间区别较明显，且簇大小相近时，其聚类结果较理想。处理大数据集合，该算法非常高效，且伸缩性较好。</li>
+<li>缺点：要事先确定簇数K和对初始聚类中心敏感外，经常以局部最优结束，同时对“噪声”和孤立点敏感，并且该方法不适于发现非凸面形状的簇或者大小差别很大的簇。</li>
+</ol>
+</li>
+<li>如何对K-means聚类效果进行评估？：轮廓系数（点到簇内距离a，点到簇间距离b，(b-a)/max，越大越好，值为负则分类错误）</li>
+<li>K-Means与KNN有什么区别：
+<ol>
+<li>KNN是分类算法，K-means是聚类算法；</li>
+<li>KNN是监督学习，K-means是非监督学习</li>
+<li>KNN没有明显的前期训练过程，K-means有明显的前期训练过程</li>
+<li>k的区别</li>
+</ol>
+</li>
+</ol>
+<h2 id="混淆矩阵">混淆矩阵</h2>
+<ol>
+<li>查准率（precision）：= TP/(TP+FP)，= P(y=1|y^=1)，在预测结果为1时，真实值为1的概率</li>
+<li>查全率（recall）：= TP/(TP+FN)，= P(y^=1|y=1)，在真实值为1时，预测结果为1的概率</li>
+<li>F1-score = 2 P*R/(P+R)，Fbeta-score对查准率设置权重β</li>
+<li>真阳性率：TPR= TP/(TP+FN)，在真实值为1时，预测结果为1的概率。越大越好——预测的收益</li>
+<li>伪阳性率：FPR= FP/(FP+TN)，在真实值为0时，预测结果为1的概率。越小越好——预测的代价</li>
+<li>ROC曲线：横轴FPR纵轴TPR。最优点左上角(0, 1)，最差位置对角线。画图方式：在01分类中，对不同阈值α进行ROC获取。比如α&lt;0.4则分类为0，此时获得TPR/FPR；然后α&lt;0.6，以此类推。</li>
+<li>AUC：ROC曲线包含的面积。概率表示：=P(P(yk=1) &gt; P(yl=1))，某一点大于另一点对于预测=1而言的概率</li>
+</ol>
+<h2 id="svm">SVM</h2>
+<p>引用：https://blog.csdn.net/szlcw1/article/details/52259668</p>
+<ol>
+<li>SVM 原理
+<ol>
+<li>数学推导，硬间隔最大化（几何间隔）、学习的对偶问题、软间隔最大化（引入松弛变量）、非线性支持向量机（核技巧）、二次规划问题的解决方法是SMO算法，sklearn调用的是SVC<br>
+<img src="https://superbb666.github.io/post-images/1595797380637.PNG" alt="" height="450" loading="lazy"></li>
+</ol>
+</li>
+<li>为什么要将求解 SVM 的原始问题转换为其对偶问题？：便于计算；便于引入核函数处理非线性问题</li>
+<li>为什么 SVM 要引入核函数？：非线性变为线性可分</li>
+<li>为什么SVM对缺失数据敏感？：SVM 没有处理缺失值的策略。特征空间的好坏对SVM的性能很重要。</li>
+<li>SVM 核函数的种类及区别：
+<ol>
+<li>线性核：主要用于线性可分的情形，参数少，速度快，对于一般数据，分类效果已经很理想了。</li>
+<li>RBF 核（高斯核）：主要用于线性不可分的情形，参数多，分类结果非常依赖于参数。有很多人是通过训练数据的交叉验证来寻找合适的参数，不过这个过程比较耗时。</li>
+<li>如果 Feature 的数量很大，跟样本数量差不多，这时候选用线性核的 SVM。 如果 Feature 的数量比较小，样本数量一般，不算大也不算小，选用高斯核的 SVM。</li>
+</ol>
+</li>
+</ol>
+<h2 id="正则项和范数-损失值处理">正则项和范数、损失值处理</h2>
+<ol>
+<li>为什么l1和l2正则化可以降低过拟合，本质原因是？：“正则化能够增大偏差但是降低方差”；PAC-learning泛化界解释，正则化降低了模型的拟合能力，使得模型结构变得更加简单；Bayes先验解释，把正则变成先验，L1正则化是给参数引入了标准拉普拉斯先验，L2正则化是给参数引入了标准高斯分布的先验，通过贝叶斯后验概率最大化（这个时候不是用极大似然估计来求解了）可以推导出带L1或L2正则项的损失函数的表达式，引入先验相当于对参数进行了约束，使得参数必须落在标准拉普拉斯分布或者标准高斯分布的范围中；奥卡姆剃刀原则，“保证性能差别不大的情况下，越是简单的模型泛化性能越好”。</li>
+</ol>
+<h2 id="kd树">KD树</h2>
+<ol>
+<li>什么是KD树？：KD树（K-dimension tree)</li>
+<li>KD树建立过程中切分维度的顺序是否可以优化？：找方差大的维度</li>
+<li>KD树每一次继续切分都要计算该子区间在需切分维度上的中值，计算量很大,有什么方法可以对其进行优化？：空间换时间，先排序后取值，也可采样取部分数据点排序</li>
+</ol>
+<h2 id="决策树">决策树</h2>
+<p>引用：https://blog.csdn.net/manduner/article/details/90516561</p>
+<ol>
+<li>对决策树的理解？：决策树算法，无论是哪种，其目的都是为了让模型的不确定性降低的越快越好，基于其评价指标的不同，主要是ID3算法，C4.5算法和CART算法，其中ID3算法的评价指标是信息增益，C4.5算法的评价指标是信息增益率，CART算法的评价指标是基尼系数。</li>
+<li>对信息增益和信息增益率的理解？
+<ol>
+<li>熵：对随机变量不确定性的度量，也可以说是对随机变量的概率分布的一个衡量。熵越大，随机变量的不确定性就越大。随机变量为均匀分布时，熵最大（限定均值和标准差时，正态分布最大）。</li>
+<li>条件熵：是指X|Y的不确定性。</li>
+<li>熵和条件熵中概率由数据估计（特别是极大似然估计）得到时，所对应的熵与条件熵分别为经验熵与经验条件熵。</li>
+<li>信息增益：熵 - Σ条件熵。</li>
+</ol>
+</li>
+<li>信息增益准则的问题（ID3算法存在的问题）？：选择信息增益大的作为分类方法，倾向于去选择特征取值比较多的特征作为最优特征。比如每家饭店的店名唯一，按店名分类信息增益最大，但无效。</li>
+<li>采用信息增益率的算法C4.5为什么可以解决ID3算法中存在的问题呢？：实际C4.5先剔除低于平均信息增益的，然后在剩下的取增益率最大的。</li>
+<li>决策树出现过拟合的原因及其解决办法？：训练的好测试的差。
+<ol>
+<li>原因：没有剪枝；噪声数据未剔除；使用了较多的输出变量，变量较多</li>
+<li>解决办法：剪枝，可以分为预剪枝和后剪枝，我们一般采用后剪枝的方法；K−folds交叉验证；减少特征，用皮尔逊相关系数计算每一个特征和响应变量的相关性，将相关性较小的变量剔除；也可用其他的方法来进行特征筛选，比如基于决策树的特征筛选，通过正则化的方式来进行特征选取等</li>
+</ol>
+</li>
+<li>简单解释一下预剪枝和后剪枝，以及剪枝过程中可以参考的参数有哪些？
+<ol>
+<li>预剪枝：在决策树生成初期就已经设置了决策树的参数，决策树构建过程中，满足参数条件就提前停止决策树的生成。</li>
+<li>后剪枝：后剪枝是一种全局的优化方法，它是在决策树完全建立之后再返回去对决策树进行剪枝。REP算法，父节点比子节点准确率高，就把孩子剪了。</li>
+<li>参数：树的高度、叶子节点的数目、最大叶子节点数、限制不纯度。</li>
+</ol>
+</li>
+<li>决策树的优缺点？
+<ol>
+<li>优点：计算简单、速度快；可解释性强；比较适合处理有缺失属性的样本。</li>
+<li>缺点：容易发生过拟合（随机森林可以很大程度上减少过拟合）；忽略了数据之间的相关性；信息增益的结果偏向于那些具有更多数值的特征</li>
+</ol>
+</li>
+<li>决策树是如何处理缺失值的？
+<ol>
+<li>如何在训练样本属性缺失的情况下进行划分属性的选择？：对每个样本设置权重，从而计算概率</li>
+<li>如何解决测试样本中属性有缺失值的情况？：子树最大概率</li>
+</ol>
+</li>
+<li>决策树与逻辑回归的区别？：决策树可直接处理缺失值；逻辑回归擅长整体结构，决策树擅长局部结构；逻辑回归擅长线性关系；逻辑回归对极值噪声值特别敏感；决策树结果较粗糙（结果只有子节点那么几个）；决策树速度快</li>
+<li>树模型的优缺点：
+<ol>
+<li>优点：可解释性强；可处理混合类型特征；具体伸缩不变性（不用归一化特征）；有特征组合的作用；可自然地处理缺失值；对异常点鲁棒；有特征选择作用；可扩展性强， 容易并行</li>
+<li>缺点：缺乏平滑性（回归预测时输出值只能输出有限的若干种数值）；不适合处理高维稀疏数据</li>
+</ol>
+</li>
+</ol>
+<h2 id="随机森林rf">随机森林RF</h2>
+<p>引用：https://blog.csdn.net/jaffe507/article/details/105088940</p>
+<ol>
+<li>随机森林建立过程：
+<ol>
+<li>对数据集进行有放回抽样。构建多个子集。</li>
+<li>每个子集，从所有特征中随机选部分特征，按照交叉熵（plnp）进行分裂，从而构建单个决策树。</li>
+<li>生成多个决策树，像bagging一样进行使用。</li>
+</ol>
+</li>
+<li>随机森林算法优缺点：
+<ol>
+<li>优点：并行训练！对于大数据时代的大样本训练速度有优势；随机选择决策树节点划分特征，这样在样本特征维度很高的时候，仍然能高效的训练模型；在训练后，可以给出各个特征对于输出的重要性；随机采样，模型的方差小，泛化能力强；RF实现比其他树简单；对部分特征缺失不敏感。</li>
+<li>缺点：噪音大的样本集，容易过拟合；取值划分比较多的特征容易对RF的决策产生更大的影响，从而影响拟合的模型的效果。</li>
+</ol>
+</li>
+<li>为什么要有放回的抽样？：保证样本集间有重叠，若不放回，每个训练样本集及其分布都不一样。</li>
+<li>为什么RF的训练效率优于bagging？：在个体决策树的构建中，随机森林仅仅考虑一个特征子集。</li>
+<li>随机森林如何处理缺失值：
+<ol>
+<li>对缺失值进行预设置，然后构建随机森林，并记录每组数据的决策分类路径</li>
+<li>判断哪组数据和缺失数据路径最相似，引入一个相似度矩阵，来记录数据之间的相似度，比如有N组数据，相似度矩阵大小就是N*N。</li>
+<li>如果是数值型变量，通过加权平均得到新的估计值。迭代重做森林，直到估计值稳定。</li>
+</ol>
+</li>
+<li>需要剪枝吗？：不需要</li>
+<li>随机森林的过拟合问题：交叉验证</li>
+</ol>
+<h2 id="gbdt">GBDT</h2>
+<p>引用：https://zhuanlan.zhihu.com/p/148050748， https://www.cnblogs.com/modifyrong/p/7744987.html</p>
+<ol>
+<li>gbdt 的算法的流程？<br>
+<img src="https://superbb666.github.io/post-images/1596227390581.PNG" alt="" loading="lazy"></li>
+<li>gbdt 如何选择特征 ？=CART Tree生成的过程：
+<ol>
+<li>原始的gbdt的做法非常的暴力，遍历每个特征。若4个特征6个样本，则遍历24颗单层树，取最小损失值。</li>
+</ol>
+</li>
+<li>gbdt 如何构建特征 ？：将原始特征变为新的0101特征，看落在不同树的哪个节点，然后组合。</li>
+<li>gbdt 如何分类？
+<ol>
+<li>gbdt 无论用于分类还是回归一直都是使用的CART 回归树。</li>
+<li>多分类问题，若分3类，则同时训练三棵树</li>
+</ol>
+</li>
+<li>gbdt的优缺点 ？
+<ol>
+<li>优点：数据可以是连续值和离散值；相对SVM来说，调参少准确率高；使用一些健壮的损失函数，对异常值的鲁棒性非常强，比如 Huber损失函数和Quantile损失函数；不需要做特殊预处理（比如归一化）。</li>
+<li>缺点：弱学习器之间存在依赖关系，难以并行训练数据。不过可以通过自采样的SGBT来达到部分并行；在高维稀疏数据上，表现不如SVM或神经网络；在处理文本分类特征问题上，优势不明显；训练过程需要串行，只能在决策树内部采用一些局部并行手段提高训练速度。</li>
+</ol>
+</li>
+<li>gbdt 通过什么方式减少误差 ？</li>
+<li>gbdt的效果相比于传统的LR，SVM效果为什么好一些 ？</li>
+<li>gbdt 如何加速训练？</li>
+<li>gbdt的参数有哪些，如何调参 ？</li>
+<li>gbdt 实战当中遇到的一些问题 ？</li>
+<li></li>
+</ol>
+<h2 id="xgboost">XGBOOST</h2>
+<ol>
+<li>简单介绍一下XGBoost:
+<ol>
+<li>首先需要说一说GBDT，它是一种基于boosting增强策略的加法模型，训练的时候采用前向分布算法进行贪婪的学习，每次迭代都学习一棵CART树来拟合之前 t-1 棵树的预测结果与训练样本真实值的残差。</li>
+<li>XGBoost对GBDT进行了一系列优化，比如损失函数进行了二阶泰勒展开、目标函数加入正则项、支持并行和默认缺失值处理等，在可扩展性和训练速度上有了巨大的提升，但其核心思想没有大的变化。</li>
+</ol>
+</li>
+<li>xgboost对特征缺失敏感吗，对缺失值做了什么操作，存在什么问题？
+<ol>
+<li>不敏感，可以自动处理，处理方式是将missing值分别加入左节点 右节点取分裂增益最大的节点将missing样本分裂进这个节点 。这种处理方式的问题在xgboost仅仅在特征的非缺失的值上进行分裂然后missing值直接放入其中一个节点，显然当缺失值很多的情况下，比如缺失80%，那么xgb分裂的时候仅仅在20%的特征值上分裂，这是非常容易过拟合的。</li>
+</ol>
+</li>
+<li>我们可以将xgboost的中众多参数分类为哪三类？请分别写出哪些参数可以用什么方式用来控制过拟合？
+<ol>
+<li>xgboost主要有3类参数:
+<ol>
+<li>通用参数：主要对当前任务的一些基本参数的设置。常用的参数有:
+<ol>
+<li>booster:base learn是采用树模型还是线性模型。一般来讲采用gbtree的模型效果会比较好一些</li>
+<li>silent:任务运行过程中是否输出信息</li>
+</ol>
+</li>
+<li>集成参数：针对base learner生长过程中需要设定的参数
+<ol>
+<li>eta：更新过程中的收缩步长，类似于learning rate</li>
+<li>gamma:为了对叶子节点做进一步分割而必须设置的损失减小的最小值，该值越大算法越保守</li>
+<li>max_depth:用来设置最大树深，该值越小算法越保守</li>
+<li>min_child_weight:表示子树观测权重之和的最小值。如果树的生长时的某一步所生成的叶子结点，其观测权重之和小于min_child_weight，那么可以放弃该步生长。该值越小算法越保守</li>
+<li>subsample和colsample_bytree:分别控制样本的采样比例和分裂时特征个数的采样比例，可在一定程度上防止过拟合</li>
+<li>lambda和alpha:分别是L2和L1的权重，用于控制正则化的强度，该值会对模型的复杂度进行限制</li>
+</ol>
+</li>
+<li>任务参数：
+<ol>
+<li>objective：称为目标函数或者需要被最小化的损失函数，目标函数的选择跟实际的任务有很大的关系</li>
+<li>eval_metric：评估函数。该参数用于定义评价模型性能好坏的指标</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>XGBoost和GBDT的区别有哪些？
+<ol>
+<li>算法层面:
+<ol>
+<li>（1）损失函数的二阶泰勒展开；</li>
+<li>（2）树的正则化概念的引入，对叶节点数量和叶子节点输出进行了约束，方式是将二者形成的约束项加入损失函数中；</li>
+<li>（3）二阶泰勒展开与树正则化推出了新的叶子节点输出的计算公式而不是原始gbdt那样的简单平均；</li>
+<li>（4）a、对于基础学习器的改进，分裂的时候自动根据是否产生正增益指导是否进行分裂，因为引入了正则项的概念，分裂的时候这个预剪枝更加严苛；  b、对于缺失值的处理，xgboost根据左右子节点的增益大小将缺失值分到增益大的节点中，而sklearn中的gbdt是无法处理缺失值的，因为sklearn中的gbdt是以sklearn中的cart为基学习器的，而sklearn中的cart也并没有实现对缺失值的处理功能。</li>
+<li>（5）学习率，Shrinkage，对每一颗树都乘以小于1的学习率，来削弱每一颗树的影响，这样的结果就是会引入更多的树来处理使得基学习器得数量变多，从而降低过拟合，不过其实sklearn中的gbdt也实现了。。。不知道为什么这么多人把这一点也列为不同；</li>
+<li>（6）引入了随机森林使用的列采样功能，便于降低过拟合；</li>
+<li>（7）引入了许多近似直方图之类的优化算法来进一步提高树的训练速度与抗过拟合的能力，这个比较复杂，因为实现了很多种算法，后面单独写一篇来总结；</li>
+</ol>
+</li>
+<li>工程层面
+<ol>
+<li>对每个特征进行分块（block）并排序（pre_sort），将排序后的结构保存在内存中，这样后续分裂的时候就不需要重复对特征进行排序然后计算最佳分裂点了，并且能够进行并行化计算.这个结构加速了split finding的过程，只需要在建树前排序一次，后面节点分裂时直接根据索引得到梯度信息。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="马尔可夫策略决策">马尔可夫策略决策</h2>
+<h2 id="朴素贝叶斯">朴素贝叶斯</h2>
+<h2 id="动态贝叶斯网络">动态贝叶斯网络</h2>
+<h2 id="cnn-rnn">CNN、RNN</h2>
+<h2 id="lstm-bi-lstm">LSTM、BI-LSTM</h2>
+<h2 id="gan">GAN</h2>
+<h2 id="mfcc梅尔频率倒谱系数">MFCC梅尔频率倒谱系数</h2>
+<ol>
+<li>语音信号预处理</li>
+<li>FFT变换到频域：目的是得到频谱包络特征和细节特征</li>
+<li>Mel滤波：将频谱转化为低频特征高、高频特征低的适用于人类的频谱</li>
+<li>取对数+DCT(类似IDFT)：将频域变时域（倒谱），使x = h + e，将包络和细节变为加法关系</li>
+</ol>
+<h2 id="gmm-hmm-dbn-hmm">GMM-HMM / DBN-HMM</h2>
+<ol>
+<li>GMM：高斯混合模型. k-means的复杂版，属于无监督聚类算法。使用EM算法迭代：E: 根据概率求期望(根据正态分布的均值标准差参数, 求每个点在这k个分布的概率). M: 根据期望反推概率(根据每个点在不同分布的概率, 求均值标准差参数).</li>
+<li>RBM: 玻尔兹曼机. 两层神经网络, 不分前向和后向, 类似对折了的自动编码器, 前向--&gt;后向为编码, 后向--&gt;前向为解码.</li>
+<li>DBN: 深层置信网络. 多个RBM组成, 但是是逐层训练每个RBM. 首先训练x--h1;  然后固定h1, 训练h1--h2; 然后h2--h3 ... 最后可以再来个BP反向传播变为有监督训练.</li>
+<li>HMM: 隐藏式马尔可夫模型. 可见链和隐含链. 可见链: 骰子掷出1,2,3,4... 隐含链: 每次掷的是骰子D4, D6, D8, D4 ...</li>
+<li>DBN-HMM: 求一串骰子序列，这串骰子序列产生观测结果的概率最大. GMM-HMM: 求每次掷出的骰子分别是某种骰子的概率.</li>
+</ol>
+<h2 id="gbdt-2">GBDT</h2>
+<ol>
+<li>Gradient Boosting Decision Tree: 梯度提升树</li>
+<li>Decision Tree: CART中的回归树, 对数据集像树一样划分为两个区域, 并生成回归树. 像k-means一样每次分两类.</li>
+<li>Gradient Boosting: 梯度提升树.
+<ol>
+<li>Boosting Tree: 提升树. 先来个通俗理解：假如有个人30岁，我们首先用20岁去拟合，发现损失有10岁，这时我们用6岁去拟合剩下的损失，发现差距还有4岁，第三轮我们用3岁拟合剩下的差距，差距就只有一岁了。-----即: 首先构建一个回归树20岁, 获得残差10岁; 再对10岁构建回归树6岁, 获得残差4岁. 最终输出回归树.</li>
+<li>梯度提升树: 利用损失函数的负梯度作为提升树算法中的残差的近似值. 即: 用梯度下降的值来构建回归树.</li>
+</ol>
+</li>
+<li>GBDT: 监督学习树.
+<ol>
+<li>标签使用Gradient Boosting的弱学习器构建初始树f0的初始残差(比如: 身高标签1.7m变为残差0.3, 即树f0为20岁, 残差为10岁).</li>
+<li>attribute使用Decision Tree来进行分类, 分类的好坏用上面计算的残差来判定.</li>
+<li>目前树已建好. 每个树的叶节点都具有残差值. 然后多次迭代生成多棵树, 每棵树的残差是越来越小的.</li>
+<li>对样本进行预测: f(x) = f0 + ηΣf. f0为初始弱学习器, 剩下的f为强学习器, 然后对后面的树求和并乘学习率.</li>
+</ol>
+</li>
+</ol>
+<h2 id="xgboost原理">XGBOOST原理</h2>
+<p>引用：https://homes.cs.washington.edu/~tqchen/pdf/BoostedTree.pdf</p>
+<ol>
+<li>如何构造目标函数</li>
+<li>如何近似目标函数</li>
+<li>如何引入树到目标函数，改造目标函数</li>
+<li>如何使用贪心算法构造树<br>
+<img src="https://superbb666.github.io/post-images/1596412099209.png" alt="" loading="lazy"></li>
+</ol>
+
+            </div>
+            
+            
+            <div class="next-post">
+                下一篇
+                <a href="https://superbb666.github.io/post/7ccsmbdt-dig-data-technologies/">
+                    7CCSMBDT 大数据技术
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    var t_img; // 定时器
+    var isLoad = true; // 控制变量
+    isImgLoad(function () {
+        // 加载完成
+        $('.postdetailimg').css("display", "block");
+    });
+    // 判断图片加载的函数
+    function isImgLoad(callback) {
+        // 注意我的图片类名都是cover，因为我只需要处理cover。其它图片可以不管。
+        // 查找所有封面图，迭代处理
+        $('.postdetailimg').each(function () {
+            // 找到为0就将isLoad设为false，并退出each
+            if (this.height === 0) {
+                isLoad = false;
+                return false;
+            }
+        });
+        // 为true，没有发现为0的。加载完毕
+        if (isLoad) {
+            clearTimeout(t_img); // 清除定时器
+            // 回调函数
+            callback();
+            // 为false，因为找到了没有加载完成的图，将调用定时器递归
+        } else {
+            isLoad = true;
+            t_img = setTimeout(function () {
+                isImgLoad(callback); // 递归扫描
+            }, 500); // 我这里设置的是500毫秒就扫描一次，可以自己调整
+        }
+    }
+</script>
+        <div name="comment" style="background: white">
+            <div class="commentcontainer">
+                
+                <p> </p>
+                <!-- 请到客户端“主题--自定义配置--valine”中填入ID和KEY -->
+                
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    hljs.initHighlightingOnLoad()
+</script>
+<script src="https://superbb666.github.io/media/js/post.js"></script>
